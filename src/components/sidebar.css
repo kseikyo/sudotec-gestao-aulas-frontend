@@ -1,0 +1,29 @@
+.nav-item:first-child {
+    background-image: linear-gradient(to bottom right, red,orange);
+}
+
+#sidebar {
+    width: 300px;
+}
+
+.container {
+    position: absolute;
+    width: 300px;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    transition: left 0.85s ease-in;
+}
+
+
+
+#content {
+    width: calc(100vh-300px);
+    /* Set sidebar fixed width and make the content fit to the rest of the screen */
+}
+.nav-item {
+    padding: .5rem .5rem;
+    margin: 0;
+    border: 1px solid black;
+}

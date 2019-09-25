@@ -2,8 +2,10 @@
     background: #FBFBFB 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px #00000029;
     opacity: 1;
-    width: 1106px;
+    /* width: 1106px; */
+    width: calc(100% - 260px);
     height: 62px;
+    transition: width 0.85s ease-in;
 }
 
 .hamburguer-button {

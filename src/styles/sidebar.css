@@ -29,6 +29,7 @@ menu {
     opacity: 1;
     margin: 0;
     padding: 0;
+    transition: width 0.85s ease-in;
     transition: left 0.85s ease-in;
 }
 

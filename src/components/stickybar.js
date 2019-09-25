@@ -3,7 +3,6 @@ import '../styles/stickybar.css';
 import Hamburguer from './hamburguer_button';
 
 function Stickybar(props) {
-    console.log(`props stickybar ${props}`);
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
                 <Hamburguer fetchToggle={props.fetchToggle}/>

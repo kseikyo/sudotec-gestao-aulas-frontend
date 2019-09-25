@@ -13,9 +13,6 @@ function MenuItem(props) {
 class Sidebar extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isShowing: true
-        }
     }
 
     render() {

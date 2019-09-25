@@ -4,8 +4,6 @@ import '../styles/stickybar.css';
 class Hamburguer extends React.Component {
     constructor(props) {
         super(props);
-        console.log(`props hamburguer ${this.props}`);
-        
     }
 
     render() {

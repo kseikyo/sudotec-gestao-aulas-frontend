@@ -8,23 +8,40 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isSidebarToggled : true
+            isSidebarToggled: false
         }
         this.fetchToggle = this.fetchToggle.bind(this);
     }
 
     fetchToggle() {
-        console.log(this.state);
-        
+
         new Promise((resolve, reject) => {
-            this.setState({
-                isSidebarToggled: !this.state.isSidebarToggled
-            });
+
+            let container = document.querySelector(".container");
+            let stickybar = document.querySelector(".navbar");
+
+
+            if (this.state.isSidebarToggled) {
+                // Setting the width and left back to the default
+                container.style.left = "0";
+                container.style.width = "260px";
+                stickybar.style.width = "calc(100% - 260px)";
+            } else {
+                /* It is needed to set the width and left style from the container to make the stickybar
+                 * use the actual 100% of the width. 
+                 * But now the animations are now at the same time.
+                 */
+                container.style.left = "-260px";
+                stickybar.style.width = "100%";
+                container.style.width = "0px";
+                
+            }
             resolve();
         })
             .then(() => {
-                let container = document.querySelector(".container");
-                this.state.isSidebarToggled ? container.style.left = "0px" : container.style.left = "-300px";
+                this.setState({
+                    isSidebarToggled: !this.state.isSidebarToggled
+                });
             })
             .catch((err) => {
                 console.log(err);
@@ -32,12 +49,11 @@ class App extends React.Component {
     }
 
     render() {
-        console.log(this.fetchToggle);
-        
+
         return (
             <div className="App">
-                <Sidebar />
-                <Stickybar fetchToggle={this.fetchToggle}/>
+                <Sidebar state={this.state.isSidebarToggled} />
+                <Stickybar fetchToggle={this.fetchToggle} />
             </div>
         );
     }

@@ -1,9 +1,9 @@
 import React from 'react';
-import './sidebar.css';
+import '../styles/sidebar.css';
 
 function MenuItem(props) {
     return (
-        <li className="nav-item" onClick={() => alert('hi')} style={{cursor: "pointer"}}>
+        <li className="nav-item" onClick={() => alert('hi')} style={{ cursor: "pointer" }}>
             <i className={props.icon}></i>
             <span>{props.span}</span>
         </li>
@@ -25,23 +25,18 @@ class Sidebar extends React.Component {
             });
             resolve();
         })
-        .then(() => {
-            let container = document.querySelector(".container");
-            if (this.state.isShowing) {
-                container.style.left = "0px";
-            }
-            else {
-                container.style.left = "-300px";
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+            .then(() => {
+                let container = document.querySelector(".container");
+                this.state.isShowing ? container.style.left = "0px" : container.style.left = "-300px";
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     render() {
         return (
-            <div className="container"> 
+            <div className="container">
                 <nav className="sidebar" role="navigation">
                     <ul className="nav flex-column nav-tabs">
                         <li className="nav-item">
@@ -54,14 +49,16 @@ class Sidebar extends React.Component {
                         <li className="nav-item">
                             <span className="nav-title">
                                 Gerenciamento de aulas
-                                    </span>
+                            </span>
                         </li>
-                        <MenuItem icon="home-icon" span="Home" />
-                        <MenuItem icon="projects-icon" span="Projetos" />
-                        <MenuItem icon="courses-icon" span="Cursos" />
-                        <MenuItem icon="classes-icon" span="Turmas" />
-                        <MenuItem icon="students-icon" span="Alunos" />
-                        <MenuItem icon="users-icon" span="Usuarios" />
+                        <menu>
+                            <MenuItem icon="home-icon" span="Home" />
+                            <MenuItem icon="projects-icon" span="Projetos" />
+                            <MenuItem icon="courses-icon" span="Cursos" />
+                            <MenuItem icon="classes-icon" span="Turmas" />
+                            <MenuItem icon="students-icon" span="Alunos" />
+                            <MenuItem icon="users-icon" span="Usuarios" />
+                        </menu>
                     </ul>
                 </nav>
                 <button onClick={() => this.handleClick()}>

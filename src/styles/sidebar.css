@@ -3,6 +3,17 @@
     overflow: hidden;
     opacity: 1;
 }
+/* 
+#logo::before {
+    content: '';
+    background: transparent;
+}
+
+#logo::after {
+    background-image: linear-gradient(180deg, #F16450 0%, #F7954E 100%);
+    overflow: hidden;
+    clip-path: ellipse(50% 29% at 50% 62%);
+} */
 
 menu {
     padding: 0;

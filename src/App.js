@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Sidebar from './components/sidebar';
 import Stickybar from './components/stickybar';
-import FormLogin from './components/form_login';
+import FormLogin from './components/forms/form_login';
 
 class App extends React.Component {
     constructor(props) {
@@ -34,7 +34,7 @@ class App extends React.Component {
                 container.style.left = "-260px";
                 stickybar.style.width = "100%";
                 container.style.width = "0px";
-                
+
             }
             resolve();
         })
@@ -54,6 +54,7 @@ class App extends React.Component {
             <div className="App">
                 <Sidebar state={this.state.isSidebarToggled} />
                 <Stickybar fetchToggle={this.fetchToggle} />
+
             </div>
         );
     }

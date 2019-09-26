@@ -23,14 +23,14 @@ class FormLogin extends React.Component {
         }
 
         let body = {
-            "username": email,
-            "password": password
+            email: email,
+            password: password
         }
 
         fetch(url, {
             method: "POST",
             headers: headers,
-            body: body
+            body: JSON.stringify(body)
         })
         .then(response => {
             if(response.status !== 200 && response.status !== 201) {

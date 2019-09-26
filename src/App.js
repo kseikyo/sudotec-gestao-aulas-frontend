@@ -12,7 +12,7 @@ class App extends React.Component {
             isSidebarToggled: false,
             token: null,
             userId: null,
-            isLogin: false
+            isLogin: true
         }
         this.fetchToggle = this.fetchToggle.bind(this);
     }

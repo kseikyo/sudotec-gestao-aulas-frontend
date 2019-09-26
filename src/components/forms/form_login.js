@@ -54,18 +54,18 @@ class FormLogin extends React.Component {
                 <header className="form-header">
                     <h3>Login</h3>
                 </header>
-                <div className="form-input">
-                    <label className="form-label">Email</label>
-                    <input type="email" ref={this.emailRef}></input>
+                <div className="form-group">
+                    <label>Email</label>
+                    <input className="form-control" type="email" ref={this.emailRef}></input>
                 </div>
-                <div className="form-input">
+                <div className="form-group">
                     <label className="form-label">Senha</label>
-                    <input type="password" ref={this.passwordRef}></input>
+                    <input className="form-control" type="password" ref={this.passwordRef}></input>
                 </div>
-                <button className="form-button" onClick={this.submitHandler}>
+                <button className="form-button btn btn-primary" onClick={this.submitHandler}>
                     Entrar
                 </button>
-                <a href="#">Esqueci minha senha</a>
+                <a href="#">Esqueci minha senha.</a>
             </form>
         );
     }

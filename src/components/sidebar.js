@@ -6,7 +6,7 @@ function MenuItem(props) {
     return (
         <NavLink activeClassName='is-active' to={props.span} style={{ textDecoration: 'none', color: '#454545'}}>
             <li className="nav-item menu-item" style={{ cursor: "pointer" }}>
-                <div className="nav-icon"><i className={props.icon} style={{ fontSize: "1.5em" }}></i></div>
+                <div className="nav-icon"><i className={props.icon}></i></div>
                 <span>{props.span}</span>
             </li>
             <Route path={`/${props.span}/`}/>

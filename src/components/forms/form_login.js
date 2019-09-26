@@ -18,7 +18,7 @@ class FormLogin extends React.Component {
         }
 
         let headers = {
-            "Content-Type": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
             "Accept": "application/json",
         }
 
@@ -26,6 +26,7 @@ class FormLogin extends React.Component {
             email: email,
             password: password
         }
+        
 
         fetch(url, {
             method: "POST",
@@ -33,8 +34,9 @@ class FormLogin extends React.Component {
             body: JSON.stringify(body)
         })
         .then(response => {
+            console.log(response);
             if(response.status !== 200 && response.status !== 201) {
-                throw new Error ('Authentication failed');
+                // throw new Error ('Authentication failed');
                 //Don't know how we are gonna handle it on frontend yet
             }
             return response.json();

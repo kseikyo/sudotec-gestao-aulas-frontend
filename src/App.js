@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import Sidebar from './components/sidebar';
 import Stickybar from './components/stickybar';
 import FormLogin from './components/forms/form_login';
@@ -17,24 +17,12 @@ class App extends React.Component {
     fetchToggle() {
 
         new Promise((resolve, reject) => {
-
-            let container = document.querySelector(".container");
-            let stickybar = document.querySelector(".navbar");
-
+            let app = document.querySelector("#app");
 
             if (this.state.isSidebarToggled) {
-                // Setting the width and left back to the default
-                container.style.left = "0";
-                container.style.width = "260px";
-                stickybar.style.width = "calc(100% - 260px)";
+                app.classList.add('sidebar-hidden')
             } else {
-                /* It is needed to set the width and left style from the container to make the stickybar
-                 * use the actual 100% of the width. 
-                 * But now the animations are now at the same time.
-                 */
-                container.style.left = "-260px";
-                stickybar.style.width = "100%";
-                container.style.width = "0px";
+                app.classList.remove('sidebar-hidden')
 
             }
             resolve();
@@ -52,11 +40,11 @@ class App extends React.Component {
     render() {
 
         return (
-            <div className="App">
+            <div id="app">
                 <Sidebar state={this.state.isSidebarToggled} />
-                <div>
-                    <Content />
+                <div id="app-content">
                     <Stickybar fetchToggle={this.fetchToggle} />
+                    <Content />
                 </div>
             </div>
         );

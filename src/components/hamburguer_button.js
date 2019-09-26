@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/stickybar.css';
+import '../styles/stickybar.scss';
 
 class Hamburguer extends React.Component {
     constructor(props) {

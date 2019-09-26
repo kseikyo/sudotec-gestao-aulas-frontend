@@ -1,41 +1,38 @@
 import React from 'react';
-import '../styles/sidebar.css';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import '../styles/sidebar.scss';
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 function MenuItem(props) {
     return (
-        <Link to={props.span} style={{ textDecoration: 'none', color: '#454545'}}>
+        <NavLink activeClassName='is-active'to={props.span} style={{ textDecoration: 'none', color: '#454545'}}>
             <li className="nav-item menu-item" style={{ cursor: "pointer" }}>
-                <a style={{ paddingRight: "1rem" }}><i className={props.icon} style={{ fontSize: "1.5em" }}></i></a>
+                <div className="nav-icon"><i className={props.icon} style={{ fontSize: "1.5em" }}></i></div>
                 <span>{props.span}</span>
             </li>
             <Route path={`/${props.span}/`}/>
-        </Link>
+        </NavLink>
     );
 }
 
 class Sidebar extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
-            <div className="container sidebar-container">
-                <nav className="sidebar" role="navigation">
-                    <ul className="nav flex-column nav-tabs">
-                        <li id="logo" className="nav-item">
-                            <header>
-                                <span className="nav-logo">
-                                    Sudotec Desenvolvimento e tecnologia
-                                </span>
-                            </header>
-                        </li>
-                        <li className="nav-item">
-                            <span className="nav-title">
-                                Gerenciamento de aulas
+            <div className="container" id="sidebar">
+                <div className="sidebar-container" role="navigation">
+                    <div id="logo">
+                        <header>
+                            <span className="nav-logo">
+                                Sudotec Desenvolvimento e tecnologia
                             </span>
-                        </li>
+                        </header>
+                    </div>
+                    <div>
+                        <span className="nav-title">
+                            Gerenciamento de aulas
+                        </span>
+                    </div>
+                    <ul className="nav flex-column nav-tabs">
                         <Router>
                             <menu>
                                 <MenuItem icon="fas fa-home home-icon" span="Home" />
@@ -47,7 +44,7 @@ class Sidebar extends React.Component {
                             </menu>
                         </Router>
                     </ul>
-                </nav>
+                </div>
             </div>
         );
     }

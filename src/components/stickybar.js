@@ -1,10 +1,10 @@
 import React from 'react';
-import '../styles/stickybar.css';
+import '../styles/stickybar.scss';
 import Hamburguer from './hamburguer_button';
 
 function Stickybar(props) {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light">
+        <nav className="navbar navbar-expand-lg navbar-light sticky-bar">
                 <Hamburguer fetchToggle={props.fetchToggle}/>
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">

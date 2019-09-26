@@ -11,7 +11,8 @@ class App extends React.Component {
         this.state = {
             isSidebarToggled: false,
             token: null,
-            userId: null
+            userId: null,
+            isLogin: true
         }
         this.fetchToggle = this.fetchToggle.bind(this);
     }
@@ -55,11 +56,16 @@ class App extends React.Component {
 
         return (
             <div className="App">
+                {
+                this.state.isLogin ? <FormLogin />
+                : <div> 
                 <Sidebar state={this.state.isSidebarToggled} />
                 <div>
                     <Content />
                     <Stickybar fetchToggle={this.fetchToggle} />
+                </div> 
                 </div>
+                }
             </div>
         );
     }

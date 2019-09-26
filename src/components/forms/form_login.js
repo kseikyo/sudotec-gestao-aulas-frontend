@@ -10,8 +10,8 @@ class FormLogin extends React.Component {
     submitHandler = (event) => {
         event.preventDefault();
         const url = new URL("http://api.sudotec.test/api/auth/login");
-        const email = this.emailEl.current.value;
-        const password = this.passwordEl.current.value;
+        const email = this.emailRef.current.value;
+        const password = this.passwordRef.current.value;
         
         if (email.trim().length === 0 || password.trim().length === 0) {
             return;

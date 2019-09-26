@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 function MenuItem(props) {
     return (
-        <NavLink activeClassName='is-active'to={props.span} style={{ textDecoration: 'none', color: '#454545'}}>
+        <NavLink activeClassName='is-active' to={props.span} style={{ textDecoration: 'none', color: '#454545'}}>
             <li className="nav-item menu-item" style={{ cursor: "pointer" }}>
                 <div className="nav-icon"><i className={props.icon} style={{ fontSize: "1.5em" }}></i></div>
                 <span>{props.span}</span>

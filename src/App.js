@@ -9,7 +9,9 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isSidebarToggled: false
+            isSidebarToggled: false,
+            token: null,
+            userId: null
         }
         this.fetchToggle = this.fetchToggle.bind(this);
     }

@@ -18,7 +18,7 @@ class FormLogin extends React.Component {
         }
 
         let headers = {
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/json",
             "Accept": "application/json",
         }
 
@@ -26,7 +26,6 @@ class FormLogin extends React.Component {
             email: email,
             password: password
         }
-        
 
         fetch(url, {
             method: "POST",
@@ -34,9 +33,8 @@ class FormLogin extends React.Component {
             body: JSON.stringify(body)
         })
         .then(response => {
-            console.log(response);
             if(response.status !== 200 && response.status !== 201) {
-                // throw new Error ('Authentication failed');
+                throw new Error ('Authentication failed');
                 //Don't know how we are gonna handle it on frontend yet
             }
             return response.json();
@@ -56,18 +54,18 @@ class FormLogin extends React.Component {
                 <header className="form-header">
                     <h3>Login</h3>
                 </header>
-                <div className="form-input">
-                    <label className="form-label">Email</label>
-                    <input type="email" ref={this.emailRef}></input>
+                <div className="form-group">
+                    <label>Email</label>
+                    <input className="form-control" type="email" ref={this.emailRef}></input>
                 </div>
-                <div className="form-input">
+                <div className="form-group">
                     <label className="form-label">Senha</label>
-                    <input type="password" ref={this.passwordRef}></input>
+                    <input className="form-control" type="password" ref={this.passwordRef}></input>
                 </div>
-                <button className="form-button" onClick={this.submitHandler}>
+                <button className="form-button btn btn-primary" onClick={this.submitHandler}>
                     Entrar
                 </button>
-                <a href="#">Esqueci minha senha</a>
+                <a href="#">Esqueci minha senha.</a>
             </form>
         );
     }

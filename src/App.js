@@ -3,6 +3,7 @@ import './App.css';
 import Sidebar from './components/sidebar';
 import Stickybar from './components/stickybar';
 import FormLogin from './components/forms/form_login';
+import Content from './components/content';
 
 class App extends React.Component {
     constructor(props) {
@@ -53,8 +54,10 @@ class App extends React.Component {
         return (
             <div className="App">
                 <Sidebar state={this.state.isSidebarToggled} />
-                <Stickybar fetchToggle={this.fetchToggle} />
-
+                <div>
+                    <Content />
+                    <Stickybar fetchToggle={this.fetchToggle} />
+                </div>
             </div>
         );
     }

@@ -9,7 +9,10 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isSidebarToggled: false
+            isSidebarToggled: false,
+            token: null,
+            userId: null,
+            isLogin: false
         }
         this.fetchToggle = this.fetchToggle.bind(this);
     }
@@ -41,11 +44,15 @@ class App extends React.Component {
 
         return (
             <div id="app">
-                <Sidebar state={this.state.isSidebarToggled} />
-                <div id="app-content">
-                    <Stickybar fetchToggle={this.fetchToggle} />
-                    <Content />
-                </div>
+                { this.state.isLogin ? <FormLogin />
+                : <div id="root"> 
+                    <Sidebar state={this.state.isSidebarToggled} />
+                    <div id="app-content">
+                        <Stickybar fetchToggle={this.fetchToggle} />
+                        <Content/>
+                    </div> 
+                 </div>
+                }
             </div>
         );
     }

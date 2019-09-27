@@ -10,18 +10,18 @@ class App extends React.Component {
         super(props);
         this.state = {
             token: null,
-            userId: null,
+            email: null,
             isLogin: true
         }
     
     }
 
-    login = (token, tokenExpiration) => {
-        this.setState({ token: token });
+    login = (token, email, tokenExpiration) => {
+        this.setState({ token: token, email: email });
     }
 
     logout = () => {
-        this.setState({ token: null });
+        this.setState({ token: null, email: null});
     }
 
 
@@ -33,6 +33,7 @@ class App extends React.Component {
                     <AuthContext.Provider
                         value={{
                             token: this.state.token,
+                            email: this.state.email,
                             login: this.login,
                             logout: this.logout
                         }}>

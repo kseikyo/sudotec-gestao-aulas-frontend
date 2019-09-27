@@ -5,7 +5,7 @@
     opacity: 1;
     width: 100%;
     transition: width 0.85s ease-in;
-    padding: 0 36px 0 36px;
+    padding: 22px 36px 22px 36px;
 
 
     .hamburguer-button {
@@ -15,11 +15,12 @@
 
     .breadcrumb {
         text-align: left;
-        font: SemiBold 14px/19px Nunito Sans;
-        letter-spacing: 0;
+        font-size: 14px;
+        font-weight: 600;
         color: #A4A4A4;
-        opacity: 1;
-        background: transparent;
+        background: none;
+        margin: 0 0 0 20px;
+        padding: 0
     }
 
     .bar1, .bar2, .bar3 {
@@ -28,7 +29,7 @@
         background: #F16450 0% 0% no-repeat padding-box;
         border-radius: 5px;
         opacity: 1;
-        margin: 6px 0;
+        margin: 3px 0;
         transition: 0.4s;
     }
 }

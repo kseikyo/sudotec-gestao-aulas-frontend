@@ -4,7 +4,9 @@ $secondary: #F16450;
 $yellow: #F7954E;
 $green: #5EC970;
 $red: #F04651;
-
+$font-family-sans-serif: 'Nunito Sans', 'Segoe UI', sans-serif;
+$semi-light: #FBFBFB;
+$light: #F2F2F2;
 
 //Buttons
 $btn-border-radius: 20px;
@@ -14,3 +16,5 @@ $input-border-radius: 20px;
 $input-border-radius-lg: 20px;
 $input-border-radius-sm: 20px;
 $input-bg: inherit;
+
+$breadcrumb-divider: quote(">");

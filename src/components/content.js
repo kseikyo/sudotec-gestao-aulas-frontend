@@ -8,11 +8,9 @@ class Content extends React.Component {
 
     render() {
         return(
-            <div className="content-container">
                 <div className="content-block">
 teste
                 </div>
-            </div>
         );
     }
 }

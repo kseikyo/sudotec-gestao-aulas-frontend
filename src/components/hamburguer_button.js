@@ -1,9 +1,9 @@
 import React from 'react';
 import '../styles/stickybar.scss';
 
-function Hamburguer() {
+function Hamburguer(props) {
         return (
-            <div className="hamburguer-button" onClick={() => { this.props.fetchToggle() }}>
+            <div className="hamburguer-button" onClick={props.toggle}>
                 <div className="bar1"></div>
                 <div className="bar2"></div>
                 <div className="bar3"></div>

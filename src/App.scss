@@ -1,5 +1,6 @@
 @import 'styles/variables';
 @import '~bootstrap/scss/bootstrap.scss';
+@import 'styles/forms';
 
 #app {
   margin: 0;
@@ -53,4 +54,16 @@
   transition: all 0.3s ease-in-out;
   width: calc(100% - 260px);
   margin-left: 260px;
+}
+
+h1 {
+  font-size: 46px;
+}
+h2 {
+  font-size: 32px;
+  color: $secondary;
+}
+h3 {
+  font-size: 20px;
+  color: $primary;
 }

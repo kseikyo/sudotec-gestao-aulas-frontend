@@ -1,12 +1,7 @@
 import React from 'react';
 import '../styles/stickybar.scss';
 
-class Hamburguer extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
+function Hamburguer() {
         return (
             <div className="hamburguer-button" onClick={() => { this.props.fetchToggle() }}>
                 <div className="bar1"></div>
@@ -14,8 +9,6 @@ class Hamburguer extends React.Component {
                 <div className="bar3"></div>
             </div>
         );
-    }
-
 }
 
 export default Hamburguer;

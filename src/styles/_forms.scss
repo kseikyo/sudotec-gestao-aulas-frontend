@@ -1,9 +1,6 @@
 .form-group {
   position: relative;
   background-color: #FBFBFB;
-  &.white {
-    background-color: white;
-  }
 
   label {
     position: absolute;
@@ -23,5 +20,20 @@
     font-size: 12px;
     top: 0;
     transition: all 0.3s ease-in-out;
+    background-color: inherit;
+  }
+}
+
+.bg-white {
+  .form-group {
+    position: relative;
+    background-color: white;
+  }
+}
+
+.bg-light {
+  .form-group {
+    position: relative;
+    background-color: $light;
   }
 }

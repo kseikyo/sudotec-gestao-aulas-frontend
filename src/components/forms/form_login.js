@@ -1,4 +1,5 @@
 import React from 'react';
+import AuthContext from '../../context/auth-context';
 
 class FormLogin extends React.Component {
     constructor(props) {
@@ -6,6 +7,8 @@ class FormLogin extends React.Component {
         this.emailRef = React.createRef();
         this.passwordRef = React.createRef();
     }
+    
+    static contextType = AuthContext;
 
     submitHandler = (event) => {
         event.preventDefault();
@@ -40,6 +43,9 @@ class FormLogin extends React.Component {
             return response.json();
         })
         .then(responseData => {
+            // if(responseData.data.token) {
+            //     this.context.login(responseData.data.token, responseData.data.email, responseData.data.tokenExpiration);
+            // }
             //Loggin the json data
             console.log(responseData);
         })
@@ -55,12 +61,12 @@ class FormLogin extends React.Component {
                     <h3>Login</h3>
                 </header>
                 <div className="form-group">
-                    <label>Email</label>
                     <input className="form-control" type="email" ref={this.emailRef}></input>
+                    <label>Email</label>
                 </div>
                 <div className="form-group">
-                    <label className="form-label">Senha</label>
                     <input className="form-control" type="password" ref={this.passwordRef}></input>
+                    <label className="form-label">Senha</label>
                 </div>
                 <button className="form-button btn btn-primary" onClick={this.submitHandler}>
                     Entrar

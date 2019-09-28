@@ -44,11 +44,11 @@ class FormLogin extends React.Component {
             return response.json();
         })
         .then(responseData => {
-            // if(responseData.data.token) {
-            //     this.context.login(responseData.data.token, responseData.data.email, responseData.data.tokenExpiration);
-            // }
+            if(responseData.access_token) {
+                this.context.login(responseData.access_token, email);
+            }
             //Loggin the json data
-            console.log(responseData);
+            console.log(this.context);
         })
         .catch(err => {
             console.log(err);

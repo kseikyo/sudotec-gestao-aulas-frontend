@@ -1,5 +1,7 @@
 @import 'styles/variables';
 @import '~bootstrap/scss/bootstrap.scss';
+@import 'styles/forms';
+@import 'styles/auth';
 
 #app {
   margin: 0;
@@ -11,34 +13,6 @@
 
 #root {
   width: 100%;
-}
-
-.form-container {
-  border: 1px solid black;
-  box-shadow: 5px 10px #888888;
-  justify-content: center;
-  width: 70vh;
-  height: 50vh;
-}
-
-.form-header {
-  margin: 1px;
-  padding-bottom: 1rem;
-  text-align: center;
-}
-
-.form-input {
-  display: table;
-  margin: 0 auto;
-  text-align: center;
-  padding-bottom: 1rem;
-}
-
-.form-button {
-  display: table;
-  margin: 0 auto;
-  text-align: center;
-  width: 13em;
 }
 
 .sidebar-hidden {
@@ -53,4 +27,18 @@
   transition: all 0.3s ease-in-out;
   width: calc(100% - 260px);
   margin-left: 260px;
+}
+
+h1 {
+  font-size: 46px;
+  font-weight: 700;
+}
+h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: $secondary;
+}
+h3 {
+  font-size: 20px;
+  color: $primary;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class FormRestaurar extends React.Component {
+class FormRestore extends React.Component {
     constructor(props) {
         super(props);
         this.emailRef = React.createRef()
@@ -62,4 +62,4 @@ class FormRestaurar extends React.Component {
     }
 }
 
-export default FormRestaurar;
+export default FormRestore;

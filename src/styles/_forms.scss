@@ -1,0 +1,39 @@
+.form-group {
+  position: relative;
+  background-color: #FBFBFB;
+
+  label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    margin: 0;
+    padding: 0 6px;
+    color: rgb(107, 107, 107);
+    font-weight: 400;
+    font-size: 16px;
+    transform: translate(0, -50%);
+    transition: all 0.3s ease-in-out;
+    background-color: inherit;
+  }
+  .form-control.filled + label {
+    color: #A4A4A4;
+    font-size: 12px;
+    top: 0;
+    transition: all 0.3s ease-in-out;
+    background-color: inherit;
+  }
+}
+
+.bg-white {
+  .form-group {
+    position: relative;
+    background-color: white;
+  }
+}
+
+.bg-light {
+  .form-group {
+    position: relative;
+    background-color: $light;
+  }
+}

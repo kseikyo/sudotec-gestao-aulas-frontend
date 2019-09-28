@@ -1,6 +1,6 @@
 import React from 'react';
 
-class FormRedefinir extends React.Component {
+class FormRedefine extends React.Component {
     constructor(props) {
         super(props);
         this.firstPass  = React.createRef();
@@ -73,4 +73,4 @@ class FormRedefinir extends React.Component {
     }
 }
 
-export default FormRedefinir;
+export default FormRedefine;

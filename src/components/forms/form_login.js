@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthContext from '../../context/auth-context';
+import Auth from './../auth';
 
 class FormLogin extends React.Component {
     constructor(props) {
@@ -56,23 +57,25 @@ class FormLogin extends React.Component {
 
     render() {
         return (
-            <form className="form-container">
-                <header className="form-header">
-                    <h3>Login</h3>
-                </header>
-                <div className="form-group">
-                    <input className="form-control" type="email" ref={this.emailRef}></input>
-                    <label>Email</label>
-                </div>
-                <div className="form-group">
-                    <input className="form-control" type="password" ref={this.passwordRef}></input>
-                    <label className="form-label">Senha</label>
-                </div>
-                <button className="form-button btn btn-primary" onClick={this.submitHandler}>
-                    Entrar
-                </button>
+            <Auth>
+                <form className="form-container text-center">
+                    <header className="form-header">
+                        <h2>Login</h2>
+                    </header>
+                    <div className="form-group">
+                        <input className="form-control" type="email" ref={this.emailRef}></input>
+                        <label>Email</label>
+                    </div>
+                    <div className="form-group">
+                        <input className="form-control" type="password" ref={this.passwordRef}></input>
+                        <label className="form-label">Senha</label>
+                    </div>
+                    <button className="btn btn-primary w-100" onClick={this.submitHandler}>
+                        Entrar
+                    </button>
+                </form>
                 <a href="#">Esqueci minha senha.</a>
-            </form>
+            </Auth>
         );
     }
 }

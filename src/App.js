@@ -13,8 +13,15 @@ class App extends React.Component {
             email: null,
             isLogin: true
         }
-    
     }
+
+    componentDidMount() {
+        let token = localStorage.getItem("token");
+        if(token)
+            this.setState({token: token});
+        
+    }
+  
 
     login = (token, email, tokenExpiration) => {
         this.setState({ token: token, email: email });

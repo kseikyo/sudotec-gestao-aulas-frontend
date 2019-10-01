@@ -45,6 +45,7 @@ class FormLogin extends React.Component {
         })
         .then(responseData => {
             if(responseData.access_token) {
+                localStorage.setItem("token", responseData.access_token);
                 this.context.login(responseData.access_token, email);
             }
             //Loggin the json data

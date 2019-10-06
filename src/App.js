@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import FormLogin from './components/forms/form_login';
+import FormLogin from './components/Form/Login/form_login';
 import Dashboard from './components/dashboard';
 import { BrowserRouter } from 'react-router-dom';
 import AuthContext from './context/auth-context';

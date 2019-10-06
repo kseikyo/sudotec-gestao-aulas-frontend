@@ -1,6 +1,6 @@
 import React from 'react';
-import AuthContext from '../../context/auth-context';
-import Auth from './../auth';
+import AuthContext from '../../../context/auth-context';
+import Auth from '../../auth';
 
 class FormLogin extends React.Component {
     constructor(props) {

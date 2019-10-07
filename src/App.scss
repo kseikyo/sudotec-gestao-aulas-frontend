@@ -2,6 +2,10 @@
 @import '~bootstrap/scss/bootstrap.scss';
 @import 'styles/forms';
 @import 'styles/auth';
+@import 'styles/sidebar';
+@import 'styles/stickybar';
+@import 'styles/content';
+
 
 #app {
   margin: 0;
@@ -11,7 +15,7 @@
   background-color: #F2F2F2;
 }
 
-#root {
+#root, #dashboard {
   width: 100%;
 }
 

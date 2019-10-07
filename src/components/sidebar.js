@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/sidebar.scss';
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 function MenuItem(props) {

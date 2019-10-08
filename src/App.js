@@ -1,9 +1,17 @@
 import React from 'react';
 import './App.scss';
-import FormLogin from './components/Form/Login/form_login';
-import Dashboard from './components/dashboard';
-import { BrowserRouter } from 'react-router-dom';
+import FormLogin from './pages/Logon/Login';
+import Dashboard from './components/layouts/dashboard';
+import { BrowserRouter, Route } from 'react-router-dom';
 import AuthContext from './context/auth-context';
+
+// const PrivateRoute = ({ component: Component, ...rest }) => (
+//     <Route {...rest} render={(props) => (
+//       fakeAuth.isAuthenticated === true
+//         ? <Component {...props} />
+//         : <Redirect to='/login' />
+//     )} />
+//   )
 
 class App extends React.Component {
     constructor(props) {
@@ -33,7 +41,6 @@ class App extends React.Component {
 
 
     render() {
-
         return (
             <BrowserRouter>
                 <>
@@ -46,7 +53,8 @@ class App extends React.Component {
                         }}>
                         <div id="app">
                             {!this.state.token ? <FormLogin isLogin={this.state.isLogin} />
-                                : <Dashboard/>
+                                : 
+                                <Dashboard></Dashboard>
                             }
                         </div>
                     </AuthContext.Provider>

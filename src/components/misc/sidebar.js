@@ -34,12 +34,12 @@ class Sidebar extends React.Component {
                     <ul className="nav flex-column nav-tabs">
                         <Router>
                             <menu>
-                                <MenuItem icon="fas fa-home home-icon" span="Home" />
-                                <MenuItem icon="fas fa-folder-open projects-icon" span="Projetos" />
-                                <MenuItem icon="fas fa-book-open courses-icon" span="Cursos" />
-                                <MenuItem icon="fas fa-chalkboard-teacher classes-icon" span="Turmas" />
-                                <MenuItem icon="fas fa-user-friends students-icon" span="Alunos" />
-                                <MenuItem icon="fas fa-user users-icon" span="Usuarios" />
+                                <MenuItem icon="fas fa-home home-icon" span="home" />
+                                <MenuItem icon="fas fa-folder-open projects-icon" span="projetos" />
+                                <MenuItem icon="fas fa-book-open courses-icon" span="cursos" />
+                                <MenuItem icon="fas fa-chalkboard-teacher classes-icon" span="turmas" />
+                                <MenuItem icon="fas fa-user-friends students-icon" span="alunos" />
+                                <MenuItem icon="fas fa-user users-icon" span="usuarios" />
                             </menu>
                         </Router>
                     </ul>

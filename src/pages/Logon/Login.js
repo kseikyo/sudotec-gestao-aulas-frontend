@@ -1,6 +1,6 @@
 import React from 'react';
-import AuthContext from '../../../context/auth-context';
-import Auth from '../../auth';
+import AuthContext from '../../context/auth-context';
+import Logon from '../../components/layouts/logon';
 
 class FormLogin extends React.Component {
     constructor(props) {
@@ -58,7 +58,7 @@ class FormLogin extends React.Component {
 
     render() {
         return (
-            <Auth>
+            <Logon>
                 <form className="form-container text-center">
                     <header className="form-header">
                         <h2>Login</h2>
@@ -76,7 +76,7 @@ class FormLogin extends React.Component {
                     </button>
                 </form>
                 <a href="#">Esqueci minha senha.</a>
-            </Auth>
+            </Logon>
         );
     }
 }

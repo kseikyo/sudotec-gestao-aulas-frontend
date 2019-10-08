@@ -1,7 +1,6 @@
 import React from 'react';
-import Sidebar from './sidebar';
-import Stickybar from './stickybar';
-import Content from './content';
+import Sidebar from '../misc/sidebar';
+import Stickybar from '../misc/stickybar';
 
 class Dashboard extends React.Component {
     render() {
@@ -10,11 +9,8 @@ class Dashboard extends React.Component {
             <Sidebar/>
             <div id="app-content">
                 <Stickybar/>
-                
                 <div className="content-container">
-                  <Content>
-                    content
-                  </Content>
+                  {this.props.children}
                 </div>
             </div> 
           </div>

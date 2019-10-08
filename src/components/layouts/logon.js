@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Auth(props) {
+function Logon(props) {
   return (
     <div id="auth" className="bg-white">
         <div id="auth-form" className="align-self-center">
@@ -17,4 +17,4 @@ function Auth(props) {
   )
 }
 
-export default Auth;
+export default Logon;

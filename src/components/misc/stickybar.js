@@ -1,6 +1,6 @@
 import React from 'react';
 import Hamburguer from './hamburguer_button';
-
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
 class Stickybar extends React.Component {
     constructor(props) {
         super(props);
@@ -39,14 +39,19 @@ class Stickybar extends React.Component {
                 <div>
                     <Hamburguer toggle={this.fetchToggle} />
                 </div>
-                <nav aria-label="breadcrumb" className="mr-auto">
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item active" aria-current="page">Home</li>
-                    </ol>
-                </nav>
+                <Breadcrumb className="mr-auto">
+                    <Breadcrumb.Item active>Home</Breadcrumb.Item>
+                </Breadcrumb>
             </div>
         );
     }
 }
+
+
+{/* <nav aria-label="breadcrumb" className="mr-auto">
+<ol className="breadcrumb">
+    <li className="breadcrumb-item active" aria-current="page">Home</li>
+</ol>
+</nav> */}
 
 export default Stickybar;

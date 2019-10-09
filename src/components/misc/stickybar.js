@@ -1,6 +1,9 @@
 import React from 'react';
 import Hamburguer from './hamburguer_button';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import Navbar from 'react-bootstrap/Navbar';
+import { NavDropdown } from 'react-bootstrap';
+
 class Stickybar extends React.Component {
     constructor(props) {
         super(props);
@@ -35,14 +38,17 @@ class Stickybar extends React.Component {
     render() {
 
         return (
-            <div className="navbar navbar-light sticky-bar">
+            <Navbar bg="light" expand="lg" className="sticky-bar">
                 <div>
                     <Hamburguer toggle={this.fetchToggle} />
                 </div>
                 <Breadcrumb className="mr-auto">
                     <Breadcrumb.Item active>Home</Breadcrumb.Item>
                 </Breadcrumb>
-            </div>
+                <NavDropdown title="User name">
+                    <NavDropdown.Item onClick={this.props.logout}>Logout</NavDropdown.Item>
+                </NavDropdown>
+            </Navbar>
         );
     }
 }

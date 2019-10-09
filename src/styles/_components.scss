@@ -1,0 +1,19 @@
+.section-title {
+  .icon {
+    padding-right: 12px;
+    font-size: 25px;
+    color: $primary;
+  }
+  .title {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: $primary;
+  }
+  .subtitle {
+    display: block;
+    font-size: 14px;
+    color: $gray-600;
+    margin-top: -3px;
+  }
+}

@@ -5,7 +5,7 @@ function MenuItem(props) {
     return (
         <NavLink activeClassName='is-active' to={props.span} style={{ textDecoration: 'none', color: '#454545'}}>
             <li className="nav-item menu-item" style={{ cursor: "pointer" }}>
-                <div className="nav-icon"><i className={props.icon}></i></div>
+                <div className="nav-icon"><i className={`icon-${props.icon}`}></i></div>
                 <span>{props.span}</span>
             </li>
             <Route path={`/${props.span}/`}/>
@@ -34,12 +34,12 @@ class Sidebar extends React.Component {
                     <ul className="nav flex-column nav-tabs">
                         <Router>
                             <menu>
-                                <MenuItem icon="fas fa-home home-icon" span="home" />
-                                <MenuItem icon="fas fa-folder-open projects-icon" span="projetos" />
-                                <MenuItem icon="fas fa-book-open courses-icon" span="cursos" />
-                                <MenuItem icon="fas fa-chalkboard-teacher classes-icon" span="turmas" />
-                                <MenuItem icon="fas fa-user-friends students-icon" span="alunos" />
-                                <MenuItem icon="fas fa-user users-icon" span="usuarios" />
+                                <MenuItem icon="home" span="home" />
+                                <MenuItem icon="project" span="projetos" />
+                                <MenuItem icon="course" span="cursos" />
+                                <MenuItem icon="grade" span="turmas" />
+                                <MenuItem icon="students" span="alunos" />
+                                <MenuItem icon="user" span="usuarios" />
                             </menu>
                         </Router>
                     </ul>

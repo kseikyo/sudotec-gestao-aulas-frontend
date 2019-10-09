@@ -4,6 +4,7 @@ import FormLogin from './pages/Logon/Login';
 import Dashboard from './components/layouts/dashboard';
 import { BrowserRouter, Route } from 'react-router-dom';
 import AuthContext from './context/auth-context';
+import Projects from './pages/Project/Projects';
 
 // const PrivateRoute = ({ component: Component, ...rest }) => (
 //     <Route {...rest} render={(props) => (
@@ -54,7 +55,7 @@ class App extends React.Component {
                         <div id="app">
                             {!this.state.token ? <FormLogin isLogin={this.state.isLogin} />
                                 : 
-                                <Dashboard></Dashboard>
+                                <Dashboard><Projects/></Dashboard>
                             }
                         </div>
                     </AuthContext.Provider>

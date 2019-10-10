@@ -1,0 +1,62 @@
+.grade-card {
+  position: relative;
+  background-color: white;
+  border-radius: 20px;
+  padding: 18px;
+  transition: all 0.3s ease-in-out;
+  .grade-name {
+    font-weight: 700;
+    color: $gray;
+    font-size: 16px;
+    line-height: 16px;
+  }
+  .grade-course {
+    font-weight: 600;
+    color: $secondary-gray;
+    font-size: 14px;
+  }
+  .expand {
+    position: absolute;
+    background-color: inherit;
+    box-shadow: inherit;
+    width: 100%;
+    border-radius: 20px;
+    top: 100%;
+    left: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    opacity: 0;
+    transform: scaleY(0);
+    transition: all 0.3s ease-out;
+    padding: 0 18px 8px 18px;
+    transform-origin: top;
+  }
+  &:hover {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.16);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;  
+    cursor: pointer;
+    .expand {
+      transform: scaleY(1);
+      opacity: 1;
+      z-index: 20;
+    }
+  }
+}
+
+.grade-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+  grid-gap: 20px;
+  .grade-info {
+    line-height: 12px;
+    color: $gray;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .label {
+    font-weight: 600;
+    font-size: 12px;
+    color: $secondary-gray;
+  }
+}

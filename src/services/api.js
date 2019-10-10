@@ -1,12 +1,11 @@
 import axios from "axios";
-import AuthContext from "../context/auth-context";
 
 const api = axios.create({
-  baseURL: "http://api.sudotect.test/api"
+  baseURL: "http://api.sudotec.test/api"
 });
 
 api.interceptors.request.use(async config => {
-  const token = AuthContext.token;
+  const token = localStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

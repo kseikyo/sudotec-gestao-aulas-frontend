@@ -9,7 +9,7 @@ class FormLogin extends React.Component {
         this.emailRef = React.createRef();
         this.passwordRef = React.createRef();
     }
-    
+
     static contextType = AuthContext;
 
     submitHandler = (event) => {
@@ -17,7 +17,7 @@ class FormLogin extends React.Component {
         const url = new URL("http://api.sudotec.test/api/auth/login");
         const email = this.emailRef.current.value;
         const password = this.passwordRef.current.value;
-        
+
         if (email.trim().length === 0 || password.trim().length === 0) {
             return;
         }
@@ -37,25 +37,23 @@ class FormLogin extends React.Component {
             headers: headers,
             body: JSON.stringify(body)
         })
-        .then(response => {
-            if(response.status !== 200 && response.status !== 201) {
-                throw new Error ('Authentication failed');
-                //Don't know how we are gonna handle it on frontend yet
-            }
-            return response.json();
-        })
-        .then(responseData => {
-            if(responseData.access_token) {
-                localStorage.setItem("token", responseData.access_token);
-                localStorage.setItem("email", email);
-                this.context.login(responseData.access_token, email);
-            }
-            //Loggin the json data
-            console.log(this.context);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            .then(response => {
+                if (response.status !== 200 && response.status !== 201) {
+                    throw new Error('Authentication failed');
+                    //Don't know how we are gonna handle it on frontend yet
+                }
+                return response.json();
+            })
+            .then(responseData => {
+                if (responseData.access_token) {
+                    localStorage.setItem("token", responseData.access_token);
+                    localStorage.setItem("email", email);
+                    this.context.login(responseData.access_token, email);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     render() {
@@ -79,7 +77,7 @@ class FormLogin extends React.Component {
                 </form>
                 <NavLink to="Forgotten-Password">
                     <span>Esqueci minha senha.</span>
-                    <Route path="Forgotten-Password"/>
+                    <Route path="Forgotten-Password" />
                 </NavLink>
             </Logon>
         );

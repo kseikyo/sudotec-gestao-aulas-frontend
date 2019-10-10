@@ -1,17 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-
-function MenuItem(props) {
-    return (
-        <NavLink activeClassName='is-active' to={props.span} style={{ textDecoration: 'none'}}>
-            <li className="nav-item menu-item" style={{ cursor: "pointer" }}>
-                <div className="nav-icon"><i className={`icon-${props.icon}`}></i></div>
-                <span>{props.span}</span>
-            </li>
-            <Route path={`/${props.span}/`}/>
-        </NavLink>
-    );
-}
+import { BrowserRouter as Router } from "react-router-dom";
+import MenuItem from '../misc/menuItem';
 
 class MainMenu extends React.Component {
 
@@ -50,3 +39,7 @@ class MainMenu extends React.Component {
 }
 
 export default MainMenu;
+/* It will work calling it Sidebar into dashboard because it's a default export
+ * If it was a named import, e.g, export const MainMenu = MainMenu.
+ * It would work by importing using "import {MainMenu} from 'path'" or by "import {MainMenu as Sidebar} .."
+ */

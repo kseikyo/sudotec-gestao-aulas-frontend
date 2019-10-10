@@ -1,7 +1,7 @@
 import React from 'react';
 import Content from '../../components/misc/content';
-import SectionTitle from '../../components/misc/SectionTitle';
-import {Button} from 'react-bootstrap';
+import SectionTitle from '../../components/misc/sectionTitle';
+// import {Button} from 'react-bootstrap';
 import GlyphButton from '../../components/misc/GlyphButton';
 
 class Projects extends React.Component {

@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthContext from '../../context/auth-context';
 import Logon from '../../components/layouts/logon';
+import { BrowserRouter as Route, NavLink } from "react-router-dom";
 
 class FormLogin extends React.Component {
     constructor(props) {
@@ -46,6 +47,7 @@ class FormLogin extends React.Component {
         .then(responseData => {
             if(responseData.access_token) {
                 localStorage.setItem("token", responseData.access_token);
+                localStorage.setItem("email", email);
                 this.context.login(responseData.access_token, email);
             }
             //Loggin the json data
@@ -75,7 +77,10 @@ class FormLogin extends React.Component {
                         Entrar
                     </button>
                 </form>
-                <a href="#">Esqueci minha senha.</a>
+                <NavLink to="Forgotten-Password">
+                    <span>Esqueci minha senha.</span>
+                    <Route path="Forgotten-Password"/>
+                </NavLink>
             </Logon>
         );
     }

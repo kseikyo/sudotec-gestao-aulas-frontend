@@ -2,9 +2,9 @@ import React from 'react';
 import './App.scss';
 import FormLogin from './pages/Logon/Login';
 import Dashboard from './components/layouts/dashboard';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter} from 'react-router-dom';
 import AuthContext from './context/auth-context';
-import Projects from './pages/Project/Projects';
+// import Projects from './pages/Project/Projects';
 import Grades from './pages/Grade/Grades';
 
 // const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -27,8 +27,9 @@ class App extends React.Component {
 
     componentDidMount() {
         let token = localStorage.getItem("token");
-        if(token)
-            this.setState({token: token});
+        let email = localStorage.getItem("email");
+        if(token && email)
+            this.setState({token: token, email: email});
         
     }
   
@@ -45,7 +46,7 @@ class App extends React.Component {
     render() {
         return (
             <BrowserRouter>
-                <>
+                <React.Fragment>
                     <AuthContext.Provider
                         value={{
                             token: this.state.token,
@@ -56,11 +57,15 @@ class App extends React.Component {
                         <div id="app">
                             {!this.state.token ? <FormLogin isLogin={this.state.isLogin} />
                                 : 
-                                <Dashboard logout={this.logout}><Grades/></Dashboard>
+                                <Dashboard
+                                    user_email={this.state.email || "Username"} 
+                                    logout={this.logout}>
+                                    <Grades/>
+                                </Dashboard>
                             }
                         </div>
                     </AuthContext.Provider>
-                </>
+                </React.Fragment>
             </BrowserRouter>
         );
     }

@@ -8,7 +8,7 @@ function Logon(props) {
         </div>
         <div id="auth-layout">
           <div className="v-center">
-            <img src="/images/logo-white.png" className="img-fluid mb-4" width="200px"></img>
+            <img alt="Sudotec" src="/images/logo-white.png" className="img-fluid mb-4" width="200px"></img>
             <hr className="bg-white my-3"></hr>
             <h1>Gerenciamento de Aulas</h1>
           </div>

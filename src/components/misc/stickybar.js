@@ -17,7 +17,7 @@ class Stickybar extends React.Component {
         new Promise((resolve, reject) => {
             let app = document.querySelector("#app");
     
-            if (this.state.isSidebarToggled) {
+            if (!this.state.isSidebarToggled) {
                 app.classList.add('sidebar-hidden')
             } else {
                 app.classList.remove('sidebar-hidden')
@@ -45,19 +45,12 @@ class Stickybar extends React.Component {
                 <Breadcrumb className="mr-auto">
                     <Breadcrumb.Item active>Home</Breadcrumb.Item>
                 </Breadcrumb>
-                <NavDropdown title="User name">
+                <NavDropdown title={this.props.user_email}>
                     <NavDropdown.Item onClick={this.props.logout}>Logout</NavDropdown.Item>
                 </NavDropdown>
             </Navbar>
         );
     }
 }
-
-
-{/* <nav aria-label="breadcrumb" className="mr-auto">
-<ol className="breadcrumb">
-    <li className="breadcrumb-item active" aria-current="page">Home</li>
-</ol>
-</nav> */}
 
 export default Stickybar;

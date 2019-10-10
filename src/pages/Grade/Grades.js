@@ -1,6 +1,6 @@
 import React from 'react';
 import Content from '../../components/misc/content';
-import SectionTitle from '../../components/misc/SectionTitle';
+import SectionTitle from '../../components/misc/sectionTitle';
 import GlyphButton from '../../components/misc/GlyphButton';
 import GradeCard from '../../components/grades/GradeCard';
 import grades from '../../services/api/grades';

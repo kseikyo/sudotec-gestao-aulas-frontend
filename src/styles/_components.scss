@@ -1,3 +1,5 @@
+@import './variables';
+
 .section-title {
   .icon {
     padding-right: 12px;
@@ -13,13 +15,30 @@
   .subtitle {
     display: block;
     font-size: 14px;
-    color: $gray-600;
+    color: $gray;
     margin-top: -3px;
   }
+  // $gray-600
 }
 
 .glyph-button {
   .icon {
     font-size: 13px;
+  }
+}
+
+.spin-icon {
+  font-size: 3.2em;
+  animation: spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin {
+  from {
+      transform:rotate(0deg);
+  }
+  to {
+      transform:rotate(360deg);
   }
 }

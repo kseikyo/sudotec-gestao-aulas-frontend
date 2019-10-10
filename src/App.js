@@ -56,7 +56,7 @@ class App extends React.Component {
                         }}>
                         <div id="app">
                             {!this.state.token ? <FormLogin isLogin={this.state.isLogin} />
-                                : 
+                                :
                                 <Dashboard
                                     user_email={this.state.email || "Username"} 
                                     logout={this.logout}>

@@ -15,7 +15,8 @@
     transition: all 0.3s ease-in-out;
     background-color: inherit;
   }
-  .form-control.filled + label {
+  // Todo: adicionar classe pelo JS .form-control.filled + label {
+  .form-control + label {
     color: #A4A4A4;
     font-size: 12px;
     top: 0;

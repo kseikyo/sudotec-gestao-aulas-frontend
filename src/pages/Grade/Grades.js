@@ -1,9 +1,10 @@
 import React from 'react';
 import Content from '../../components/misc/content';
-import SectionTitle from '../../components/misc/sectionTitle';
+import SectionTitle from '../../components/misc/SectionTitle';
 import GlyphButton from '../../components/misc/GlyphButton';
 import GradeCard from '../../components/grades/GradeCard';
 import grades from '../../services/api/grades';
+import RegisterGradeModal from '../../components/grades/RegisterGradeModal';
 
 class Grades extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class Grades extends React.Component {
 
     this.state = {
       grades: [],
+      showRegisterModal: false,
     }
   }
 
@@ -27,17 +29,24 @@ class Grades extends React.Component {
     );
   }
 
+  openRegister() {
+    this.setState({showRegisterModal: true});
+  }
+  closeRegister() {
+    this.setState({showRegisterModal: false});
+  }
+
   render() {
       return(
         <div> 
           <Content>
+            <RegisterGradeModal show={this.state.showRegisterModal} close={this.closeRegister.bind(this)}/>
             <div className="d-flex mb-5">
               <SectionTitle icon="grade" title='Turmas'></SectionTitle>
               <div className="ml-auto">
-                <GlyphButton className="ml-auto">Nova turma</GlyphButton>
+                <GlyphButton click={this.openRegister.bind(this)} className="ml-auto">Nova turma</GlyphButton>
               </div>
             </div>
-
             <div className="grade-cards">
               {this.state.grades.map(this.renderGrade)}
             </div>

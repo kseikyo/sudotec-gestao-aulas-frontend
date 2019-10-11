@@ -4,6 +4,7 @@
   border-radius: 20px;
   padding: 18px;
   transition: all 0.3s ease-in-out;
+  border: 1px solid $gray-200;
   .grade-name {
     font-weight: 700;
     color: $gray;
@@ -47,7 +48,7 @@
 .grade-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, auto));
-  grid-gap: 20px;
+  grid-gap: 25px;
   .grade-info {
     line-height: 12px;
     color: $gray;

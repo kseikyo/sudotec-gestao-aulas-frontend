@@ -3,7 +3,7 @@ import {Button} from 'react-bootstrap';
 
 function GlyphButton(props) {
     return (
-        <Button variant={props.variant} className="glyph-button">
+        <Button onClick={props.click} variant={props.variant} className="glyph-button shadow-sm">
           <i className={`icon icon-${props.icon || 'plus'} mr-2 align-top`}></i>
           {props.children}
         </Button>

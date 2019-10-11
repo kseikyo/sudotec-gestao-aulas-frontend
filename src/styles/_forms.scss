@@ -38,3 +38,22 @@
     background-color: $light;
   }
 }
+
+.search-input {
+  .form-group {
+    &::after {
+      content: '\e90f';
+      font-family: 'icomoon';
+      z-index: 100;
+      color: $gray;
+      font-size: 15px;
+      position: absolute;
+      top: 50%;
+      right: 4%;
+      transform: translateY(-50%);
+    }
+  }
+  input {
+    padding-right: 40px;
+  }
+}

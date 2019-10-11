@@ -1,7 +1,8 @@
 import React from 'react';
 import RegisterModal from '../misc/RegisterModal';
-import TextInput from '../forms/TextInput';
+import TextInput from '../forms/Input';
 import TextArea from '../forms/TextArea';
+import SearchInput from '../forms/SearchInput';
 
 class RegisterGradeModal extends React.Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class RegisterGradeModal extends React.Component {
       <RegisterModal show={this.props.show} close={this.props.close} title='Cadastrar turma' subtitle='Preencha os dados para cadastrar uma nova turma.'>
         <TextInput label='Nome'/>
         <TextArea label='Descrição'/>
+        <SearchInput/>
       </RegisterModal>
     )
   }

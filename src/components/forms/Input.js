@@ -1,6 +1,6 @@
 import React from 'react'
 
-function TextInput(props) {
+function Input(props) {
   return (
     <div className="form-group">
       <input defaultValue={props.value} className="form-control" type={props.type || 'text'} ref={props.ref}></input>
@@ -9,4 +9,4 @@ function TextInput(props) {
   );
 }
 
-export default TextInput;
+export default Input;

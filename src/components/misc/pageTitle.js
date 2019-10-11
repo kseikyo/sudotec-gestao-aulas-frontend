@@ -2,12 +2,12 @@ import React from 'react';
 
 function PageTitle(props) {
     return (
-        <div>
-            <h3>
-                {props.courseTitle}
+        <div className='page-title'>
+            <h3 className='title'>
+                {props.title}
             </h3>
-            <span>
-                {props.projectTitle}
+            <span className='subtitle'>
+                {props.subtitle}
             </span>
         </div>
     );

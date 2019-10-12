@@ -19,7 +19,6 @@ class Grades extends React.Component {
   componentDidMount() {
     grades.getAll().then(res => {
       this.setState({grades: res.data});
-      console.log(this.state.grades);
     })
   }
 
@@ -36,11 +35,17 @@ class Grades extends React.Component {
     this.setState({showRegisterModal: false});
   }
 
+  addGrade(grade) {
+    this.setState({
+      grades: [...this.state.grades, grade]
+    });
+  }
+
   render() {
       return(
         <div> 
           <Content>
-            <RegisterGradeModal show={this.state.showRegisterModal} close={this.closeRegister.bind(this)}/>
+            <RegisterGradeModal onRegister={this.addGrade.bind(this)} show={this.state.showRegisterModal} close={this.closeRegister.bind(this)}/>
             <div className="d-flex mb-5">
               <SectionTitle icon="grade" title='Turmas'></SectionTitle>
               <div className="ml-auto">

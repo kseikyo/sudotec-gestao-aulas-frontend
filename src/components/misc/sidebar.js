@@ -15,7 +15,7 @@ class MainMenu extends React.Component {
                             </span>
                         </header>
                     </div>
-                    <div>
+                    <div className='text-center mt-3 text-black-50 font-weight-bold'>
                         <span className="nav-title">
                             Gerenciamento de aulas
                         </span>

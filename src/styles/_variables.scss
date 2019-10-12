@@ -13,6 +13,7 @@ $secondary-gray: #A4A4A4;
 
 //Buttons
 $btn-border-radius: 20px;
+$btn-padding-x: 20px;
 
 // Input
 $input-border-radius: 20px;
@@ -21,3 +22,8 @@ $input-border-radius-sm: 20px;
 $input-bg: inherit;
 
 $breadcrumb-divider: quote(">");
+
+// Modal
+$modal-inner-padding: 35px;
+$modal-content-border-radius: 20px;
+$modal-content-border-width: 0;

@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Input(props) {
+function Input({label, type, ...rest}) {
   return (
     <div className="form-group">
-      <input defaultValue={props.value} className="form-control" type={props.type || 'text'} ref={props.ref}></input>
-      <label className="form-label">{props.label}</label>
+      <input type={type || 'text'} {...rest} className="form-control"></input>
+      <label className="form-label">{label}</label>
     </div>
   );
 }

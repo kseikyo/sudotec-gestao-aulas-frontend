@@ -1,10 +1,10 @@
 import React from 'react'
 
-function TextArea(props) {
+function TextArea({label, type, ...rest}) {
   return (
     <div className="form-group">
-      <textarea className="form-control" type={props.type || 'text'} ref={props.ref}></textarea>
-      <label className="form-label">{props.label}</label>
+      <textarea className="form-control" type={type || 'text'} {...rest}></textarea>
+      <label className="form-label">{label}</label>
     </div>
   );
 }

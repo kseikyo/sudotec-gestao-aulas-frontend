@@ -1,24 +1,44 @@
+@mixin form-label {
+  color: #A4A4A4;
+  font-size: 12px;
+}
+
+.form-check {
+  .form-check-label {
+    color: $gray;
+    font-size: 16px;
+  }
+  .form-check-input {
+    position: relative;
+    margin-right: 8px;
+  }
+  label {
+    @include form-label;
+    margin-bottom: 0;
+  }
+}
+
 .form-group {
   position: relative;
   background-color: #FBFBFB;
 
   label {
+    @include form-label;
     position: absolute;
     top: 50%;
     left: 15px;
     margin: 0;
     padding: 0 6px;
-    color: rgb(107, 107, 107);
-    font-weight: 400;
-    font-size: 16px;
     transform: translate(0, -50%);
     transition: all 0.3s ease-in-out;
     background-color: inherit;
+    color: rgb(107, 107, 107);
+    font-weight: 400;
+    font-size: 16px;
   }
   // Todo: adicionar classe pelo JS .form-control.filled + label {
   .form-control + label {
-    color: #A4A4A4;
-    font-size: 12px;
+    @include form-label;
     top: 0;
     transition: all 0.3s ease-in-out;
     background-color: inherit;

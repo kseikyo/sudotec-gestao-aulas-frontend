@@ -8,14 +8,12 @@ class MainMenu extends React.Component {
         return (
             <div className="container" id="sidebar">
                 <div className="sidebar-container" role="navigation">
-                    <div id="logo">
-                        <header>
-                            <span className="nav-logo">
-                                Sudotec Desenvolvimento e tecnologia
-                            </span>
-                        </header>
+                    <div id="logo" className="p-4 text-center text-white">
+                        <span className="nav-logo">
+                            <img alt="Sudotec" src="/images/logo-white.png" className="img-fluid" width="150px"></img>
+                        </span>
                     </div>
-                    <div className='text-center mt-3 text-black-50 font-weight-bold'>
+                    <div className='text-center mt-4 text-black-50 font-weight-bold'>
                         <span className="nav-title">
                             Gerenciamento de aulas
                         </span>

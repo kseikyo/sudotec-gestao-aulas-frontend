@@ -4,7 +4,7 @@ function Option({value, description}) {
   return (<option key={value} value={value}>{description}</option>);
 }
 
-export function Select({options, valueAttr = 'id', descriptionAttr = 'name', label, selected, ...rest}) {
+function Select({options, valueAttr = 'id', descriptionAttr = 'name', label, selected, ...rest}) {
   return (
     <div className="form-group">
       <select required={true} defaultValue={selected || 0} {...rest} className="form-control">
@@ -19,3 +19,5 @@ export function Select({options, valueAttr = 'id', descriptionAttr = 'name', lab
     </div>
   )
 }
+
+export default Select;

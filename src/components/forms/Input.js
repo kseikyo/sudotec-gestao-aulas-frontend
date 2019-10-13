@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Input({label, type, ...rest}) {
+function Input({label, type = 'text', ...rest}) {
   return (
     <div className="form-group">
       <input type={type || 'text'} {...rest} className="form-control"></input>

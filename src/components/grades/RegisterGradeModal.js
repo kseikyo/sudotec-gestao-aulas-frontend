@@ -3,7 +3,7 @@ import RegisterModal from '../misc/RegisterModal';
 import {changeHandler} from '../forms/handler';
 import TextInput from '../forms/Input';
 import TextArea from '../forms/TextArea';
-import {Select, wrapData} from '../forms/Select';
+import Select from '../forms/Select';
 import projects from '../../services/api/projects';
 import teachers from '../../services/api/teachers';
 import grades from '../../services/api/grades';

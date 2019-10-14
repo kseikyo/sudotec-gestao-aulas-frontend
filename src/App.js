@@ -5,7 +5,7 @@ import Dashboard from './components/layouts/dashboard';
 import { BrowserRouter} from 'react-router-dom';
 import AuthContext from './context/auth-context';
 // import Projects from './pages/Project/Projects';
-import Grades from './pages/Grade/Grades';
+import Grade from './pages/Grade/Grade';
 
 // const PrivateRoute = ({ component: Component, ...rest }) => (
 //     <Route {...rest} render={(props) => (
@@ -60,7 +60,7 @@ class App extends React.Component {
                                 <Dashboard
                                     user_email={this.state.email || "Username"} 
                                     logout={this.logout}>
-                                    <Grades/>
+                                    <Grade/>
                                 </Dashboard>
                             }
                         </div>

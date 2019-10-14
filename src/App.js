@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import FormLogin from './pages/Logon/Login';
-import Dashboard from './components/layouts/dashboard';
+import Dashboard from './components/layouts/Dashboard';
 import { BrowserRouter} from 'react-router-dom';
 import AuthContext from './context/auth-context';
 // import Projects from './pages/Project/Projects';

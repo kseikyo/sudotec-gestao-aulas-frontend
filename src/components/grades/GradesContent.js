@@ -1,5 +1,5 @@
 import React from 'react';
-import Content from '../misc/content';
+import Content from '../misc/Content';
 import SectionTitle from '../misc/SectionTitle';
 import GlyphButton from '../misc/GlyphButton';
 import GradeCard from './GradeCard';

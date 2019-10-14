@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Route, Link } from "react-router-dom";
 
 function TextLink(props) {
     return (
-        <NavLink to={props.to}>
+        <Link to={props.to} className="text-link" >
              <span>{props.span}</span>
             <Route path={props.path} />
-        </NavLink>
+        </Link>
     );
 }
 

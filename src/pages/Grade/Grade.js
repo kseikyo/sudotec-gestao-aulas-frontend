@@ -1,8 +1,13 @@
 import React from 'react';
 import Content from '../../components/misc/Content';
 import Checkbox from '../../components/forms/Checkbox';
+<<<<<<< HEAD
 import SectionTitle from '../../components/misc/SectionTitle';
 import PageTitle from '../../components/misc/PageTitle';
+=======
+import SectionTitle from '../../components/misc/sectionTitle';
+import PageTitle from '../../components/misc/pageTitle';
+>>>>>>> ff8efe3159ff7df36987ccdfc23eafd0a116a0f6
 import GlyphButton from '../../components/misc/GlyphButton';
 import grades from '../../services/api/grades';
 import Input from '../../components/forms/Input';

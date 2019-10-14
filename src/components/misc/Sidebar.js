@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
-import MenuItem from '../misc/menuItem';
+import MenuItem from './MenuItem';
 
 class MainMenu extends React.Component {
 

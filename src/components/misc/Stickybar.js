@@ -1,5 +1,5 @@
 import React from 'react';
-import Hamburguer from './hamburguer_button';
+import Hamburguer from './HamburguerButton';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavDropdown } from 'react-bootstrap';

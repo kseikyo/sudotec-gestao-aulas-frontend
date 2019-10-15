@@ -1,11 +1,9 @@
 import React from 'react';
-import Content from '../../components/misc/content';
-import Checkbox from '../../components/forms/Checkbox';
-import SectionTitle from '../../components/misc/sectionTitle';
-import PageTitle from '../../components/misc/pageTitle';
-import GlyphButton from '../../components/misc/GlyphButton';
+import Content from '../../components/misc/Content';
+import UpdateGrade from '../../components/grades/UpdateGrade';
+import SectionTitle from '../../components/misc/SectionTitle';
+import PageTitle from '../../components/misc/PageTitle';
 import grades from '../../services/api/grades';
-import Input from '../../components/forms/Input';
 
 class Grade extends React.Component {
   constructor(props) {
@@ -19,7 +17,6 @@ class Grade extends React.Component {
 
   componentDidMount() {
     grades.getById(1).then(res => {
-      console.log(res)
       this.setState({
         grade: res
         , 
@@ -40,6 +37,7 @@ class Grade extends React.Component {
       <PageTitle title={grade.name} subtitle={grade.course.name}/>
       <Content>
         <SectionTitle title='Dados' icon='info-circle' />
+        <UpdateGrade grade={grade} />
       </Content>
       <Content>
         <SectionTitle title='Aulas' icon='lesson' />

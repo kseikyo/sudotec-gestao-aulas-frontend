@@ -3,6 +3,7 @@ import Content from '../../components/misc/Content';
 import UpdateGrade from '../../components/grades/UpdateGrade';
 import SectionTitle from '../../components/misc/SectionTitle';
 import PageTitle from '../../components/misc/PageTitle';
+
 import grades from '../../services/api/grades';
 
 class Grade extends React.Component {

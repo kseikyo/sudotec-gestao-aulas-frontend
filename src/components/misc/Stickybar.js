@@ -14,26 +14,19 @@ class Stickybar extends React.Component {
     }
 
     fetchToggle() {
-        new Promise((resolve, reject) => {
-            let app = document.querySelector("#app");
-    
-            if (!this.state.isSidebarToggled) {
-                app.classList.add('sidebar-hidden')
-            } else {
-                app.classList.remove('sidebar-hidden')
-    
-            }
-            resolve();
-        })
-            .then(() => {
-                this.setState({
-                    isSidebarToggled: !this.state.isSidebarToggled
-                });
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        let app = document.querySelector("#app");
+
+        if (!this.state.isSidebarToggled) {
+            app.classList.add('sidebar-hidden')
+        } else {
+            app.classList.remove('sidebar-hidden')
         }
+
+        this.setState({
+            isSidebarToggled: !this.state.isSidebarToggled
+        });
+
+    }
 
     render() {
 

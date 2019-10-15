@@ -2,7 +2,9 @@
 .sticky-bar {
     background: #FBFBFB;
     box-shadow: 0px 3px 6px #00000029;
-    
+    position: sticky;
+    top: 0;
+    z-index: 900;
     width: 100%;
     transition: width 0.85s ease-in;
     padding: 22px 36px 22px 36px;
@@ -31,5 +33,9 @@
         
         margin: 3px 0;
         transition: 0.4s;
+    }
+
+    a.dropdown-toggle {
+        padding: 0;
     }
 }

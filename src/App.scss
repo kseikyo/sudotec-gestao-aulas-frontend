@@ -55,3 +55,11 @@ h3 {
 .btn {
   min-width: 120px;
 }
+
+.btn-main {
+  @include button-variant($main, $main, darken($main, 5), $main, darken($main, 5), darken($main, 6));
+}
+
+.btn-outline-main {
+  @include button-outline-variant($main);
+}

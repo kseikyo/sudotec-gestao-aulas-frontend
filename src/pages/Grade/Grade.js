@@ -2,8 +2,9 @@ import React from 'react';
 import Content from '../../components/misc/Content';
 import UpdateGrade from '../../components/grades/UpdateGrade';
 import SectionTitle from '../../components/misc/SectionTitle';
+import GlyphButton from '../../components/misc/GlyphButton';
 import PageTitle from '../../components/misc/PageTitle';
-
+import {Button} from 'react-bootstrap';
 import grades from '../../services/api/grades';
 
 class Grade extends React.Component {
@@ -35,10 +36,13 @@ class Grade extends React.Component {
 
     return(
       <>
-      <PageTitle title={grade.name} subtitle={grade.course.name}/>
+      <div className='d-flex'>
+        <PageTitle title={grade.name} subtitle={grade.course.name}/>
+        <GlyphButton variant='main' className='ml-auto align-self-start'>Chamada</GlyphButton>
+      </div>
       <Content>
         <SectionTitle title='Dados' icon='info-circle' />
-        <UpdateGrade grade={grade} />
+        <UpdateGrade className="pt-3" grade={grade} />
       </Content>
       <Content>
         <SectionTitle title='Aulas' icon='lesson' />

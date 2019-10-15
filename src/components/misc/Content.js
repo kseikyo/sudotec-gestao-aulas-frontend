@@ -1,13 +1,11 @@
 import React from 'react';
 
-class Content extends React.Component {
-    render() {
-        return(
-            <div className="content-block">
-                {this.props.children}
-            </div>
-        );
-    }
+function Content({children, className, ...props}) {
+    return(
+        <div className={`content-block ${className}`} {...props}>
+            {children}
+        </div>
+    );
 }
 
 export default Content;

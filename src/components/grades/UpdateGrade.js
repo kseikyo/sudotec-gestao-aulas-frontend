@@ -78,7 +78,7 @@ class UpdateGrade extends React.Component {
 
     return (
       <>
-        <div className="row">
+        <div className={`row ${this.props.className}`}>
           <div className="col-md-6">
             <TextInput name='name' defaultValue={formControls.name} onInput={this.changeHandler} label='Nome' />
             <Select label='Período' onChange={this.changeHandler} name='shift' defaultValue={formControls.shift} options={this.shifts} descriptionAttr='description' />
@@ -94,7 +94,7 @@ class UpdateGrade extends React.Component {
             <TextInput value={this.state.formControls.registration_date_limit} type='date' name='registration_date_limit' onChange={this.changeHandler} label='Data limite para matrícula' />
           </div>
 
-          <div className="col-12 text-right">
+          <div className="col-12 pt-3 text-right">
             <Button variant='secondary' onClick={this.cancel.bind(this)} className='mr-3'>Cancelar</Button>
             <Button variant='primary' onClick={this.update.bind(this)}>Atualizar</Button>
           </div>

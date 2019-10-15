@@ -6,7 +6,6 @@ import { BrowserRouter} from 'react-router-dom';
 import AuthContext from './context/auth-context';
 // import Projects from './pages/Project/Projects';
 import Grade from './pages/Grade/Grade';
-import ImageUploader from './components/misc/ImageUploader';
 
 // const PrivateRoute = ({ component: Component, ...rest }) => (
 //     <Route {...rest} render={(props) => (
@@ -61,8 +60,7 @@ class App extends React.Component {
                                 <Dashboard
                                     user_email={this.state.email || "Username"} 
                                     logout={this.logout}>
-                                        <ImageUploader />
-                                    {/* <Grade/> */}
+                                    <Grade/>
                                 </Dashboard>
                             }
                         </div>

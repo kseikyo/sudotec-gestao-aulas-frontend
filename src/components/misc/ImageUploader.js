@@ -53,7 +53,9 @@ class ImageUploader extends Component {
     render() {
         return (
             <div>
-                <span>Imagem</span><br />
+                <div>
+                    <span>Imagem</span>
+                </div>
                 {!this.state.imageFile ?
                     <input accept=".jpeg, .jpg, .png" type="file" onChange={this.handleUpload} />
                     :

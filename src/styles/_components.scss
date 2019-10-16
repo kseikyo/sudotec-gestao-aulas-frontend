@@ -1,3 +1,5 @@
+@import './variables';
+
 .page-title {
   padding-bottom: 30px;
   .title {
@@ -40,7 +42,7 @@
 }
 
 .spin-icon {
-  font-size: 3.2em;
+  font-size: 10rem;
   animation: spin 4s linear infinite;
 }
 

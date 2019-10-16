@@ -6,6 +6,7 @@ import PageTitle from '../../components/misc/pageTitle';
 import GlyphButton from '../../components/misc/GlyphButton';
 import grades from '../../services/api/grades';
 import Input from '../../components/forms/Input';
+import Loading from '../../components/misc/loading';
 
 class Grade extends React.Component {
   constructor(props) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Hamburguer from './hamburguer_button';
+import Hamburguer from './HamburguerButton';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavDropdown } from 'react-bootstrap';
@@ -14,34 +14,25 @@ class Stickybar extends React.Component {
     }
 
     fetchToggle() {
-        new Promise((resolve, reject) => {
-            let app = document.querySelector("#app");
-    
-            if (!this.state.isSidebarToggled) {
-                app.classList.add('sidebar-hidden')
-            } else {
-                app.classList.remove('sidebar-hidden')
-    
-            }
-            resolve();
-        })
-            .then(() => {
-                this.setState({
-                    isSidebarToggled: !this.state.isSidebarToggled
-                });
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        let app = document.querySelector("#app");
+
+        if (!this.state.isSidebarToggled) {
+            app.classList.add('sidebar-hidden')
+        } else {
+            app.classList.remove('sidebar-hidden')
         }
+
+        this.setState({
+            isSidebarToggled: !this.state.isSidebarToggled
+        });
+
+    }
 
     render() {
 
         return (
             <Navbar bg="light" expand="lg" className="sticky-bar">
-                <div>
-                    <Hamburguer toggle={this.fetchToggle} />
-                </div>
+                <Hamburguer toggle={this.fetchToggle} />
                 <Breadcrumb className="mr-auto">
                     <Breadcrumb.Item active>Home</Breadcrumb.Item>
                 </Breadcrumb>

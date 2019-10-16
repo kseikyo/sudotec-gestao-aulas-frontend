@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthContext from '../../context/auth-context';
-import Logon from '../../components/layouts/logon';
-import { BrowserRouter as Route, NavLink } from "react-router-dom";
+import Logon from '../../components/layouts/Logon';
+import TextLink from '../../components/misc/TextLink';
 
 class FormLogin extends React.Component {
     constructor(props) {
@@ -76,10 +76,8 @@ class FormLogin extends React.Component {
                         Entrar
                     </button>
                 </form>
-                <NavLink to="Forgotten-Password">
-                    <span>Esqueci minha senha.</span>
-                    <Route path="Forgotten-Password" />
-                </NavLink>
+                
+                <TextLink  to="Forgotten-Password" span="Esqueci minha senha." path="Forgotten-Password"/>
             </Logon>
         );
     }

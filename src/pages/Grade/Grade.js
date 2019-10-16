@@ -1,12 +1,13 @@
 import React from 'react';
-import Content from '../../components/misc/content';
-import Checkbox from '../../components/forms/Checkbox';
+import Content from '../../components/misc/Content';
+import UpdateGrade from '../../components/grades/UpdateGrade';
 import SectionTitle from '../../components/misc/SectionTitle';
-import PageTitle from '../../components/misc/pageTitle';
 import GlyphButton from '../../components/misc/GlyphButton';
+import PageTitle from '../../components/misc/PageTitle';
+import {Button} from 'react-bootstrap';
 import grades from '../../services/api/grades';
 import Input from '../../components/forms/Input';
-import Loading from '../../components/misc/loading';
+import Loading from '../../components/misc/Loading';
 
 class Grade extends React.Component {
   constructor(props) {
@@ -20,7 +21,6 @@ class Grade extends React.Component {
 
   componentDidMount() {
     grades.getById(1).then(res => {
-      console.log(res)
       this.setState({
         grade: res
         , 
@@ -38,9 +38,13 @@ class Grade extends React.Component {
 
     return(
       <>
-      <PageTitle title={grade.name} subtitle={grade.course.name}/>
+      <div className='d-flex'>
+        <PageTitle title={grade.name} subtitle={grade.course.name}/>
+        <GlyphButton variant='main' className='ml-auto align-self-start'>Chamada</GlyphButton>
+      </div>
       <Content>
         <SectionTitle title='Dados' icon='info-circle' />
+        <UpdateGrade className="pt-3" grade={grade} />
       </Content>
       <Content>
         <SectionTitle title='Aulas' icon='lesson' />

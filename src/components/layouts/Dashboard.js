@@ -1,6 +1,6 @@
 import React from 'react';
-import Sidebar from '../misc/sidebar';
-import Stickybar from '../misc/stickybar';
+import Sidebar from '../misc/Sidebar';
+import Stickybar from '../misc/Stickybar';
 
 class Dashboard extends React.Component {
     

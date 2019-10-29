@@ -59,7 +59,7 @@ class FormLogin extends React.Component {
     render() {
         return (
             
-            <Logon>
+            <Logon>           
                 <form className="form-container text-center">
                     <header className="form-header">
                         <h2>Login</h2>

@@ -54,3 +54,18 @@
       transform:rotate(360deg);
   }
 }
+
+.section-info {
+  .title {
+    display: block;
+    font-size: 1em;
+    font-weight: 500;
+    color: $secondary-gray;
+  }
+  .subtitle {
+    display: block;
+    font-size: 2em;
+    color: $primary;
+    margin-top: -3px;
+  }
+}

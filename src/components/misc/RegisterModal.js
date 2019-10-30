@@ -3,12 +3,12 @@ import {Modal} from 'react-bootstrap';
 import SectionTitle from '../../components/misc/SectionTitle';
 import {Button} from 'react-bootstrap';
 
-function ResgisterModal(props) {
+function ResgisterModal({icon = 'plus-circle', ...props}) {
   return (
     <>
       <Modal show={props.show} onHide={props.close}>
         <Modal.Body>
-          <SectionTitle icon='plus-circle' title={props.title} subtitle={props.subtitle}/>
+          <SectionTitle icon={icon} title={props.title} subtitle={props.subtitle}/>
 
           <div className='mt-3 py-3 bg-white'>
             {props.children}

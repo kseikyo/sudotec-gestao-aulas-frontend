@@ -6,10 +6,13 @@
 @import 'styles/stickybar';
 @import 'styles/content';
 @import 'styles/components';
-@import 'styles/grade';
+
+// Pages
+@import 'styles/pages/grade';
+@import 'styles/pages/lesson';
 
 body {
-  background-color: #F2F2F2;
+  background-color: #efefef;
 }
 
 #app {
@@ -17,7 +20,7 @@ body {
   padding: 0;
   height: 100vh;
   display: flex;
-  background-color: #F2F2F2;
+  background-color: #efefef;
 }
 
 #root, #dashboard {

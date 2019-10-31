@@ -10,7 +10,7 @@ class ProjectsFilterForm extends Component {
         this.state = {
             projects: props.projects,
             formControls: {
-                project_id: null,
+                project_status: null,
                 search: "",
             },
         };
@@ -19,9 +19,19 @@ class ProjectsFilterForm extends Component {
     
     render() {
         return(
-            <div className = "d-inline-flex" >
-                <Select value={this.state.formControls.project_id} label="Status" name="project_id" onInput={(event) => {this.changeHandler(event)}} options={this.state.projects} defaultValue="Todos"/>
-                <SearchInput name="search" onChange={this.changeHandler}/>
+            <div className="d-inline-flex">
+                <Select
+                    value={this.state.formControls.project_status}
+                    label="Status"
+                    name="project_status"
+                    onInput={(event) => {this.changeHandler(event)}}
+                    options={this.state.projects.status}
+                    defaultValue="Todos"
+                />
+                <SearchInput 
+                    name="search"
+                    onChange={this.changeHandler}
+                />
             </div>
         );
     }

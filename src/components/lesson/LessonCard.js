@@ -35,6 +35,7 @@ class LessonCard extends React.Component {
 
   render() {
     let {lesson, className} = this.props;
+
     return (
       <>
         <div className={`lesson-card border ${className}`} onClick={this.openModal.bind(this)}>
@@ -46,7 +47,7 @@ class LessonCard extends React.Component {
             {lesson.description}
           </span>
         </div>
-        <UpdateLessonModal onUpdate={this.updateLesson.bind(this)} showModal={this.state.showModal} closeModal={this.closeModal.bind(this)} grade={this.props.grade} lesson={lesson} />
+        <UpdateLessonModal key={lesson.attendances.length} onUpdate={this.updateLesson.bind(this)} showModal={this.state.showModal} closeModal={this.closeModal.bind(this)} grade={this.props.grade} lesson={lesson} />
       </>
     );
   }

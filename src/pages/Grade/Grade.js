@@ -29,20 +29,6 @@ class Grade extends React.Component {
         loaded: true
       });
     });
-
-    this.setStudentsStateFromAPI();
-  }
-
-  setStudentsStateFromAPI() {
-    // Todo: get url id
-    gradesAPI.students(1).then(res => {
-      let grade = this.state.grade;
-      grade.students = res.data;
-
-      this.setState({
-        grade: grade,
-      });
-    });
   }
 
   updateLessons() {
@@ -52,29 +38,13 @@ class Grade extends React.Component {
     const students = gradesAPI.students(grade.id);
 
     Promise.all([lessons, students]).then((values) => {
-      grade.lessons = values[0].data;
-      console.log(values[0].data);
-      
+      grade.lessons = values[0].data;      
       grade.students = values[1].data;
 
       this.setState({
         grade
       });
     });
-  }
-
-  updateLessons2() {
-    let grade = this.state.grade;
-
-    lessonsAPI.getAllByGrade(grade.id).then(res => {
-      grade.lessons = res.data;
-
-      this.setState({
-        grade: grade,
-      });
-    });
-    
-    this.setStudentsStateFromAPI();
   }
 
   render() {

@@ -11,14 +11,14 @@ class UpdateLessonModal extends React.Component {
   constructor(props) {
     super(props);
 
-    let formControls = this.props.lesson;
-    formControls.attendances = formControls.attendances.map(el => {
-      if (el.presence === attendanceDefs.JUSTIFIED) {
-        el.justification = el.justification.justification;
-      }
+    // let formControls = this.props.lesson;
+    // formControls.attendances = formControls.attendances.map(el => {
+    //   if (el.presence === attendanceDefs.JUSTIFIED) {
+    //     el.justification = el.justification.justification;
+    //   }
 
-      return el;
-    })
+    //   return el;
+    // })
 
     this.state = {
       showModal: false,
@@ -57,8 +57,6 @@ class UpdateLessonModal extends React.Component {
   }
 
   render() {
-    console.log(this.state.formControls.attendances);
-    
     return (
       <>
         <RegisterModal icon='lesson' save={this.update.bind(this)} show={this.props.showModal} close={this.props.closeModal} cancel={this.props.closeModal} title='Relatório de aula' subtitle={this.props.grade.name}>

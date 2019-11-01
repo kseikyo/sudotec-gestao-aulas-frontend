@@ -2,6 +2,7 @@ import React from 'react';
 import Content from '../../components/misc/Content';
 import UpdateGrade from '../../components/grades/UpdateGrade';
 import LessonsContent from '../../components/lesson/LessonsContent';
+import StudentsContent from '../../components/students/StudentsContent';
 import RegisterLessonModal from '../../components/lesson/RegisterLessonModal';
 import SectionTitle from '../../components/misc/SectionTitle';
 // import GlyphButton from '../../components/misc/GlyphButton';
@@ -14,22 +15,55 @@ class Grade extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      grade: null,
+    this.state = {  
+      grade: {students: []},
       loaded: false,
     }
   }
 
   componentDidMount() {
+    // Todo: get url id
     gradesAPI.getById(1).then(res => {
       this.setState({
         grade: res, 
         loaded: true
       });
-    })
+    });
+
+    this.setStudentsStateFromAPI();
+  }
+
+  setStudentsStateFromAPI() {
+    // Todo: get url id
+    gradesAPI.students(1).then(res => {
+      let grade = this.state.grade;
+      grade.students = res.data;
+
+      this.setState({
+        grade: grade,
+      });
+    });
   }
 
   updateLessons() {
+    let {grade} = this.state;
+
+    const lessons = lessonsAPI.getAllByGrade(grade.id);
+    const students = gradesAPI.students(grade.id);
+
+    Promise.all([lessons, students]).then((values) => {
+      grade.lessons = values[0].data;
+      console.log(values[0].data);
+      
+      grade.students = values[1].data;
+
+      this.setState({
+        grade
+      });
+    });
+  }
+
+  updateLessons2() {
     let grade = this.state.grade;
 
     lessonsAPI.getAllByGrade(grade.id).then(res => {
@@ -38,7 +72,9 @@ class Grade extends React.Component {
       this.setState({
         grade: grade,
       });
-    })
+    });
+    
+    this.setStudentsStateFromAPI();
   }
 
   render() {
@@ -59,9 +95,7 @@ class Grade extends React.Component {
         <UpdateGrade className="pt-3" grade={grade} />
       </Content>
       <LessonsContent updateLessons={this.updateLessons.bind(this)} grade={grade} lessons={grade.lessons} />
-      <Content>
-        <SectionTitle title='Frequência' icon='calendar' />
-      </Content>
+      <StudentsContent update={this.updateLessons.bind(this)} grade={grade} students={this.state.grade.students} />
       </>
     );
   }

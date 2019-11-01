@@ -15,6 +15,7 @@ function ResgisterModal({icon = 'plus-circle', ...props}) {
           </div>
 
           <div className="text-right mt-3">
+            <div onClick={props.cancel} className='mr-4 text-danger d-inline-block'>Excluir</div>
             <Button onClick={props.cancel} className='mr-2' variant='secondary'>Cancelar</Button>
             <Button onClick={props.save} variant='primary'>Salvar</Button>
           </div>

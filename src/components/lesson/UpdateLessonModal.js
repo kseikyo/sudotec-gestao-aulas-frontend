@@ -57,6 +57,8 @@ class UpdateLessonModal extends React.Component {
   }
 
   render() {
+    console.log(this.state.formControls.attendances);
+    
     return (
       <>
         <RegisterModal icon='lesson' save={this.update.bind(this)} show={this.props.showModal} close={this.props.closeModal} cancel={this.props.closeModal} title='Relatório de aula' subtitle={this.props.grade.name}>

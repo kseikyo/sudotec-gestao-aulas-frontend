@@ -10,9 +10,10 @@
 // Pages
 @import 'styles/pages/grade';
 @import 'styles/pages/lesson';
+@import 'styles/pages/student';
 
 body {
-  background-color: #efefef;
+  background-color: #eeeeee;
 }
 
 #app {
@@ -20,7 +21,7 @@ body {
   padding: 0;
   height: 100vh;
   display: flex;
-  background-color: #efefef;
+  background-color: #eeeeee;
 }
 
 #root, #dashboard {

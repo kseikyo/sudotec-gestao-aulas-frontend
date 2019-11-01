@@ -24,7 +24,7 @@ function StudentFrequency({student, onchange, ...rest}) {
   let togglePresence = presence === attendanceDefs.PRESENT ? attendanceDefs.AUSENT : attendanceDefs.PRESENT;
 
   return (
-    <div className={'student-frequency py-3 pr-3 ' + presence} onDoubleClick={() => onchange({student_id: student_id, presence: togglePresence})}>
+    <div className={'student-set-frequency py-3 pr-3 ' + presence} onDoubleClick={() => onchange({student_id: student_id, presence: togglePresence})}>
       <div className='d-flex justify-content-between'>
         <div className='px-3 username'>{name}</div>
         <div>

@@ -29,14 +29,14 @@ class RegisterGradeModal extends React.Component {
     let attendances = [];
 
     this.props.grade.students.forEach(student => {
-      attendances.push({student_id: student.id, presence: attendanceDefs.PRESENT, name: student.name});
+      attendances.push({student_id: student.id, presence: attendanceDefs.PRESENT, name: student.name, student: student});
     })
     
     this.setState({formControls: {...this.state.formControls, attendances: attendances}});
   }
   
   setPresence(presence) {
-    let index = this.state.formControls.attendances.findIndex(el => el.student_id === presence.student_id);
+    let index = this.state.formControls.attendances.findIndex(el => el.student.id === presence.student_id);
     let attendances = this.state.formControls.attendances;
 
     attendances[index] = Object.assign(attendances[index], presence);
@@ -77,7 +77,7 @@ class RegisterGradeModal extends React.Component {
           <div className='pb-3'>
             <h6 className="text-muted mb-0">Presenças</h6>
             <small className='text-black-50'>Clique nos ícones ou dê dois cliques para alterar a presença.</small>
-            {this.state.formControls.attendances.map(student => (<StudentFrequency key={student.student_id} onchange={this.setPresence.bind(this)} student={student} />))}
+            {this.state.formControls.attendances.map(attendance => (<StudentFrequency key={attendance.student.id} onchange={this.setPresence.bind(this)} attendance={attendance} />))}
           </div>
         </RegisterModal>
       </>

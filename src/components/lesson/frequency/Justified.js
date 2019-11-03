@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Justified({disabled, onclick, ...props}) {
+function Justified({disabled, onClick, ...props}) {
   return (
-    <button onClick={onclick} className={`btn frequency f-justified has-modal ${disabled ? 'disabled' : ''}`}>J</button>
+    <button onClick={onClick} className={`btn frequency f-justified has-modal ${disabled ? 'disabled' : ''}`}>J</button>
   );
 }
 

@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Present({disabled = false, onclick, ...props}) {
+function Present({disabled = false, onClick, ...props}) {
   return (
-    <button onClick={onclick} className={`btn frequency f-present ${disabled ? 'disabled' : ''}`}>✔</button>
+    <button onClick={onClick} className={`btn frequency f-present ${disabled ? 'disabled' : ''}`}>✔</button>
   );
 }
 

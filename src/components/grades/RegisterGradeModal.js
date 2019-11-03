@@ -87,13 +87,14 @@ class RegisterGradeModal extends React.Component {
   }
 
   render() {
+    let {formControls} = this.state;
     return (
       <RegisterModal save={this.create.bind(this)} show={this.props.show} close={this.props.close} cancel={this.props.close} title='Cadastrar turma' subtitle='Preencha os dados para cadastrar uma nova turma.'>
         <TextInput name='name' onInput={this.changeHandler} label='Nome'/>
-        <Select label='Período' onInput={this.changeHandler} name='shift' options={this.shifts} descriptionAttr='description' />
-        <Select label='Professor' name='teacher_id' onInput={this.changeHandler} options={this.state.teachers} />
-        <Select label='Projeto' name='project_id' onInput={(event) => {this.changeHandler(event, this.setCourses.bind(this))}} options={this.state.projects} />
-        <Select label='Cursos' name='course_id' onInput={this.changeHandler} options={this.state.courses} />
+        <Select label='Período' onChange={this.changeHandler} name='shift' defaultValue={formControls.shift} options={this.shifts} descriptionAttr='description' />
+        <Select label='Professor' name='teacher_id' defaultValue={formControls.teacher_id} onChange={this.changeHandler} options={this.state.teachers} />
+        <Select label='Projeto' name='project_id' defaultValue={formControls.project_id} onChange={(event) => {this.changeHandler(event, this.setCourses.bind(this))}} options={this.state.projects} />
+        <Select label='Cursos' name='course_id' defaultValue={formControls.course_id} onChange={this.changeHandler} options={this.state.courses} />
         <TextArea name='resources' onInput={this.changeHandler} label='Recursos necessários' />
         <hr/>
         <h6 className='text-secondary font-weight-bold py-2'>Datas</h6>

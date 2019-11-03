@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Present from './Present';
 import Justified from './Justified';
 import Ausent from './Ausent';
 import attendanceDefs from '../../../config/attendance';
+import InfoButton from '../../../components/misc/InfoButton';
 
-function Justification({student, onchange, justification}) {
-  if (student.presence === attendanceDefs.JUSTIFIED) {
+function Justification({student, attendance, onChange}) {
+  let justification = attendance.justification;
+  
+  if (attendance.presence === attendanceDefs.JUSTIFIED) {
     return (
       <div className='pl-3'>        
         <div className='form-group mb-0 mt-3'>
-          <input className='form-control' type='text' defaultValue={student.justification ? student.justification : ''} onChange={(e) => onchange({student_id: student.student_id, presence: attendanceDefs.JUSTIFIED, justification: e.target.value})}></input>
+          <input className='form-control' type='text' defaultValue={justification} onChange={(e) => onChange({student_id: attendance.student.id, presence: attendanceDefs.JUSTIFIED, justification: e.target.value})}></input>
           <label>Justificativa</label>
         </div>
       </div>
@@ -19,21 +22,43 @@ function Justification({student, onchange, justification}) {
   return (<></>); 
 }
 
-function StudentFrequency({student, onchange, ...rest}) {
-  let {student_id, name, presence} = student;
+function Details({show, student}) {  
+  if (!show) {
+    return <></>;
+  }
+
+  return (
+    <div className='px-3 d-flex justify-content-between'>
+      <div>
+        <small className='text-black-50'>Nome da mãe</small>
+        {student.mother_name}
+      </div>  
+      <div>
+        <small className='text-black-50'>Telefone</small>
+        {student.phone}
+      </div>  
+    </div>
+  );
+}
+
+function StudentFrequency({attendance, onchange, ...rest}) {
+  const [details, setDetails] = useState(false);
+  let {student, presence} = attendance;
   let togglePresence = presence === attendanceDefs.PRESENT ? attendanceDefs.AUSENT : attendanceDefs.PRESENT;
 
   return (
-    <div className={'student-set-frequency py-3 pr-3 ' + presence} onDoubleClick={() => onchange({student_id: student_id, presence: togglePresence})}>
+    <div className={'student-set-frequency py-3 pr-3 ' + presence} onDoubleClick={() => onchange({student_id: student.id, presence: togglePresence})}>
       <div className='d-flex justify-content-between'>
-        <div className='px-3 username'>{name}</div>
-        <div>
-          <Present onclick={() => onchange({student_id: student_id, presence: attendanceDefs.PRESENT})} disabled={presence !== attendanceDefs.PRESENT} />
-          <Ausent onclick={() => onchange({student_id: student_id, presence: attendanceDefs.AUSENT})} disabled={presence !== attendanceDefs.AUSENT} />
-          <Justified onclick={() => onchange({student_id: student_id, presence: attendanceDefs.JUSTIFIED})} disabled={presence !== attendanceDefs.JUSTIFIED} />
+      <div className='px-3 username'>{student.name}</div>
+      <div>
+        <Present onClick={() => onchange({student_id: student.id, presence: attendanceDefs.PRESENT})} disabled={presence !== attendanceDefs.PRESENT} />
+        <Ausent onClick={() => onchange({student_id: student.id, presence: attendanceDefs.AUSENT})} disabled={presence !== attendanceDefs.AUSENT} />
+        <Justified onClick={() => onchange({student_id: student.id, presence: attendanceDefs.JUSTIFIED})} disabled={presence !== attendanceDefs.JUSTIFIED} />
+        <InfoButton onClick={() => setDetails(!details)} className='ml-2' />
       </div>
       </div>
-      <Justification student={student} onchange={onchange} />
+        <Details show={details} student={student} />
+        <Justification student={student} attendance={attendance} onChange={onchange} />
     </div>
   );
 }

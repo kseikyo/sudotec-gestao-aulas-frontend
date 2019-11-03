@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Ausent({disabled, onclick, ...props}) {
+function Ausent({disabled, onClick, ...props}) {
   return (
-    <button onClick={onclick} className={`btn btn-frequency frequency f-ausent ${disabled ? 'disabled' : ''}`}>F</button>
+    <button onClick={onClick} className={`btn btn-frequency frequency f-ausent ${disabled ? 'disabled' : ''}`}>F</button>
   );
 }
 

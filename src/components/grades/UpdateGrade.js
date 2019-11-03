@@ -32,7 +32,7 @@ class UpdateGrade extends React.Component {
   update() {
     grades.update(this.state.formControls)
       .then(res => {
-        console.log(res)
+        this.props.update();
       })
   }
 
@@ -68,8 +68,15 @@ class UpdateGrade extends React.Component {
       return el.id === parseInt(this.state.formControls.project_id);
     });
 
+    let courseId = 0;
+    
+    if (selectedProject.courses.length > 0) {
+      courseId = selectedProject.courses[0].id
+    }
+
     this.setState({
       courses: selectedProject.courses,
+      formControls: {...this.state.formControls, course_id: courseId}
     });
   }
 

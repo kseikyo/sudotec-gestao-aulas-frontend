@@ -2,18 +2,26 @@ import React from 'react';
 import './App.scss';
 import FormLogin from './pages/Logon/Login';
 import Dashboard from './components/layouts/Dashboard';
-import { BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import AuthContext from './context/auth-context';
 // import Projects from './pages/Project/Projects';
+import Grades from './pages/Grade/Grades';
 import Grade from './pages/Grade/Grade';
 
-// const PrivateRoute = ({ component: Component, ...rest }) => (
-//     <Route {...rest} render={(props) => (
-//       fakeAuth.isAuthenticated === true
-//         ? <Component {...props} />
-//         : <Redirect to='/login' />
-//     )} />
-//   )
+const PrivateRoute = ({path, children, ...rest}) => (
+    <Route {...rest} render={(props) => 
+      localStorage.getItem('token')
+        ? children
+        : <Redirect to='/auth' />
+    } />
+  )
+const GuestRoute = ({path, children, ...rest}) => (
+<Route render={(props) => 
+    localStorage.getItem('token')
+    ? <Redirect to='/' />
+    : children
+} />
+)
 
 class App extends React.Component {
     constructor(props) {
@@ -40,6 +48,7 @@ class App extends React.Component {
 
     logout = () => {
         this.setState({ token: null, email: null});
+        localStorage.removeItem('token');
     }
 
 
@@ -47,23 +56,26 @@ class App extends React.Component {
         return (
             <BrowserRouter>
                 <React.Fragment>
-                    <AuthContext.Provider
+                <AuthContext.Provider
                         value={{
                             token: this.state.token,
                             email: this.state.email,
                             login: this.login,
                             logout: this.logout
                         }}>
-                        <div id="app">
-                            {!this.state.token ? <FormLogin isLogin={this.state.isLogin} />
-                                :
-                                <Dashboard
+                    <div id='app'>
+                    <Switch>
+                        <GuestRoute path='/auth'><FormLogin /></GuestRoute>
+                        <PrivateRoute path='/'>
+                            <Dashboard
                                     user_email={this.state.email || "Username"} 
                                     logout={this.logout}>
-                                    <Grade/>
-                                </Dashboard>
-                            }
-                        </div>
+                                <Route exact path='/turmas' component={Grades}></Route>
+                                <Route exact path='/turmas/:id' component={Grade}></Route>
+                            </Dashboard>
+                        </PrivateRoute>
+                    </Switch>
+                    </div>
                     </AuthContext.Provider>
                 </React.Fragment>
             </BrowserRouter>

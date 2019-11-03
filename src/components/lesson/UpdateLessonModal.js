@@ -11,15 +11,6 @@ class UpdateLessonModal extends React.Component {
   constructor(props) {
     super(props);
 
-    // let formControls = this.props.lesson;
-    // formControls.attendances = formControls.attendances.map(el => {
-    //   if (el.presence === attendanceDefs.JUSTIFIED) {
-    //     el.justification = el.justification.justification;
-    //   }
-
-    //   return el;
-    // })
-
     this.state = {
       showModal: false,
       formControls: this.props.lesson,
@@ -27,9 +18,25 @@ class UpdateLessonModal extends React.Component {
 
     this.changeHandler = changeHandler.bind(this);
   }
+
+  componentDidMount() {
+    let attendances = this.state.formControls.attendances;
+
+    attendances = attendances.map(att => {
+      console.log(att);
+      
+      if (att.presence === attendanceDefs.JUSTIFIED) {
+        att.justification = att.justification.justification;
+      }
+
+      return att;
+    })
+
+    this.setState({formControls: {...this.state.formControls, attendances}})
+  }
   
-  setPresence(presence) {
-    let index = this.state.formControls.attendances.findIndex(el => el.student_id === presence.student_id);
+  setPresence(presence) {    
+    let index = this.state.formControls.attendances.findIndex(el => el.student.id === presence.student_id);
     let attendances = this.state.formControls.attendances;
 
     attendances[index] = Object.assign(attendances[index], presence);
@@ -68,7 +75,7 @@ class UpdateLessonModal extends React.Component {
           <div className='pb-3'>
             <h6 className="text-muted mb-0">Presenças</h6>
             <small className='text-black-50'>Clique nos ícones ou dê dois cliques para alterar a presença.</small>
-            {this.state.formControls.attendances.map(student => (<StudentFrequency key={student.student_id} onchange={this.setPresence.bind(this)} student={student} />))}
+            {this.state.formControls.attendances.map(attendance => (<StudentFrequency key={attendance.student.id} onchange={this.setPresence.bind(this)} attendance={attendance} />))}
           </div>
         </RegisterModal>
       </>

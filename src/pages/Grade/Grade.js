@@ -22,8 +22,13 @@ class Grade extends React.Component {
   }
 
   componentDidMount() {
-    // Todo: get url id
-    gradesAPI.getById(1).then(res => {
+    this.updateGrade();
+  }
+
+  updateGrade() {
+    let routeId = this.props.match.params.id;
+    
+    gradesAPI.getById(routeId).then(res => {
       this.setState({
         grade: res, 
         loaded: true
@@ -58,11 +63,11 @@ class Grade extends React.Component {
       <>
       <div className='d-flex'>
         <PageTitle title={grade.name} subtitle={grade.course.name}/>
-        <RegisterLessonModal onRegister={this.updateLessons.bind(this)} grade={grade} />
+        <RegisterLessonModal key={grade.students.length} onRegister={this.updateLessons.bind(this)} grade={grade} />
       </div>
       <Content>
         <SectionTitle title='Dados' icon='info-circle' />
-        <UpdateGrade className="pt-3" grade={grade} />
+        <UpdateGrade update={this.updateGrade.bind(this)} className="pt-3" grade={grade} />
       </Content>
       <LessonsContent updateLessons={this.updateLessons.bind(this)} grade={grade} lessons={grade.lessons} />
       <StudentsContent update={this.updateLessons.bind(this)} grade={grade} students={this.state.grade.students} />

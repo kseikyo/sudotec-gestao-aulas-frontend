@@ -5,9 +5,9 @@
 
   .student-card {
     position: relative;
-    padding: 6px 16px;
+    padding: 6px 14px;
     font-weight: 600;
-    border-radius: 20px;
+    border-radius: 12px;
     background-color: darken($light, 2);
     .student-name {
       font-weight: 800;
@@ -28,8 +28,14 @@
     }
     .icon-delete {
       position: absolute;
-      top: 10%;
+      top: 15%;
       right: 3%;
+      font-size: 14px;
+      transition: all 0.2s linear;
+      &:hover {
+        color: darken($danger, 10) !important;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+      }
     }
   }
 }

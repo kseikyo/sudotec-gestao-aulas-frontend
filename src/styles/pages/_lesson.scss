@@ -76,10 +76,10 @@ transition: all 0.3s ease-in-out;
 }
 
 .lesson-card {
-  padding: 12px 16px;
+  padding: 6px 14px;
   cursor: pointer;
   font-weight: 600;
-  border-radius: 20px;
+  border-radius: 12px;
   background-color: darken($light, 2);;
   transition: all 0.3s ease-in;
   &:hover {

@@ -71,7 +71,7 @@ class UpdateLessonModal extends React.Component {
   render() {
     return (
       <>
-        <RegisterModal enableDelete onDelete={this.deleteLesson.bind(this)} icon='lesson' save={this.update.bind(this)} show={this.props.showModal} close={this.props.closeModal} cancel={this.props.closeModal} title='Relatório de aula' subtitle={this.props.grade.name}>
+        <RegisterModal enableDelete onDelete={this.deleteLesson.bind(this)} icon='lesson' save={this.update.bind(this)} show={this.props.showModal} close={this.props.closeModal} cancel={this.props.closeModal} title='Relatório de aula' subtitle={`Turma ${this.props.grade.name}`}>
           <div className='pb-3'>
             <h6 className="text-muted">Dados da aula</h6>
             <TextInput type='date' name='grade_date' value={this.state.formControls.grade_date} onChange={this.changeHandler} label='Data'/>

@@ -17,7 +17,7 @@ class LessonsContent extends React.Component {
 
     return (
       <Content className='lessons-content'>
-        <SectionTitle title='Aulas' icon='lesson' />
+        <SectionTitle title='Aulas' icon='lesson' subtitle='Clique em uma aula para ver detalhes' />
 
         <div className='lessons-content-list row pr-3'>
           {lessons.map(lesson => 

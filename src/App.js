@@ -7,6 +7,8 @@ import AuthContext from './context/auth-context';
 // import Projects from './pages/Project/Projects';
 import Grades from './pages/Grade/Grades';
 import Grade from './pages/Grade/Grade';
+import Students from './pages/Student/Students';
+import Student from './pages/Student/Student';
 
 const PrivateRoute = ({path, children, ...rest}) => (
     <Route {...rest} render={(props) => 
@@ -72,6 +74,8 @@ class App extends React.Component {
                                     logout={this.logout}>
                                 <Route exact path='/turmas' component={Grades}></Route>
                                 <Route exact path='/turmas/:id' component={Grade}></Route>
+                                <Route exact path='/alunos' component={Students}></Route>
+                                <Route exact path='/alunos/:id' component={Student}></Route>
                             </Dashboard>
                         </PrivateRoute>
                     </Switch>

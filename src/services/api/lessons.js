@@ -7,5 +7,6 @@ lessons.getAllByGrade = (gradeId) => api.get(`/lessons?grade_id=${gradeId}`).the
 lessons.getById = (id) => api.get(`/lessons/${id}`).then(res => res.data);
 lessons.create = (lesson) => api.post('/lessons', lesson).then(res => res.data);
 lessons.update = (lesson) => api.put(`/lessons/${lesson.id}`, lesson).then(res => res.data);
+lessons.delete = (id) => api.delete(`/lessons/${id}`).then(res => res.data);
 
 export default lessons;

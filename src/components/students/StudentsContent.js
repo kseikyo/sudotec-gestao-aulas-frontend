@@ -49,7 +49,7 @@ class StudentsContent extends React.Component {
           <div className="col-md-8">
             <div className='students-content-list row pr-3'>
               {students.map(student => 
-                  <StudentCard student={student} key={student.id} />
+                  <StudentCard student={student} key={student.id} grade={this.props.grade} onDelete={this.props.update} />
                 )}
             </div>
           </div>

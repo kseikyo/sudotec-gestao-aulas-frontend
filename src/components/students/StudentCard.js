@@ -1,6 +1,6 @@
 import React from 'react';
-// import UpdateLessonModal from './UpdateLessonModal';
-// import StudentFrequency from '../lesson/frequency/StudentFrequency';
+import DeleteModal from './../misc/DeleteModal';
+import gradesApi from './../../services/api/grades';
 
 function frequencyColor(frequency) {
   if (parseInt(frequency) === 100) {
@@ -18,12 +18,23 @@ class StudentCard extends React.Component {
 
     this.state = {
       showModal: false,
+      showDeleteModal: false,
     }
   }
 
   updateLesson() {
     this.props.updateLesson();
     this.closeModal();
+  }
+
+  toggleDeleteModal() {
+    this.setState({showDeleteModal: !this.state.showDeleteModal});
+  }
+
+  removeStudentFromGrade() {
+    gradesApi.removeStudent(this.props.grade.id, this.props.student.id).then(() => {
+      this.props.onDelete();
+    })
   }
   
   openModal() {
@@ -47,8 +58,11 @@ class StudentCard extends React.Component {
             {student.age} anos
           </span>
           </div>
+          <div onClick={this.toggleDeleteModal.bind(this)} className='icon icon-delete hover-pointer text-danger'></div>
+          <DeleteModal show={this.state.showDeleteModal} onDelete={this.removeStudentFromGrade.bind(this)} onHide={this.toggleDeleteModal.bind(this)}>
+            Tem certeza que deseja remover {(student.gender === 'F' ? 'a aluna' : 'o aluno')} <b>{student.name}</b> da turma {this.props.grade.name}?
+          </DeleteModal>
         </div>
-        {/* <UpdateLessonModal onUpdate={this.updateLesson.bind(this)} showModal={this.state.showModal} closeModal={this.closeModal.bind(this)} grade={this.props.grade} lesson={lesson} /> */}
       </>
     );
   }

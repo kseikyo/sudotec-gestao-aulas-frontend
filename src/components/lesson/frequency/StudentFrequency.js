@@ -28,14 +28,14 @@ function Details({show, student}) {
   }
 
   return (
-    <div className='px-3 d-flex justify-content-between'>
+    <div className='px-3 d-flex justify-content-between pt-2'>
       <div>
-        <small className='text-black-50'>Nome da mãe</small>
-        {student.mother_name}
+        <small className='text-black-50 d-block'>Nome da mãe</small>
+        <small>{student.mother_name}</small>
       </div>  
       <div>
-        <small className='text-black-50'>Telefone</small>
-        {student.phone}
+        <small className='text-black-50 d-block'>Telefone</small>
+        <small>{student.phone}</small>
       </div>  
     </div>
   );

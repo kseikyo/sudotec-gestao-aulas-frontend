@@ -90,12 +90,12 @@ class RegisterGradeModal extends React.Component {
     let {formControls} = this.state;
     return (
       <RegisterModal save={this.create.bind(this)} show={this.props.show} close={this.props.close} cancel={this.props.close} title='Cadastrar turma' subtitle='Preencha os dados para cadastrar uma nova turma.'>
-        <TextInput name='name' onInput={this.changeHandler} label='Nome'/>
-        <Select label='Período' onChange={this.changeHandler} name='shift' defaultValue={formControls.shift} options={this.shifts} descriptionAttr='description' />
-        <Select label='Professor' name='teacher_id' defaultValue={formControls.teacher_id} onChange={this.changeHandler} options={this.state.teachers} />
-        <Select label='Projeto' name='project_id' defaultValue={formControls.project_id} onChange={(event) => {this.changeHandler(event, this.setCourses.bind(this))}} options={this.state.projects} />
-        <Select label='Cursos' name='course_id' defaultValue={formControls.course_id} onChange={this.changeHandler} options={this.state.courses} />
-        <TextArea name='resources' onInput={this.changeHandler} label='Recursos necessários' />
+        <TextInput name='name' onChange={this.changeHandler} label='Nome'/>
+        <Select label='Período' onChange={this.changeHandler} name='shift' value={formControls.shift} options={this.shifts} descriptionAttr='description' />
+        <Select label='Professor' name='teacher_id' value={formControls.teacher_id} onChange={this.changeHandler} options={this.state.teachers} />
+        <Select label='Projeto' name='project_id' value={formControls.project_id} onChange={(event) => {this.changeHandler(event, this.setCourses.bind(this))}} options={this.state.projects} />
+        <Select label='Cursos' name='course_id' value={formControls.course_id} onChange={this.changeHandler} options={this.state.courses} />
+        <TextArea name='resources' onChange={this.changeHandler} label='Recursos necessários' />
         <hr/>
         <h6 className='text-secondary font-weight-bold py-2'>Datas</h6>
         <TextInput type='date' name='initial_date' onChange={(event) => {this.changeHandler(event, this.setLimitDate.bind(this))}} label='Data inicial'/>

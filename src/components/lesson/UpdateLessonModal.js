@@ -22,9 +22,7 @@ class UpdateLessonModal extends React.Component {
   componentDidMount() {
     let attendances = this.state.formControls.attendances;
 
-    attendances = attendances.map(att => {
-      console.log(att);
-      
+    attendances = attendances.map(att => {      
       if (att.presence === attendanceDefs.JUSTIFIED) {
         att.justification = att.justification.justification;
       }
@@ -62,15 +60,22 @@ class UpdateLessonModal extends React.Component {
       this.closeModal();
     });
   }
+  
+  deleteLesson() {
+    lessons.delete(this.props.lesson.id).then(() => {
+      this.props.onUpdate();
+      this.closeModal();
+    })
+  }
 
   render() {
     return (
       <>
-        <RegisterModal icon='lesson' save={this.update.bind(this)} show={this.props.showModal} close={this.props.closeModal} cancel={this.props.closeModal} title='Relatório de aula' subtitle={this.props.grade.name}>
+        <RegisterModal enableDelete onDelete={this.deleteLesson.bind(this)} icon='lesson' save={this.update.bind(this)} show={this.props.showModal} close={this.props.closeModal} cancel={this.props.closeModal} title='Relatório de aula' subtitle={this.props.grade.name}>
           <div className='pb-3'>
             <h6 className="text-muted">Dados da aula</h6>
-            <TextInput type='date' name='grade_date' defaultValue={this.state.formControls.grade_date} onInput={this.changeHandler} label='Data'/>
-            <TextArea name='description' defaultValue={this.props.lesson.description} onInput={this.changeHandler} label='Descrição'/>
+            <TextInput type='date' name='grade_date' value={this.state.formControls.grade_date} onChange={this.changeHandler} label='Data'/>
+            <TextArea name='description' value={this.state.formControls.description} onChange={this.changeHandler} label='Descrição'/>
           </div>
           <div className='pb-3'>
             <h6 className="text-muted mb-0">Presenças</h6>

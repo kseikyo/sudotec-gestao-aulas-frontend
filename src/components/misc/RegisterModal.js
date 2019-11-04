@@ -3,7 +3,7 @@ import {Modal} from 'react-bootstrap';
 import SectionTitle from '../../components/misc/SectionTitle';
 import {Button} from 'react-bootstrap';
 
-function ResgisterModal({icon = 'plus-circle', ...props}) {
+function ResgisterModal({icon = 'plus-circle', enableDelete = false, onDelete, ...props}) {
   return (
     <>
       <Modal show={props.show} onHide={props.close}>
@@ -15,7 +15,7 @@ function ResgisterModal({icon = 'plus-circle', ...props}) {
           </div>
 
           <div className="text-right mt-3">
-            <div onClick={props.cancel} className='mr-4 text-danger d-inline-block'>Excluir</div>
+            {enableDelete ? <div onClick={onDelete} className='mr-4 text-danger d-inline-block hover-pointer'>Excluir</div> : <></>}
             <Button onClick={props.cancel} className='mr-2' variant='secondary'>Cancelar</Button>
             <Button onClick={props.save} variant='primary'>Salvar</Button>
           </div>

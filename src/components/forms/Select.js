@@ -4,10 +4,10 @@ function Option({value, description}) {
   return (<option key={value} value={value}>{description}</option>);
 }
 
-function Select({options, valueAttr = 'id', descriptionAttr = 'name', label, defaultValue, ...rest}) {
+function Select({options, valueAttr = 'id', descriptionAttr = 'name', label, value, ...rest}) {
   return (
     <div className="form-group">
-      <select required={true} value={defaultValue || 0} {...rest} className="form-control">
+      <select required={true} value={value || 0} {...rest} className="form-control">
         <option value="0" disabled>Selecione...</option>
         {options.map(
           item => (

@@ -9,6 +9,7 @@ import Grades from './pages/Grade/Grades';
 import Grade from './pages/Grade/Grade';
 import Students from './pages/Student/Students';
 import Student from './pages/Student/Student';
+import Projects from './pages/Project/Projects';
 
 const PrivateRoute = ({path, children, ...rest}) => (
     <Route {...rest} render={(props) => 
@@ -73,6 +74,7 @@ class App extends React.Component {
                                     user_email={this.state.email || "Username"} 
                                     logout={this.logout}>
                                 <Route exact path='/turmas' component={Grades}></Route>
+                                <Route exact path='/projetos' component={Projects}></Route>
                                 <Route exact path='/turmas/:id' component={Grade}></Route>
                                 <Route exact path='/alunos' component={Students}></Route>
                                 <Route exact path='/alunos/:id' component={Student}></Route>

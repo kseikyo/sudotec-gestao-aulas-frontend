@@ -6,6 +6,8 @@ import StudentsContent from '../../components/students/StudentsContent';
 import RegisterLessonModal from '../../components/lesson/RegisterLessonModal';
 import SectionTitle from '../../components/misc/SectionTitle';
 // import GlyphButton from '../../components/misc/GlyphButton';
+import gradesAPI from '../../services/api/grades';
+import lessonsAPI from '../../services/api/lessons';
 import PageTitle from '../../components/misc/PageTitle';
 import {Button} from 'react-bootstrap';
 import grades from '../../services/api/grades';

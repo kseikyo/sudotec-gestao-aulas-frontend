@@ -35,7 +35,8 @@
   }
   &.variant-danger {
     .icon, .title {
-      color: $danger;
+      color: $red;
+      //color: $danger;
     }
   }
 }

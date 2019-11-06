@@ -22,51 +22,54 @@ class ImageUploader extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            imageFile: false
-        }
-
         this.handleUpload = this.handleUpload.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
-        this.handleEdit   = this.handleEdit.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
     }
 
     handleUpload(input) {
         const file = URL.createObjectURL(input.target.files[0]);
         if (file) {
-            this.setState({
-                imageFile: file
-            });
+            this.props.handler(file);
         }
     }
 
     handleEdit() {
-        this.setState({
-            imageFile: false
-        }, () => {
+        this.props.handler(false, () => {
             document.querySelector('input[type="file"]').click();
         });
 
     }
 
     handleDelete() {
-        this.setState({
-            imageFile: false
-        });
+        this.props.handler(false);
     }
 
     render() {
+        const imageStyles = { 
+            width: "10em", 
+            height: "8em", 
+            marginLeft: '20px', 
+            border: '1px solid black' 
+        };
+
+        const spanStyle = () => {
+            if(this.props.imageFile){
+                return {marginLeft: '20px'}
+            } 
+            return {};
+        }
         return (
             <div>
                 <div>
-                    <span>Imagem</span>
+                    <span style={spanStyle()}>Imagem</span>
                 </div>
-                {!this.state.imageFile ?
+                {!this.props.imageFile ?
                     <input accept=".jpeg, .jpg, .png" type="file" onChange={this.handleUpload} />
                     :
                     <div>
                         <Image
-                            style={{ width: "6em", height: "6em" }} src={this.state.imageFile} rounded
+                            style={imageStyles} src={this.props.imageFile} rounded
                         />
                         <div className="">
                             <ModifiedGlyphButton

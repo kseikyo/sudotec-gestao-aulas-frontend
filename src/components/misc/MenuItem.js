@@ -1,14 +1,13 @@
 import React from 'react';
-import {BrowserRouter as Route, NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
-function MenuItem(props) {
+function MenuItem({exact = false, ...props}) {
     return (
-        <NavLink activeClassName='is-active' to={props.span} style={{ textDecoration: 'none'}}>
+        <NavLink exact={exact} activeClassName='is-active' to={props.link} style={{ textDecoration: 'none'}}>
             <li className="nav-item menu-item" style={{ cursor: "pointer" }}>
                 <div className="nav-icon"><i className={`icon-${props.icon}`}></i></div>
                 <span>{props.span}</span>
             </li>
-            <Route path={`/${props.span}/`}/>
         </NavLink>
     );
 }

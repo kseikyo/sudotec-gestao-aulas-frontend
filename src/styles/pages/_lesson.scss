@@ -1,0 +1,103 @@
+
+.frequency {
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  border-radius: 50%;
+  color: white;
+  min-width: 22px !important;
+  padding: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 6px;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    opacity: 1;
+    color: white;
+    &.disabled {
+      opacity: 0.8;
+    }
+  }
+  &.disabled {
+    opacity: 0.5;
+  }
+  &:not(.disabled) {
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  }
+  &.has-modal {
+    border-radius: 50% 0 50% 50%;
+  }
+&.f-present {
+  background-color: $green;
+  &:hover {
+    background-color: darken($green, 10);
+    color: white;
+  }
+}
+&.f-justified {
+  background-color: $primary;
+  &:hover {
+    background-color: darken($primary, 10);
+    color: white;
+  }
+}
+&.f-ausent {
+  background-color: $red;
+  &:hover {
+    background-color: darken($red, 10);
+    color: white;
+  }
+}
+}
+
+.student-set-frequency {
+user-select: none;
+background-color: lighten($light, 4);
+transition: all 0.3s ease-in-out;
+.form-control, label, .form-group {
+  background-color: lighten($light, 4);
+}
+&:nth-of-type(even) {
+  background-color: $light;
+  .form-control, label, .form-group {
+    background-color: $light;
+  }
+}
+&.A {
+  background-color: lighten($red, 30);
+}
+.username {
+  user-select: text;
+}
+}
+
+.btn-frequency {
+transition: all 0.3s ease-in-out;
+}
+
+.lesson-card {
+  padding: 6px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 12px;
+  background-color: darken($light, 2);;
+  transition: all 0.3s ease-in;
+  &:hover {
+    background-color: darken($light, 4);
+    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.15);
+  }
+  .lesson-date {
+    font-weight: 800;
+    color: $gray-700;
+    font-size: 16px;
+    padding-bottom: 8px;
+  }
+  .lesson-frequency {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .lesson-description {
+    color: $gray-600;
+    font-size: 14px;
+  }
+}

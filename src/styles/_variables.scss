@@ -3,7 +3,7 @@ $primary: #0080C1;
 $secondary: #707070;
 $main: #F16450;
 $yellow: #F7954E;
-$green: #5EC970;
+$green: rgb(50, 160, 68);
 $red: #F04651;
 $font-family-sans-serif: 'Nunito Sans', 'Segoe UI', sans-serif;
 $semi-light: #FBFBFB;
@@ -13,6 +13,7 @@ $secondary-gray: #A4A4A4;
 
 //Buttons
 $btn-border-radius: 20px;
+$btn-border-radius-sm: 20px;
 $btn-padding-x: 20px;
 
 // Input
@@ -20,12 +21,13 @@ $input-border-radius: 20px;
 $input-border-radius-lg: 20px;
 $input-border-radius-sm: 20px;
 $input-bg: inherit;
+$input-border-color: $secondary-gray;
 
 $breadcrumb-divider: quote(">");
 
 // Modal
-$modal-inner-padding: 35px;
-$modal-content-border-radius: 20px;
+$modal-inner-padding: 25px 30px;
+$modal-content-border-radius: 16px;
 $modal-content-border-width: 0;
 
 $form-check-input-gutter: 0;

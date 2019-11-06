@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import { Button, Image } from 'react-bootstrap';
 
 function ModifiedGlyphButton(props) {
+    const styles = {
+        backgroundColor: "transparent",
+        border: "none",
+        color: props.color
+    };
     return (
         <Button
-            style={{ backgroundColor: "transparent", border: "none", color: props.color }}
+            style={styles}
             onClick={props.click}
         >
             <i className={`icon icon-${props.icon || 'plus'} mr-2 align-top`}></i>

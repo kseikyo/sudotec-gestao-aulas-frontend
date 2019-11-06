@@ -33,6 +33,11 @@
     color: $gray;
     margin-top: -3px;
   }
+  &.variant-danger {
+    .icon, .title {
+      color: $danger;
+    }
+  }
 }
 
 .glyph-button {
@@ -54,5 +59,42 @@
   }
   to {
       transform:rotate(360deg);
+  }
+}
+
+.section-info {
+  .title {
+    display: block;
+    font-size: 1em;
+    font-weight: 500;
+    color: $secondary-gray;
+  }
+  .subtitle {
+    display: block;
+    font-size: 2em;
+    color: $primary;
+    margin-top: -3px;
+  }
+}
+
+.info-button {
+  display: inline-block;
+  margin: 1px;
+  padding: 3px;
+  border: 1px solid $primary;
+  color: $primary;
+  font-weight: 800;
+  font-size: 16px;
+  text-align: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  line-height: 18px;
+  
+  &:hover {
+    background-color: $primary;
+    border-color: darken($primary, 3);
+    color: white;
+    cursor: pointer;
   }
 }

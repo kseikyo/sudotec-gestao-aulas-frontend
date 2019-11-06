@@ -31,7 +31,7 @@ class Stickybar extends React.Component {
     render() {
 
         return (
-            <Navbar bg="light" expand="lg" className="sticky-bar">
+            <Navbar expand="lg" className="sticky-bar">
                 <Hamburguer toggle={this.fetchToggle} />
                 <Breadcrumb className="mr-auto">
                     <Breadcrumb.Item active>Home</Breadcrumb.Item>

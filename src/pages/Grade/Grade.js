@@ -1,8 +1,11 @@
 import React from 'react';
 import Content from '../../components/misc/Content';
 import UpdateGrade from '../../components/grades/UpdateGrade';
+import LessonsContent from '../../components/lesson/LessonsContent';
+import StudentsContent from '../../components/students/StudentsContent';
+import RegisterLessonModal from '../../components/lesson/RegisterLessonModal';
 import SectionTitle from '../../components/misc/SectionTitle';
-import GlyphButton from '../../components/misc/GlyphButton';
+// import GlyphButton from '../../components/misc/GlyphButton';
 import PageTitle from '../../components/misc/PageTitle';
 import {Button} from 'react-bootstrap';
 import grades from '../../services/api/grades';
@@ -13,20 +16,41 @@ class Grade extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      grade: null,
+    this.state = {  
+      grade: {students: []},
       loaded: false,
     }
   }
 
   componentDidMount() {
-    grades.getById(1).then(res => {
+    this.updateGrade();
+  }
+
+  updateGrade() {
+    let routeId = this.props.match.params.id;
+    
+    gradesAPI.getById(routeId).then(res => {
       this.setState({
-        grade: res
-        , 
+        grade: res, 
         loaded: true
       });
-    })
+    });
+  }
+
+  updateLessons() {
+    let {grade} = this.state;
+
+    const lessons = lessonsAPI.getAllByGrade(grade.id);
+    const students = gradesAPI.students(grade.id);
+
+    Promise.all([lessons, students]).then((values) => {
+      grade.lessons = values[0].data;      
+      grade.students = values[1].data;
+
+      this.setState({
+        grade
+      });
+    });
   }
 
   render() {
@@ -35,23 +59,19 @@ class Grade extends React.Component {
     if (!loaded) {
       return 'loading...'
     }
-
+    
     return(
       <>
       <div className='d-flex'>
         <PageTitle title={grade.name} subtitle={grade.course.name}/>
-        <GlyphButton variant='main' className='ml-auto align-self-start'>Chamada</GlyphButton>
+        <RegisterLessonModal key={grade.students.length} onRegister={this.updateLessons.bind(this)} grade={grade} />
       </div>
       <Content>
         <SectionTitle title='Dados' icon='info-circle' />
-        <UpdateGrade className="pt-3" grade={grade} />
+        <UpdateGrade update={this.updateGrade.bind(this)} className="pt-3" grade={grade} />
       </Content>
-      <Content>
-        <SectionTitle title='Aulas' icon='lesson' />
-      </Content>
-      <Content>
-        <SectionTitle title='Frequência' icon='calendar' />
-      </Content>
+      <LessonsContent updateLessons={this.updateLessons.bind(this)} grade={grade} lessons={grade.lessons} />
+      <StudentsContent update={this.updateLessons.bind(this)} grade={grade} students={this.state.grade.students} />
       </>
     );
   }

@@ -6,9 +6,9 @@ function sectionSubtitle(subtitle) {
   }
 }
 
-function SectionTitle({icon, title, subtitle, iconPrefix = 'icon-'}) {
+function SectionTitle({icon, title, subtitle, iconPrefix = 'icon-', className, variant}) {
   return (
-    <div className="section-title d-flex">
+    <div className={`section-title d-flex ${className} variant-${variant}`}>
       <div className={`icon ${iconPrefix}${icon}`}></div>
       <div>
         <span className="title">{title}</span>

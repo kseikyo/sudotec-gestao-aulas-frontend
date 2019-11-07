@@ -8,7 +8,7 @@ class ProjectsFilterForm extends Component {
         super(props);
 
         this.state = {
-            projects: props.projects,
+            projects: [],
             formControls: {
                 project_status: null,
                 search: "",
@@ -16,17 +16,23 @@ class ProjectsFilterForm extends Component {
         };
         this.changeHandler  = changeHandler.bind(this);
     }
+
+    componentDidMount() {
+        this.setState({
+            projects: this.props.projects
+        })
+    }
     
     render() {
+        console.log(this.state.projects);
         return(
             <div className="d-inline-flex">
                 <Select
                     value={this.state.formControls.project_status}
                     label="Status"
                     name="project_status"
-                    onInput={(event) => {this.changeHandler(event)}}
-                    options={this.state.projects.status}
-                    defaultValue="Todos"
+                    onChange={(event) => {this.changeHandler(event)}}
+                    options={this.state.projects}
                 />
                 <SearchInput 
                     name="search"

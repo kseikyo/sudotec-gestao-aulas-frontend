@@ -20,6 +20,7 @@ class RegisterProjectModal extends React.Component {
             }
         }
 
+        this.formRef = React.createRef();
         this.changeHandler = changeHandler.bind(this);
         this.imageHandler = this.imageHandler.bind(this);
     }
@@ -38,15 +39,8 @@ class RegisterProjectModal extends React.Component {
     }
 
     create() {
-        function createForm({name, description, image, status}) {
-            let form = new FormData();
-            form.append('name', name);
-            form.append('description', description);
-            form.append('image', image);
-            form.append('status', status);
-            return form;
-        }
-        let form = createForm(this.state.formControls);
+       let form = new FormData(this.formRef.current);
+
         projects.create(form).then(res => {
             this.props.onRegister(res.data);
             this.props.close();
@@ -57,14 +51,16 @@ class RegisterProjectModal extends React.Component {
         let { formControls } = this.state;
         return (
             <RegisterModal save={this.create.bind(this)} show={this.props.show} close={this.props.close} cancel={this.props.close} title='Cadastrar projeto' subtitle='Preencha as informações para cadastrar um novo projeto.'>
-                <TextInput name='name' onChange={this.changeHandler} label='Nome' />
-                <TextArea name='description' onChange={this.changeHandler} label='Descrição' />
-                <div className="d-flex flex-row">
-                    <ImageUploader handler={this.imageHandler} imageFile={formControls.image} />
-                    <div>
-                        <SectionStatus icon="plus" status="Ativo" />
+                <form encType="multipart/form-data" ref={this.formRef}>
+                    <TextInput name='name' onChange={this.changeHandler} label='Nome' />
+                    <TextArea name='description' onChange={this.changeHandler} label='Descrição' />
+                    <div className="d-flex flex-row">
+                        <ImageUploader name='image' handler={this.imageHandler} imageFile={formControls.image} />
+                        <div>
+                            <SectionStatus icon="plus" status="Ativo" />
+                        </div>
                     </div>
-                </div>
+                </form>
             </RegisterModal>
         )
     }

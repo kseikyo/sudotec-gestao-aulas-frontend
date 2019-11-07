@@ -22,16 +22,29 @@ class ImageUploader extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            imagePreview: null,
+        }
+
+        this.inputRef = React.createRef();
         this.handleUpload = this.handleUpload.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
     }
 
     handleUpload(input) {
-        const file = URL.createObjectURL(input.target.files[0]);
-        if (file) {
-            this.props.handler(file);
-        }
+        const file = input.target.files[0];
+        this.props.handler(file);
+
+        const reader = new FileReader();
+
+        reader.readAsDataURL(file);
+
+        reader.onload = (event) => {
+            let imagePreview = event.target.result;
+
+            this.setState({imagePreview});
+        };
     }
 
     handleEdit() {
@@ -64,13 +77,14 @@ class ImageUploader extends Component {
                 <div>
                     <span style={spanStyle()}>Imagem</span>
                 </div>
-                {!this.props.imageFile ?
-                    <input accept=".jpeg, .jpg, .png" type="file" onChange={this.handleUpload} />
-                    :
+                    <input name={this.props.name} className='d-none' ref={this.inputRef} accept=".jpeg, .jpg, .png" type="file" onChange={this.handleUpload} />
                     <div>
+                    {this.state.imagePreview ? 
                         <Image
-                            style={imageStyles} src={this.props.imageFile} rounded
-                        />
+                            style={imageStyles} src={this.state.imagePreview} rounded
+                        /> : 
+                        <div className='py-5 bg-light border rounded' onClick={this.handleEdit}></div>
+                    }
                         <div className="">
                             <ModifiedGlyphButton
                                 click={this.handleEdit} icon="edit" color="#0080C1"
@@ -84,7 +98,6 @@ class ImageUploader extends Component {
                             </ModifiedGlyphButton>
                         </div>
                     </div>
-                }
             </div>
         )
     }

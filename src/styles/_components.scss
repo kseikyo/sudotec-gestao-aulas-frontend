@@ -41,6 +41,15 @@
   }
 }
 
+.section-status {
+  .title {
+    display: block;
+    font-size: 14px;
+    color: $gray;
+    margin-top: -3px;
+  }
+}
+
 .glyph-button {
   .icon {
     font-size: 13px;

@@ -1,0 +1,21 @@
+.project-card {
+    position: relative;
+    background-color: white;
+    border-radius: 20px;
+    padding: 18px;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid $gray-200;
+    text-align: center;
+
+    .project-name {
+      position: relative;
+      font-weight: 600;
+      color: $gray;
+      font-size: 16px;
+      line-height: 16px;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  

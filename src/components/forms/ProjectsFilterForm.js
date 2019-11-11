@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import SearchInput from './SearchInput';
 import Select from './Select';
-import {changeHandler} from './handler';
+import { changeHandler } from './handler';
+import projects from '../../services/api/projects';
 
 class ProjectsFilterForm extends Component {
     constructor(props) {
@@ -10,31 +11,33 @@ class ProjectsFilterForm extends Component {
         this.state = {
             projects: [],
             formControls: {
-                project_status: null,
+                status: '',
                 search: "",
             },
         };
-        this.changeHandler  = changeHandler.bind(this);
+        this.changeHandler = changeHandler.bind(this);
     }
 
     componentDidMount() {
-        this.setState({
-            projects: this.props.projects
-        })
+        projects.getAll().then(res => {
+            this.setState({ projects: res.data });
+        });
     }
-    
+
     render() {
-        console.log(this.state.projects);
-        return(
+        
+        return (
             <div className="d-inline-flex">
                 <Select
-                    value={this.state.formControls.project_status}
+                    value={this.state.formControls.status}
                     label="Status"
-                    name="project_status"
-                    onChange={(event) => {this.changeHandler(event)}}
-                    options={this.state.projects}
+                    name="status"
+                    descriptionAttr='status'
+                    valueAttr='status'
+                    onChange={(event) => { this.changeHandler(event) }}
+                    options={[{'status': 'Ativo'}, {'status': 'Inativo'}]}
                 />
-                <SearchInput 
+                <SearchInput
                     name="search"
                     onChange={this.changeHandler}
                 />

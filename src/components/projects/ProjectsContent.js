@@ -14,9 +14,9 @@ const styles = {
 }
 
 const SectionInfoStyles = {
-    width:   '100%',
-    marginTop:  '2em',
-    marginBottom:  '2em',
+    width: '100%',
+    marginTop: '2em',
+    marginBottom: '2em',
     marginLeft: '1em'
 }
 
@@ -66,15 +66,15 @@ class ProjectsContent extends React.Component {
                     <div className="ml-auto">
                         <GlyphButton className="ml-auto" click={this.openRegister.bind(this)}>Novo projeto</GlyphButton>
                     </div>
-                    <div className="d-flex" style={{...styles, justifyContent: '', ...SectionInfoStyles}}>
-                        <SectionInfo hasBorder={true} title="Projetos cadastrados" subtitle={len}/>
-                        <SectionInfo hasBorder={true} title="Projetos ativos" subtitle={len}/>
-                        <SectionInfo title="Alunos atuais" subtitle="130"/>
+                    <div className="d-flex" style={{ ...styles, justifyContent: '', ...SectionInfoStyles }}>
+                        <SectionInfo hasBorder={true} title="Projetos cadastrados" subtitle={len} />
+                        <SectionInfo hasBorder={true} title="Projetos ativos" subtitle={len} />
+                        <SectionInfo title="Alunos atuais" subtitle="130" />
                     </div>
-                    <div style={{width: '100%'}}>
-                        <ProjectsFilterForm projects={this.state.projects}/>
+                    <div style={{ width: '100%' }}>
+                        <ProjectsFilterForm />
                     </div>
-                    <div className="project-card d-flex" style={styles}>
+                    <div className="project-cards d-flex" style={styles}>
                         {this.state.projects.map(this.renderProject)}
                     </div>
                 </div>

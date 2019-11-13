@@ -4,6 +4,8 @@ import TextArea from '../forms/TextArea';
 import courses from '../../services/api/courses';
 import projects from '../../services/api/projects';
 import TextInput from '../forms/Input';
+import ImageUploader from '../misc/ImageUploader';
+import SectionStatus from '../misc/SectionStatus';
 import { Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 
@@ -15,7 +17,7 @@ class UpdateProject extends React.Component {
 
         this.state = {
             formControls: { ...project },
-            courses: [],
+            courses: [],    
         };
 
         this.formRef = React.createRef();
@@ -24,6 +26,7 @@ class UpdateProject extends React.Component {
 
     update() {
         let form = new FormData(this.formRef.current);
+        form.append('_method', 'put');
         projects.update(form)
             .then(res => {
                 this.props.update();
@@ -32,9 +35,20 @@ class UpdateProject extends React.Component {
 
     cancel() {
         this.setState({ formControls: { ...this.props.project } });
-        // this.render();
     }
 
+    imageHandler(file, callback) {
+        this.setState({
+            formControls: {
+                ...this.state.formControls,
+                image: file
+            }
+        }, () => {
+            if (callback) {
+                callback();
+            }
+        });
+    }
 
     componentDidMount() {
         courses
@@ -45,25 +59,25 @@ class UpdateProject extends React.Component {
                 })
             });
     }
-    
+
     render() {
         let { formControls } = this.state;
-
         return (
             <>
                 <div className={`row ${this.props.className}`}>
-                    <form encType="multipart/form-data" ref={this.formRef}>
-                        <div className="col-md-6">
-                            <TextInput name='name' onChange={this.changeHandler} label='Nome' />
-                            <TextArea name='description' onChange={this.changeHandler} label='Descrição' />
-                        </div>
-                        <div className="col-md-3">
-                            <ImageUploader name='image' handler={this.imageHandler} imageFile={formControls.image} />
-                        </div>
-                        <div className="col-md-3">
-                            <SectionStatus icon="plus" status="Ativo" />
-                        </div>
-                    </form>
+                    <div className="col-md-12">
+                        <form encType="multipart/form-data" ref={this.formRef}>
+                            <input type='hidden' name='id' value={formControls.id}/>
+                            <div className="col-md-6">
+                                <TextInput name='name' value={formControls.name} onChange={this.changeHandler} label='Nome' />
+                                <TextArea name='description' value={formControls.description} onChange={this.changeHandler} label='Descrição' />
+                                <ImageUploader name='image' handler={this.imageHandler.bind(this)} imageFile={formControls.image} />
+                            </div>
+                            <div className="col-md-2">
+                                <SectionStatus icon="plus" status="Ativo" />
+                            </div>
+                        </form>
+                    </div>
                     <div className="col-12 pt-3 text-right">
                         <Button variant='secondary' onClick={this.cancel.bind(this)} className='mr-3'>Cancelar</Button>
                         <Button variant='primary' onClick={this.update.bind(this)}>Atualizar</Button>

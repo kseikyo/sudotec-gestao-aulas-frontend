@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import projectsAPI from '../../services/api/projects';
+import PageTitle from '../../components/misc/PageTitle';
+import Content from '../../components/misc/Content';
+import SectionTitle from '../../components/misc/SectionTitle';
+import UpdateProject from '../../components/projects/UpdateProject';
 
 export default class Project extends Component {
     state = {
@@ -8,15 +12,14 @@ export default class Project extends Component {
     }
 
     componentDidMount() {
-        this.updateCourse();
+        this.updateProject();
     }
 
     updateProject() {
         let routeId = this.props.match.params.id;
-
         projectsAPI.getById(routeId).then(res => {
             this.setState({
-                project: res,
+                project: res.data,
                 loaded: true
             });
         });

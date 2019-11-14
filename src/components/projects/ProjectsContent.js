@@ -4,6 +4,7 @@ import SectionTitle from '../misc/SectionTitle';
 import GlyphButton from '../misc/GlyphButton';
 import ProjectCard from './ProjectCard';
 import projects from '../../services/api/projects';
+import students from '../../services/api/students';
 import RegisterProjectModal from './RegisterProjectModal';
 import SectionInfo from '../misc/SectionInfo';
 import ProjectsFilterForm from '../forms/ProjectsFilterForm';
@@ -27,6 +28,7 @@ class ProjectsContent extends React.Component {
 
         this.state = {
             projects: [],
+            students: [],
             showRegisterModal: false,
         }
     }
@@ -34,6 +36,10 @@ class ProjectsContent extends React.Component {
     componentDidMount() {
         projects.getAll().then(res => {
             this.setState({ projects: res.data });
+        });
+
+        students.getAll().then(res => {
+            this.setState({ students: res.data });
         });
     }
 
@@ -57,7 +63,8 @@ class ProjectsContent extends React.Component {
     }
 
     render() {
-        const len = this.state.projects.length.toString();
+        const project_len = this.state.projects.length;
+        const student_len = this.state.students.length;
         return (
             <Content>
                 <RegisterProjectModal onRegister={this.addProject.bind(this)} show={this.state.showRegisterModal} close={this.closeRegister.bind(this)} />
@@ -67,9 +74,9 @@ class ProjectsContent extends React.Component {
                         <GlyphButton className="ml-auto" click={this.openRegister.bind(this)}>Novo projeto</GlyphButton>
                     </div>
                     <div className="d-flex" style={{ ...styles, justifyContent: '', ...SectionInfoStyles }}>
-                        <SectionInfo hasBorder={true} title="Projetos cadastrados" subtitle={len} />
-                        <SectionInfo hasBorder={true} title="Projetos ativos" subtitle={len} />
-                        <SectionInfo title="Alunos atuais" subtitle="130" />
+                        <SectionInfo hasBorder={true} title="Projetos cadastrados" subtitle={project_len} />
+                        <SectionInfo hasBorder={true} title="Projetos ativos" subtitle={project_len} />
+                        <SectionInfo title="Alunos atuais" subtitle={student_len} />
                     </div>
                     <div style={{ width: '100%' }}>
                         <ProjectsFilterForm />

@@ -47,6 +47,13 @@ class ImageUploader extends Component {
         };
     }
 
+    componentDidMount() {
+        if(this.props.imageFile)
+            this.setState({
+                imagePreview: this.props.imageFile
+            });
+    }
+
     handleEdit() {
         this.props.handler(false, () => {
             document.querySelector('input[type="file"]').click();
@@ -60,8 +67,8 @@ class ImageUploader extends Component {
 
     render() {
         const imageStyles = { 
-            width: "10em", 
-            height: "8em", 
+            width: "12em", 
+            height: "7em", 
             marginLeft: '20px', 
             border: '1px solid black' 
         };

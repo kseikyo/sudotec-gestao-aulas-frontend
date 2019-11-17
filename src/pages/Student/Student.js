@@ -84,7 +84,7 @@ class Student extends React.Component {
         <PageTitle title='Perfil do estudante'/>
       </div>
       <Content>
-        <SectionTitle title={student.name} icon='info-circle' />
+        <SectionTitle title='Dados' icon='info-circle' />
         
         <div className='row mt-5'>
           <div className='col-md-6'>

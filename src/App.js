@@ -11,6 +11,8 @@ import Students from './pages/Student/Students';
 import Student from './pages/Student/Student';
 import Projects from './pages/Project/Projects';
 import Project from './pages/Project/Project';
+import User from './pages/User/User';
+import Users from './pages/User/Users';
 
 const PrivateRoute = ({path, children, ...rest}) => (
     <Route {...rest} render={(props) => 
@@ -80,6 +82,8 @@ class App extends React.Component {
                                 <Route exact path='/turmas/:id' component={Grade}></Route>
                                 <Route exact path='/alunos' component={Students}></Route>
                                 <Route exact path='/alunos/:id' component={Student}></Route>
+                                <Route exact path='/usuarios' component={Users}></Route>
+                                <Route exact path='/usuarios/:id' component={User}></Route>
                             </Dashboard>
                         </PrivateRoute>
                     </Switch>

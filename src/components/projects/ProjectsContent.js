@@ -8,6 +8,7 @@ import students from '../../services/api/students';
 import RegisterProjectModal from './RegisterProjectModal';
 import SectionInfo from '../misc/SectionInfo';
 import ProjectsFilterForm from '../forms/ProjectsFilterForm';
+import Loader from '../misc/Loader';
 
 const styles = {
     flexFlow: 'row wrap',
@@ -18,7 +19,7 @@ const SectionInfoStyles = {
     width: '100%',
     marginTop: '2em',
     marginBottom: '2em',
-    marginLeft: '1em'
+    marginLeft: '1rem'
 }
 
 
@@ -27,6 +28,7 @@ class ProjectsContent extends React.Component {
         super(props);
 
         this.state = {
+            loaded: false,
             projects: [],
             students: [],
             showRegisterModal: false,
@@ -35,7 +37,7 @@ class ProjectsContent extends React.Component {
 
     componentDidMount() {
         projects.getAll().then(res => {
-            this.setState({ projects: res.data });
+            this.setState({ projects: res.data, loaded: true });
         });
 
         students.getAll().then(res => {
@@ -63,6 +65,9 @@ class ProjectsContent extends React.Component {
     }
 
     render() {
+        if (!this.state.loaded) {
+            return <Loader />
+        }
         const project_len = this.state.projects.length;
         const student_len = this.state.students.length;
         return (

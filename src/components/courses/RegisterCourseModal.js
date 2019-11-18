@@ -25,13 +25,14 @@ class RegisterCourseModal extends React.Component {
         }
 
         this.formRef = React.createRef();
+        this.clearFormControl = this.clearFormControl.bind(this);
         this.changeHandler = changeHandler.bind(this);
         this.imageHandler = this.imageHandler.bind(this);
     }
 
     componentDidMount() {
         projects.getAll().then(res => {
-          this.setState({projects: res.data});
+            this.setState({ projects: res.data });
         });
     }
 
@@ -48,8 +49,21 @@ class RegisterCourseModal extends React.Component {
         });
     }
 
+    clearFormControl() {
+        this.setState({
+            formControls: {
+                name: '',
+                description: '',
+                image: '',
+                status: 'active',
+                project_id: ''
+            }
+        })
+    }
+
     create() {
-       let form = new FormData(this.formRef.current);
+        let form = new FormData(this.formRef.current);
+        form.append('status', 'active');
 
         courses.create(form).then(res => {
             this.props.onRegister(res.data);
@@ -60,7 +74,7 @@ class RegisterCourseModal extends React.Component {
     render() {
         let { formControls } = this.state;
         return (
-            <RegisterModal save={this.create.bind(this)} show={this.props.show} close={this.props.close} cancel={this.props.close} title='Cadastrar curso' subtitle='Preencha as informações para cadastrar um novo curso.'>
+            <RegisterModal save={this.create.bind(this)} show={this.props.show} close={this.props.close} cancel={() => {this.props.close(); this.clearFormControl()}} title='Cadastrar curso' subtitle='Preencha as informações para cadastrar um novo curso.'>
                 <form encType="multipart/form-data" ref={this.formRef}>
                     <TextInput name='name' onChange={this.changeHandler} label='Nome' />
                     <Select label='Projeto' name='project_id' value={formControls.project_id} onChange={this.changeHandler} options={this.state.projects} />

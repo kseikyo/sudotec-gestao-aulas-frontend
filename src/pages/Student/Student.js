@@ -15,6 +15,7 @@ import {changeHandler} from '../../components/forms/handler';
 import DeleteModal from '../../components/misc/DeleteModal';
 import {Button} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
+import Loader from '../../components/misc/Loader';
 
 class Student extends React.Component {
   constructor(props) {
@@ -75,7 +76,7 @@ class Student extends React.Component {
     let {student, loaded, formControls} = this.state;
 
     if (!loaded) {
-      return 'loading...'
+      return <Loader />
     }
     
     return(

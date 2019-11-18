@@ -5,6 +5,7 @@ import GlyphButton from '../misc/GlyphButton';
 import GradeCard from './GradeCard';
 import grades from '../../services/api/grades';
 import RegisterGradeModal from '../grades/RegisterGradeModal';
+import Loader from '../../components/misc/Loader';
 
 class GradesContent extends React.Component {
   constructor(props) {
@@ -13,12 +14,13 @@ class GradesContent extends React.Component {
     this.state = {
       grades: [],
       showRegisterModal: false,
+      loaded: false,
     }
   }
 
   componentDidMount() {
     grades.getAll().then(res => {
-      this.setState({ grades: res.data });
+      this.setState({ grades: res.data, loaded: true });
     })
   }
 
@@ -42,6 +44,10 @@ class GradesContent extends React.Component {
   }
 
   render() {
+    if (!this.state.loaded) {
+      return <Loader />
+    } 
+      
     return (
       <Content>
         <RegisterGradeModal onRegister={this.addGrade.bind(this)} show={this.state.showRegisterModal} close={this.closeRegister.bind(this)} />

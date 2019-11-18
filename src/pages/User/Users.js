@@ -4,6 +4,7 @@ import AddUser from '../../components/users/AddUser';
 import Content from '../../components/misc/Content';
 import SectionTitle from '../../components/misc/SectionTitle';
 import {Link} from 'react-router-dom';
+import Loader from '../../components/misc/Loader';
 
 function UserListCard({user}) {
   return (
@@ -26,6 +27,7 @@ class Users extends React.Component {
 
     this.state = {
       users: [],
+      laoded: false,
     }
   }
 
@@ -35,31 +37,35 @@ class Users extends React.Component {
 
   getAllUsers() {
     usersAPI.getAll().then(res => {
-      this.setState({users: res.data});
+      this.setState({users: res.data, loaded: true});
     })
   }
 
-  render() {    
-      return(
-        <Content> 
-          <div className="d-flex mb-3">
-            <SectionTitle icon="user" title='Usuários' />
-            <div className="ml-auto">
-              <AddUser onRegister={this.getAllUsers.bind(this)} />
-            </div>
+  render() { 
+    if (!this.state.loaded) {
+      return <Loader />
+    } 
+      
+    return(
+      <Content> 
+        <div className="d-flex mb-3">
+          <SectionTitle icon="user" title='Usuários' />
+          <div className="ml-auto">
+            <AddUser onRegister={this.getAllUsers.bind(this)} />
           </div>
-          <div className='row'>
+        </div>
+        <div className='row'>
 
-            {this.state.users.map(user => 
-                (
-                  <div key={user.id} className='col-md-4 mt-2'>
-                    <UserListCard user={user} />
-                  </div>
-                )
-            )}
-          </div>
-        </Content>
-      );
+          {this.state.users.map(user => 
+              (
+                <div key={user.id} className='col-md-4 mt-2'>
+                  <UserListCard user={user} />
+                </div>
+              )
+          )}
+        </div>
+      </Content>
+    );
   }
 }
 

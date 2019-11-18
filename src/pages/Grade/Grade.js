@@ -5,14 +5,10 @@ import LessonsContent from '../../components/lesson/LessonsContent';
 import StudentsContent from '../../components/students/StudentsContent';
 import RegisterLessonModal from '../../components/lesson/RegisterLessonModal';
 import SectionTitle from '../../components/misc/SectionTitle';
-// import GlyphButton from '../../components/misc/GlyphButton';
 import gradesAPI from '../../services/api/grades';
 import lessonsAPI from '../../services/api/lessons';
 import PageTitle from '../../components/misc/PageTitle';
-import {Button} from 'react-bootstrap';
-import grades from '../../services/api/grades';
-import Input from '../../components/forms/Input';
-import Loading from '../../components/misc/Loading';
+import Loader from '../../components/misc/Loader';
 
 class Grade extends React.Component {
   constructor(props) {
@@ -59,8 +55,8 @@ class Grade extends React.Component {
     let {grade, loaded} = this.state;
 
     if (!loaded) {
-      return 'loading...'
-    }
+      return <Loader />
+    } 
     
     return(
       <>

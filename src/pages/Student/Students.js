@@ -4,6 +4,7 @@ import AddStudent from '../../components/students/AddStudent';
 import Content from '../../components/misc/Content';
 import SectionTitle from '../../components/misc/SectionTitle';
 import {Link} from 'react-router-dom';
+import Loader from '../../components/misc/Loader';
 
 function StudentListCard({student}) {
   return (
@@ -22,6 +23,7 @@ class Students extends React.Component {
 
     this.state = {
       students: [],
+      loaded: false,
     }
   }
 
@@ -31,24 +33,28 @@ class Students extends React.Component {
 
   getAllStudents() {
     studentsAPI.getAll().then(res => {
-      this.setState({students: res.data});
+      this.setState({students: res.data, loaded: true});
     })
   }
 
   render() {
-      return(
-        <Content> 
-          <div className="d-flex mb-3">
-            <SectionTitle icon="students" title='Alunos' />
-            <div className="ml-auto">
-              <AddStudent onRegister={this.getAllStudents.bind(this)} />
-            </div>
+    if (!this.state.loaded) {
+      return <Loader />
+    }
+
+    return(
+      <Content> 
+        <div className="d-flex mb-3">
+          <SectionTitle icon="students" title='Alunos' />
+          <div className="ml-auto">
+            <AddStudent onRegister={this.getAllStudents.bind(this)} />
           </div>
-          {this.state.students.map(student => 
-                (<StudentListCard key={student.id} student={student} />)
-              )}
-        </Content>
-      );
+        </div>
+        {this.state.students.map(student => 
+              (<StudentListCard key={student.id} student={student} />)
+            )}
+      </Content>
+    );
   }
 }
 

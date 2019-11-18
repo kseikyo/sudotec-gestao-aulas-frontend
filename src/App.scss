@@ -69,3 +69,7 @@ h3 {
 .btn-outline-main {
   @include button-outline-variant($main);
 }
+
+.hover-pointer {
+  cursor: pointer;
+}

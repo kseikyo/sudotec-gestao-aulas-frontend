@@ -3,7 +3,7 @@ import React from 'react'
 function SectionInfo({title, subtitle, hasBorder=false}){
         function border() {
             return (
-                hasBorder ? {borderRight: "1px solid #ccc", paddingRight: '20px', marginRight: '10px'}
+                hasBorder ? {borderRight: "1px solid #A4A4A4", paddingRight: '50px', marginRight: '50px'}
                  : {paddingRight: '20px', marginRight: '10px'}
             );
         }

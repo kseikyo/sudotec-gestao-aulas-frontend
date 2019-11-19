@@ -1,6 +1,7 @@
 export function changeHandler(event, callback = null) {
-  const name = event.target.name;
-  const value = event.target.value;
+  const target = event.target;
+  const value = target.value;
+  const name = target.name;
   
   this.setState({
     formControls: {

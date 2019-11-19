@@ -9,6 +9,8 @@ import SectionStatus from '../misc/SectionStatus';
 import { Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import Select from '../forms/Select';
+import { statusHandler } from '../forms/statusHandler';
+import StatusCheckbox from '../misc/StatusCheckbox';
 
 class UpdateCourse extends React.Component {
     constructor(props) {
@@ -18,18 +20,24 @@ class UpdateCourse extends React.Component {
 
         this.state = {
             formControls: { 
-                ...course, 
-                project_id: ''
+                ...course,
             },
             projects: [],
         };
 
         this.formRef = React.createRef();
+        this.statusHandler = statusHandler.bind(this);
         this.changeHandler = changeHandler.bind(this);
     }
 
     update() {
         let form = new FormData(this.formRef.current);
+        
+        if(!!form.get('status'))
+            form.set('status', 'active')
+        else
+            form.set('status', 'inactive')
+
         form.append('_method', 'put');
         courses.update(form)
             .then(res => {
@@ -89,7 +97,8 @@ class UpdateCourse extends React.Component {
                             
                         </div>
                         <div className="col-md-2">
-                            <SectionStatus icon="plus" status="Ativo" />
+                            {/* <SectionStatus icon="plus" status="Ativo" /> */}
+                            <StatusCheckbox status={formControls.status} handler={this.statusHandler}/>
                         </div>
                     </form>
                 </div>

@@ -8,6 +8,8 @@ import ImageUploader from '../misc/ImageUploader';
 import SectionStatus from '../misc/SectionStatus';
 import { Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
+import StatusCheckbox from '../misc/StatusCheckbox';
+import { statusHandler } from '../forms/statusHandler';
 
 class UpdateProject extends React.Component {
     constructor(props) {
@@ -21,11 +23,18 @@ class UpdateProject extends React.Component {
         };
 
         this.formRef = React.createRef();
+        this.statusHandler = statusHandler.bind(this);
         this.changeHandler = changeHandler.bind(this);
     }
 
     update() {
         let form = new FormData(this.formRef.current);
+        
+        if(!!form.get('status'))
+            form.set('status', 'active')
+        else
+            form.set('status', 'inactive')
+
         form.append('_method', 'put');
         projects.update(form)
             .then(res => {
@@ -87,7 +96,8 @@ class UpdateProject extends React.Component {
                             <ImageUploader name='image' handler={this.imageHandler.bind(this)} imagePreview={formControls.image} />
                         </div>
                         <div className="col-md-2">
-                            <SectionStatus icon="plus" status="Ativo" />
+                            {/* <SectionStatus icon="plus" status="Ativo" /> */}
+                            <StatusCheckbox status={formControls.status} handler={this.statusHandler}/>
                         </div>
                     </form>
                 </div>

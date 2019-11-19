@@ -31,6 +31,18 @@ export default class CoursesFilterForm extends Component {
         });
     }
 
+    componentWillUnmount() {
+        this.setState({
+            projects: [],
+            courses: [],
+            formControls: {
+                project_id: null,
+                search: "",
+                status: null
+            },
+        });
+    }
+
     render() {
         return (
             <div className="d-flex ">
@@ -38,7 +50,7 @@ export default class CoursesFilterForm extends Component {
                     label="Projetos" 
                     name="project_id" 
                     value={this.state.formControls.project_id} 
-                    onInput={(event) => { this.changeHandler(event) }} 
+                    onChange={(event) => { this.changeHandler(event) }} 
                     options={this.state.projects} 
                 />
                 <Select

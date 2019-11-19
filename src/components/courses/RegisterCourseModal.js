@@ -36,6 +36,10 @@ class RegisterCourseModal extends React.Component {
         });
     }
 
+    componentWillUnmount() {
+        this.clearFormControl();
+    }
+
     imageHandler(file, callback) {
         this.setState({
             formControls: {

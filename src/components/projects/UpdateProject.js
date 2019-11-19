@@ -31,10 +31,21 @@ class UpdateProject extends React.Component {
             .then(res => {
                 this.props.update();
             })
+            .then(() => {
+                this.redirect();
+            });
+    }
+
+    redirect() {
+        this.props.history.push('/projetos');
     }
 
     cancel() {
-        this.setState({ formControls: { ...this.props.project } });
+        this.setState({
+            formControls: { ...this.props.project }
+        },
+            this.redirect()
+        );
     }
 
     imageHandler(file, callback) {
@@ -48,6 +59,7 @@ class UpdateProject extends React.Component {
                 callback();
             }
         });
+
     }
 
     componentDidMount() {
@@ -72,8 +84,7 @@ class UpdateProject extends React.Component {
                             <TextArea name='description' value={formControls.description} onChange={this.changeHandler} label='Descrição' />
                         </div>
                         <div className="col-md-4">
-                            <ImageUploader name='image' handler={this.imageHandler.bind(this)} imageFile={formControls.image} />
-                            
+                            <ImageUploader name='image' handler={this.imageHandler.bind(this)} imagePreview={formControls.image} />
                         </div>
                         <div className="col-md-2">
                             <SectionStatus icon="plus" status="Ativo" />

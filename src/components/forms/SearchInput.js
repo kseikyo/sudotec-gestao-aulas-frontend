@@ -1,11 +1,10 @@
 import React from 'react';
 import Input from './Input';
 
-function SearchInput(props) {
-    console.log(props);
+function SearchInput({...rest}) {
     return (
         <div className='search-input'>
-            <Input onChange={props.onChange} label='Pesquisar'></Input>
+            <Input {...rest} label='Pesquisar'></Input>
         </div>
     );
 }

@@ -10,6 +10,8 @@ import SectionInfo from '../misc/SectionInfo';
 import CoursesFilterForm from '../forms/CoursesFilterForm';
 import Loader from '../misc/Loader';
 import CourseCard from './CourseCard';
+import { searchFilter } from '../misc/searchFilter';
+import { statusFilter } from '../misc/statusFilter';
 
 const styles = {
     flexFlow: 'row wrap',
@@ -30,11 +32,18 @@ class ProjectsContent extends React.Component {
 
         this.state = {
             loaded: false,
+            status: '',
+            searchValue: '',
+            rendered: [],
             courses: [],
             projects: [],
             students: [],
             showRegisterModal: false,
         }
+        this.updateStatusValue = this.updateStatusValue.bind(this);
+        this.updateSearchValue = this.updateSearchValue.bind(this);
+        this.searchFilter = searchFilter.bind(this);
+        this.statusFilter = statusFilter.bind(this);
     }
 
     componentDidMount() {
@@ -49,6 +58,26 @@ class ProjectsContent extends React.Component {
         courses.getAll().then(res => {
             this.setState({ courses: res.data, loaded: true})
         })
+    }
+
+    updateSearchValue(event) {
+        const value = event.target.value;
+        this.setState({
+            searchValue: value
+        },
+            () => {
+                this.searchFilter(this.state.projects, value);
+            });
+    }
+
+    updateStatusValue(event) {
+        const value = event.target.value === 'Ativo' ? 'active' : 'inactive';
+        this.setState({
+            status: value
+        },
+            () => {
+                this.statusFilter(this.state.projects, value);
+            });
     }
 
     renderCourse(course) {
@@ -74,6 +103,12 @@ class ProjectsContent extends React.Component {
         if (!this.state.loaded) {
             return <Loader />
         }
+
+        const active = this.state.courses.reduce((total, course) => {
+            total += course.status === 'active' ? 1 : 0;
+            return total;
+        }, 0);
+
         const courses_len = this.state.courses.length;
         const students_len = this.state.students.length;
         return (
@@ -86,11 +121,14 @@ class ProjectsContent extends React.Component {
                     </div>
                     <div className="d-flex" style={{ ...styles, justifyContent: '', ...SectionInfoStyles }}>
                         <SectionInfo hasBorder={true} title="Cursos cadastrados" subtitle={courses_len} />
-                        <SectionInfo hasBorder={true} title="Cursos ativos" subtitle={courses_len} />
+                        <SectionInfo hasBorder={true} title="Cursos ativos" subtitle={active} />
                         <SectionInfo title="Alunos atuais" subtitle={students_len} />
                     </div>
                     <div style={{ width: '100vw' }}>
-                        <CoursesFilterForm />
+                        <CoursesFilterForm 
+                            onStatusChange={this.updateStatusValue} 
+                            onChange={this.updateSearchValue}
+                        />
                     </div>
                     <div className="project-cards d-flex" style={styles}>
                         {this.state.courses.map(this.renderCourse)}

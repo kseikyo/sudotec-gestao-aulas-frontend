@@ -34,7 +34,7 @@ class ProjectsFilterForm extends Component {
                     name="status"
                     descriptionAttr='status'
                     valueAttr='status'
-                    onChange={(event) => { this.changeHandler(event) }}
+                    onChange={(event) => {this.changeHandler(event,this.props.onStatusChange(event))}}
                     options={[{'status': 'Ativo'}, {'status': 'Inativo'}]}
                 />
                 <SearchInput

@@ -51,7 +51,7 @@ export default class CoursesFilterForm extends Component {
                     name="project_id" 
                     value={this.state.formControls.project_id} 
                     onChange={(event) => { this.changeHandler(event) }} 
-                    options={this.state.projects} 
+                    options={this.state.projects}
                 />
                 <Select
                     value={this.state.formControls.status}
@@ -59,10 +59,10 @@ export default class CoursesFilterForm extends Component {
                     name="status"
                     descriptionAttr='status'
                     valueAttr='status'
-                    onChange={(event) => { this.changeHandler(event) }}
+                    onChange={(event) => {this.changeHandler(event,this.props.onStatusChange(event))}}
                     options={[{'status': 'Ativo'}, {'status': 'Inativo'}]}
                 />
-                <SearchInput name="search" onChange={this.changeHandler} />
+                <SearchInput name="search" onChange={this.props.onChange} />
             </div>
         );
     }

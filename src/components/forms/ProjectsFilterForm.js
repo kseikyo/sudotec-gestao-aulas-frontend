@@ -39,7 +39,7 @@ class ProjectsFilterForm extends Component {
                 />
                 <SearchInput
                     name="search"
-                    onChange={this.changeHandler}
+                    onChange={this.props.onChange}
                 />
             </div>
         );

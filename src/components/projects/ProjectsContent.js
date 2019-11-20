@@ -9,6 +9,8 @@ import RegisterProjectModal from './RegisterProjectModal';
 import SectionInfo from '../misc/SectionInfo';
 import ProjectsFilterForm from '../forms/ProjectsFilterForm';
 import Loader from '../misc/Loader';
+import { searchFilter } from '../misc/searchFilter';
+import { thisExpression } from '@babel/types';
 
 const styles = {
     flexFlow: 'row wrap',
@@ -29,15 +31,21 @@ class ProjectsContent extends React.Component {
 
         this.state = {
             loaded: false,
+            searchValue: '',
             projects: [],
+            rendered: [],
             students: [],
             showRegisterModal: false,
         }
+
+        this.updateSearchValue = this.updateSearchValue.bind(this);
+        this.filterProjects = this.filterProjects.bind(this);
+        this.searchFilter = searchFilter.bind(this);
     }
 
     componentDidMount() {
         projects.getAll().then(res => {
-            this.setState({ projects: res.data, loaded: true });
+            this.setState({ projects: res.data, rendered: res.data, loaded: true });
         });
 
         students.getAll().then(res => {
@@ -45,10 +53,24 @@ class ProjectsContent extends React.Component {
         });
     }
 
+    updateSearchValue(event) {
+        const value = event.target.value;
+        this.setState({
+            searchValue: value
+        },
+        () => {
+            this.searchFilter(this.state.projects, value);
+        })
+    }
+
     renderProject(project) {
         return (
             <ProjectCard key={project.id} project={project} />
         );
+    }
+
+    filterProjects() {
+
     }
 
     openRegister() {
@@ -84,10 +106,10 @@ class ProjectsContent extends React.Component {
                         <SectionInfo title="Alunos atuais" subtitle={student_len} />
                     </div>
                     <div style={{ width: '100%' }}>
-                        <ProjectsFilterForm />
+                        <ProjectsFilterForm onChange={this.updateSearchValue}/>
                     </div>
                     <div className="project-cards d-flex" style={styles}>
-                        {this.state.projects.map(this.renderProject)}
+                        {this.state.rendered.map(this.renderProject)}
                     </div>
                 </div>
             </Content>

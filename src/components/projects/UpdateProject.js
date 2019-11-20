@@ -9,7 +9,6 @@ import SectionStatus from '../misc/SectionStatus';
 import { Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import StatusCheckbox from '../misc/StatusCheckbox';
-import { statusHandler } from '../forms/statusHandler';
 
 class UpdateProject extends React.Component {
     constructor(props) {
@@ -23,7 +22,6 @@ class UpdateProject extends React.Component {
         };
 
         this.formRef = React.createRef();
-        this.statusHandler = statusHandler.bind(this);
         this.changeHandler = changeHandler.bind(this);
     }
 
@@ -97,7 +95,7 @@ class UpdateProject extends React.Component {
                         </div>
                         <div className="col-md-2">
                             {/* <SectionStatus icon="plus" status="Ativo" /> */}
-                            <StatusCheckbox status={formControls.status} handler={this.statusHandler}/>
+                            <StatusCheckbox status={formControls.status} handler={this.changeHandler}/>
                         </div>
                     </form>
                 </div>

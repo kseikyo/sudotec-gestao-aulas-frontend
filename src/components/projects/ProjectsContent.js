@@ -89,7 +89,8 @@ class ProjectsContent extends React.Component {
 
     addProject(project) {
         this.setState({
-            rendered: [...this.state.projects, project]
+            rendered: [...this.state.projects, project],
+            projects: [...this.state.projects, project]
         });
     }
 
@@ -102,8 +103,6 @@ class ProjectsContent extends React.Component {
             total += project.status === 'active' ? 1 : 0;
             return total;
         }, 1);
-
-        console.log(this.state.projects);
 
         const project_len = this.state.projects.length;
         const student_len = this.state.students.length;

@@ -12,6 +12,7 @@ import Loader from '../misc/Loader';
 import CourseCard from './CourseCard';
 import { searchFilter } from '../misc/searchFilter';
 import { statusFilter } from '../misc/statusFilter';
+import { projectsFilter } from '../misc/projectsFilter';
 
 const styles = {
     flexFlow: 'row wrap',
@@ -34,16 +35,21 @@ class ProjectsContent extends React.Component {
             loaded: false,
             status: '',
             searchValue: '',
+            project_id: '',
             rendered: [],
             courses: [],
             projects: [],
             students: [],
             showRegisterModal: false,
         }
+
         this.updateStatusValue = this.updateStatusValue.bind(this);
         this.updateSearchValue = this.updateSearchValue.bind(this);
-        this.searchFilter = searchFilter.bind(this);
-        this.statusFilter = statusFilter.bind(this);
+        this.updateProjectId   = this.updateProjectId.bind(this);
+
+        this.projectsFilter = projectsFilter.bind(this); 
+        this.searchFilter   = searchFilter.bind(this);
+        this.statusFilter   = statusFilter.bind(this);
     }
 
     componentDidMount() {
@@ -56,8 +62,18 @@ class ProjectsContent extends React.Component {
         });
 
         courses.getAll().then(res => {
-            this.setState({ courses: res.data, loaded: true})
+            this.setState({ courses: res.data, rendered: res.data, loaded: true })
         })
+    }
+
+    updateProjectId(event) {
+        const id = event.target.value;
+        this.setState({
+            project_id: id,
+        },
+            () => {
+                this.projectsFilter(this.state.projects, id);
+        });
     }
 
     updateSearchValue(event) {
@@ -66,7 +82,7 @@ class ProjectsContent extends React.Component {
             searchValue: value
         },
             () => {
-                this.searchFilter(this.state.projects, value);
+                this.searchFilter(this.state.courses, value);
             });
     }
 
@@ -76,7 +92,7 @@ class ProjectsContent extends React.Component {
             status: value
         },
             () => {
-                this.statusFilter(this.state.projects, value);
+                this.statusFilter(this.state.courses, value);
             });
     }
 
@@ -95,7 +111,8 @@ class ProjectsContent extends React.Component {
 
     addCourse(course) {
         this.setState({
-            courses: [...this.state.courses, course]
+            courses: [...this.state.courses, course],
+            rendered: [...this.state.rendered, course]
         });
     }
 
@@ -125,13 +142,14 @@ class ProjectsContent extends React.Component {
                         <SectionInfo title="Alunos atuais" subtitle={students_len} />
                     </div>
                     <div style={{ width: '100vw' }}>
-                        <CoursesFilterForm 
-                            onStatusChange={this.updateStatusValue} 
-                            onChange={this.updateSearchValue}
+                        <CoursesFilterForm
+                            onProjectChange={ this.updateProjectId }
+                            onStatusChange={ this.updateStatusValue }
+                            onChange={ this.updateSearchValue }
                         />
                     </div>
                     <div className="project-cards d-flex" style={styles}>
-                        {this.state.courses.map(this.renderCourse)}
+                        {this.state.rendered.map(this.renderCourse)}
                     </div>
                 </div>
             </Content>

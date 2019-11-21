@@ -21,7 +21,8 @@
 .form-group {
   position: relative;
   background-color: #FBFBFB;
-
+  margin-top: auto;
+  margin-right: 2rem;
   &:first-of-type {
     margin-top: 9px;
   }
@@ -45,6 +46,9 @@
     top: 0;
     transition: all 0.3s ease-in-out;
     background-color: inherit;
+  }
+  select {
+    padding-right: 8em;
   }
 }
 
@@ -75,6 +79,7 @@
       right: 4%;
       transform: translateY(-50%);
     }
+    
   }
   input {
     padding-right: 40px;

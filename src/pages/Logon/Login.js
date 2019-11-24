@@ -1,6 +1,5 @@
 import React from 'react';
 import AuthContext from '../../context/auth-context';
-import Logon from '../../components/layouts/Logon';
 import TextLink from '../../components/misc/TextLink';
 import {Redirect} from 'react-router-dom'
 
@@ -12,7 +11,7 @@ const RedirectIfLogged = ({logged}) => {
     return <Redirect to='/' push />
 }
 
-class FormLogin extends React.Component {
+class Login extends React.Component {
     constructor(props) {
         super(props);
         this.emailRef = React.createRef();
@@ -72,7 +71,7 @@ class FormLogin extends React.Component {
 
     render() {
         return (
-            <Logon>
+            <>
                 <RedirectIfLogged logged={this.state.logged}/>           
                 <form className="form-container text-center">
                     <header className="form-header">
@@ -91,10 +90,10 @@ class FormLogin extends React.Component {
                     </button>
                 </form>
                 
-                <TextLink  to="Forgotten-Password" span="Esqueci minha senha." path="Forgotten-Password"/>
-            </Logon>
+                <TextLink  to="/auth/recuperacao" span="Esqueci minha senha." path="/auth/recuperacao"/>
+            </>
         );
     }
 }
 
-export default FormLogin;
+export default Login;

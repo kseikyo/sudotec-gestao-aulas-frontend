@@ -1,15 +1,9 @@
 import React from 'react';
 import Content from '../../components/misc/Content';
-// import UpdateGrade from '../../components/grades/UpdateGrade';
-// import LessonsContent from '../../components/lesson/LessonsContent';
-// import StudentsContent from '../../components/students/StudentsContent';
-// import RegisterLessonModal from '../../components/lesson/RegisterLessonModal';
 import SectionTitle from '../../components/misc/SectionTitle';
 import TextInput from '../../components/forms/Input';
 import Select from '../../components/forms/Select';
-// import GlyphButton from '../../components/misc/GlyphButton';
 import PageTitle from '../../components/misc/PageTitle';
-// import {Button} from 'react-bootstrap';
 import studentsAPI from '../../services/api/students';
 import {changeHandler} from '../../components/forms/handler';
 import DeleteModal from '../../components/misc/DeleteModal';
@@ -73,7 +67,7 @@ class Student extends React.Component {
   }
 
   render() {
-    let {student, loaded, formControls} = this.state;
+    let {loaded, formControls} = this.state;
 
     if (!loaded) {
       return <Loader />

@@ -1,65 +1,72 @@
 import React from 'react';
+import {changeHandler} from '../../components/forms/handler';
+import TextLink from '../../components/misc/TextLink';
+import Input from '../../components/forms/Input';
+import {Button} from 'react-bootstrap';
+import loginAPI from '../../services/api/login';
+import Loader from '../../components/misc/Loader';
 
-class FormRestore extends React.Component {
+class RedefinePassword extends React.Component {
     constructor(props) {
         super(props);
-        this.emailRef = React.createRef()
+
+        this.state = {
+            success: false,
+            fail: false,
+            formControls: {
+                token: '',
+                email: '',
+                password: '',
+                password_confirmation: '',
+            }
+        }
+
+        this.changeHandler = changeHandler.bind(this);
     }
 
     submitHandler() {
-        event.preventDefault();
-        const url = new URL("http://api.sudotec.test/api/auth/password/email");
-        const email = this.emailRef.current.value;
-        
-        if (email.trim().length === 0) {
-            return;
-        }
+        this.setState({loading: true, success: false, fail: false});
 
-        let headers = {
-            "Accept": "application/json",
-        }
-
-        let body = {
-            email: email
-        }
-
-        fetch(url, {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(body)
+        loginAPI.requestReset(this.state.formControls)
+        .then(() => {
+            this.setState({success: true, loading: false});
         })
-        .then(response => {
-            if(response.status !== 200 && response.status !== 201) {
-                throw new Error ("Couldn't find an account with this email!");
-                //Don't know how we are gonna handle it on frontend yet
-            }
-            return response.json();
-        })
-        .then(responseData => {
-            //Loggin the json data
-            console.log(responseData);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        .catch(() => {
+            this.setState({fail: true, loading: false});
+        });
     }
 
     render() {
+        let {formControls} = this.state;
         return (
-            <form className="form-container">
-                <header className="form-header">
-                    <h3>Restaurar Senha</h3>
-                </header>
-                <div className="form-input">
-                    <label className="form-label">Email</label>
-                    <input type="email" ref={this.emailRef}></input>
-                </div>
-                <button className="form-button" onClick={this.submitHandler}>
-                    Restaurar
-                </button>
-            </form>
+            <>
+                <form className="form-container">
+                    <header className="form-header text-center">
+                        <h2>Recuperar Senha</h2>
+                    </header>
+                    <Input label='Email' name='email' type="email" value={formControls.email} onChange={this.changeHandler.bind(this)} />
+                    
+                    {this.state.success ? 
+                    <small className='d-block text-primary'>Um link de recuperação de senha foi enviado para o seu email.</small> :
+                    <></>
+                    }
+                    
+                    {this.state.fail ? 
+                    <small className='d-block text-danger'>Falha ao enviar email de recuperação de senha.</small> :
+                    <></> 
+                    }
+                    
+                    {this.state.loading ? 
+                    <Loader message='Enviando...' size='40px' /> :
+                    <></> 
+                    }
+
+                    <Button className="form-button w-100" onClick={this.submitHandler.bind(this)}>Confirmar</Button>
+                </form>
+                <TextLink  to="/auth" span="Fazer login." path="/auth"/>
+            </>
         );
     }
 }
 
-export default FormRestore;
+export default RedefinePassword;

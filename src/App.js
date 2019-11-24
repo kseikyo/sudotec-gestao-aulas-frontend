@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.scss';
-import FormLogin from './pages/Logon/Login';
+import Login from './pages/Logon/Login';
+import Restore from './pages/Logon/Restore';
+import RedefinePassword from './pages/Logon/RedefinePassword';
 import Dashboard from './components/layouts/Dashboard';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import AuthContext from './context/auth-context';
-// import Projects from './pages/Project/Projects';
+import Logon from './components/layouts/Logon';
 import Grades from './pages/Grade/Grades';
 import Grade from './pages/Grade/Grade';
 import Students from './pages/Student/Students';
@@ -71,7 +73,21 @@ class App extends React.Component {
                         }}>
                     <div id='app'>
                     <Switch>
-                        <GuestRoute path='/auth'><FormLogin /></GuestRoute>
+                        <GuestRoute exact path='/auth'>
+                            <Logon>
+                                <Login />
+                            </Logon>
+                        </GuestRoute>
+                        <GuestRoute exact path='/auth/recuperacao'>
+                            <Logon>
+                                <Restore />
+                            </Logon>
+                        </GuestRoute>
+                        <GuestRoute exact path='/auth/redefinir-senha'>
+                            <Logon>
+                                <RedefinePassword />
+                            </Logon>
+                        </GuestRoute>
                         <PrivateRoute path='/'>
                             <Dashboard
                                     user_email={this.state.email || "Username"} 

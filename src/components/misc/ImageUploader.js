@@ -48,9 +48,9 @@ class ImageUploader extends Component {
     }
 
     componentDidMount() {
-        if(this.props.imageFile)
+        if(this.props.imagePreview)
             this.setState({
-                imagePreview: this.props.imageFile
+                imagePreview: this.props.imagePreview
             });
     }
 
@@ -62,7 +62,11 @@ class ImageUploader extends Component {
     }
 
     handleDelete() {
-        this.props.handler(false);
+        this.props.handler(null, () => {
+            this.setState({
+                imagePreview: null
+            })
+        });
     }
 
     render() {

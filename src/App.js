@@ -13,6 +13,8 @@ import Students from './pages/Student/Students';
 import Student from './pages/Student/Student';
 import Projects from './pages/Project/Projects';
 import Project from './pages/Project/Project';
+import Courses from './pages/Course/Courses';
+import Course from './pages/Course/Course';
 import User from './pages/User/User';
 import Users from './pages/User/Users';
 
@@ -92,9 +94,11 @@ class App extends React.Component {
                             <Dashboard
                                     user_email={this.state.email || "Username"} 
                                     logout={this.logout}>
-                                <Route exact path='/turmas' component={Grades}></Route>
                                 <Route exact path='/projetos' component={Projects}></Route>
                                 <Route exact path='/projetos/:id' component={Project}></Route>
+                                <Route exact path='/cursos' component={Courses}></Route>
+                                <Route exact path='/cursos/:id' component={Course}></Route>
+                                <Route exact path='/turmas' component={Grades}></Route>
                                 <Route exact path='/turmas/:id' component={Grade}></Route>
                                 <Route exact path='/alunos' component={Students}></Route>
                                 <Route exact path='/alunos/:id' component={Student}></Route>

@@ -1,10 +1,10 @@
 import React from 'react';
 import Input from './Input';
 
-function SearchInput(props) {
+function SearchInput({...rest}) {
     return (
         <div className='search-input'>
-            <Input label='Pesquisar'></Input>
+            <Input {...rest} label='Pesquisar'></Input>
         </div>
     );
 }

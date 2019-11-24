@@ -1,24 +1,27 @@
 import React from 'react';
 import { changeHandler } from '../forms/handler';
 import TextArea from '../forms/TextArea';
-import courses from '../../services/api/courses';
 import projects from '../../services/api/projects';
+import courses from '../../services/api/courses';
 import TextInput from '../forms/Input';
 import ImageUploader from '../misc/ImageUploader';
 import SectionStatus from '../misc/SectionStatus';
 import { Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
+import Select from '../forms/Select';
 import StatusCheckbox from '../misc/StatusCheckbox';
 
-class UpdateProject extends React.Component {
+class UpdateCourse extends React.Component {
     constructor(props) {
         super(props);
 
-        let { project } = props;
+        let { course } = props;
 
         this.state = {
-            formControls: { ...project },
-            courses: [],
+            formControls: { 
+                ...course,
+            },
+            projects: [],
         };
 
         this.formRef = React.createRef();
@@ -34,25 +37,22 @@ class UpdateProject extends React.Component {
             form.set('status', 'inactive')
 
         form.append('_method', 'put');
-        projects.update(form)
+        courses.update(form)
             .then(res => {
                 this.props.update();
-            })
-            .then(() => {
+            }).then(() => {
                 this.redirect();
-            });
+            })
     }
 
     redirect() {
-        this.props.history.push('/projetos');
+        this.props.history.push('/cursos');
     }
 
     cancel() {
-        this.setState({
-            formControls: { ...this.props.project }
-        },
-            this.redirect()
-        );
+        this.setState({ 
+            formControls: { ...this.props.project } 
+        }, this.redirect());
     }
 
     imageHandler(file, callback) {
@@ -66,15 +66,14 @@ class UpdateProject extends React.Component {
                 callback();
             }
         });
-
     }
 
     componentDidMount() {
-        courses
+        projects
             .getAll()
             .then(res => {
                 this.setState({
-                    courses: res.data,
+                    projects: res.data,
                 })
             });
     }
@@ -88,10 +87,12 @@ class UpdateProject extends React.Component {
                         <div className="col-md-6">
                             <input type='hidden' name='id' value={formControls.id} />
                             <TextInput name='name' value={formControls.name} onChange={this.changeHandler} label='Nome' />
+                            <Select label='Projeto' name='project_id' value={formControls.project_id} onChange={this.changeHandler} options={this.state.projects} />
                             <TextArea name='description' value={formControls.description} onChange={this.changeHandler} label='Descrição' />
                         </div>
                         <div className="col-md-4">
                             <ImageUploader name='image' handler={this.imageHandler.bind(this)} imagePreview={formControls.image} />
+                            
                         </div>
                         <div className="col-md-2">
                             {/* <SectionStatus icon="plus" status="Ativo" /> */}
@@ -108,4 +109,4 @@ class UpdateProject extends React.Component {
     }
 }
 
-export default withRouter(UpdateProject);
+export default withRouter(UpdateCourse);

@@ -2,33 +2,67 @@ import React, { Component } from 'react'
 import SearchInput from './SearchInput';
 import Select from './Select';
 import { changeHandler } from './handler';
+import projects from '../../services/api/projects';
+import courses from '../../services/api/courses';
 
 export default class CoursesFilterForm extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            projects: props.projects,
-            courses: props.courses,
+            projects: [],
+            courses: [],
             formControls: {
                 project_id: null,
                 search: "",
-                course_status: null
+                status: null
             },
         };
         this.changeHandler = changeHandler.bind(this);
     }
 
+    componentDidMount() {
+        projects.getAll().then(res => {
+            this.setState({ projects: res.data });
+        });
+
+        courses.getAll().then(res => {
+            this.setState({ courses: res.data });
+        });
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            projects: [],
+            courses: [],
+            formControls: {
+                project_id: null,
+                search: "",
+                status: null
+            },
+        });
+    }
+
     render() {
         return (
-            <div className="d-inline-flex">
-                <Select label="Projetos" name="project_id" value={this.state.formControls.project_id} onInput={(event) => { this.changeHandler(event) }} options={this.state.projects} defaultValue="Todos" />
-                <Select
-                    label='Status' name='course_status'
-                    value={this.state.formControls.course_status}
-                    onInput={this.changeHandler} options={this.state.courses.status}
+            <div className="d-flex ">
+                <Select 
+                    label="Projetos" 
+                    name="project_id" 
+                    value={this.state.formControls.project_id} 
+                    onChange={(event) => { this.changeHandler(event, this.props.onProjectChange(event)) }} 
+                    options={this.state.projects}
                 />
-                <SearchInput name="search" onChange={this.changeHandler} />
+                <Select
+                    value={this.state.formControls.status}
+                    label="Status"
+                    name="status"
+                    descriptionAttr='status'
+                    valueAttr='status'
+                    onChange={(event) => {this.changeHandler(event, this.props.onStatusChange(event)) }}
+                    options={[{'status': 'Ativo'}, {'status': 'Inativo'}]}
+                />
+                <SearchInput name="search" onChange={this.props.onChange} />
             </div>
         );
     }

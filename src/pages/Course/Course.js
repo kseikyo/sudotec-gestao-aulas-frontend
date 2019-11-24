@@ -1,52 +1,52 @@
 import React, { Component } from 'react'
-import projectsAPI from '../../services/api/projects';
+import courseAPI from '../../services/api/courses';
 import PageTitle from '../../components/misc/PageTitle';
 import Content from '../../components/misc/Content';
 import SectionTitle from '../../components/misc/SectionTitle';
-import UpdateProject from '../../components/projects/UpdateProject';
+import UpdateCourse from '../../components/courses/UpdateCourse';
 import Loader from '../../components/misc/Loader';
 
 export default class Project extends Component {
     state = {
-        project: { courses: [] },
+        course: { projects: [] },
         loaded: false,
     }
 
     componentDidMount() {
-        this.updateProject();
+        this.updateCourse();
     }
 
     componentWillUnmount() {
         this.setState({
-            project: { courses: [] },
+            course: { projects: [] },
             loaded: false,
         })
     }
 
-    updateProject() {
+    updateCourse() {
         let routeId = this.props.match.params.id;
-        projectsAPI.getById(routeId).then(res => {
+        courseAPI.getById(routeId).then(res => {
             this.setState({
-                project: res.data,
+                course: res.data,
                 loaded: true
             });
         });
     }
 
     render() {
-        let { project, loaded } = this.state;
+        let { course, loaded } = this.state;
 
         if (!loaded) {
-            return <Loader />
+            return <Loader/>
         }
         return (
             <>
                 <div className='d-flex'>
-                    <PageTitle title={project.name} subtitle={project.name} />
+                    <PageTitle title={course.name} subtitle={course.name} />
                 </div>
                 <Content>
                     <SectionTitle title='Dados' icon='info-circle' />
-                    <UpdateProject update={this.updateProject.bind(this)} className="pt-3" project={project} />
+                    <UpdateCourse update={this.updateCourse.bind(this)} className="pt-3" course={course} />
                 </Content>
             </>
         )

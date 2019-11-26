@@ -17,6 +17,9 @@ import Courses from './pages/Course/Courses';
 import Course from './pages/Course/Course';
 import User from './pages/User/User';
 import Users from './pages/User/Users';
+import Stats from './pages/Dashboard/Stats';
+import usersApi from './services/api/users';
+import Loader from './components/misc/Loader';
 
 const PrivateRoute = ({path, children, ...rest}) => (
     <Route {...rest} render={(props) => 
@@ -25,6 +28,16 @@ const PrivateRoute = ({path, children, ...rest}) => (
         : <Redirect to='/auth' />
     } />
   )
+
+const UserRoute = ({admin = false, ...rest}) => {
+    let userType = localStorage.getItem('type');
+    if (admin && userType !== 'admin') {
+        return <Redirect to='/' />
+    } 
+
+    return <Route {...rest} />
+}
+
 const GuestRoute = ({path, children, ...rest}) => (
 <Route render={(props) => 
     localStorage.getItem('token')
@@ -39,16 +52,23 @@ class App extends React.Component {
         this.state = {
             token: null,
             email: null,
-            isLogin: true
+            isLogin: true,
+            user: null,
+            loaded: false,
         }
     }
 
     componentDidMount() {
         let token = localStorage.getItem("token");
         let email = localStorage.getItem("email");
-        if(token && email)
+        if(token && email) {
             this.setState({token: token, email: email});
-        
+        }
+
+        usersApi.getLogged().then((res) => {
+            this.setState({user: res, loaded: true});
+            localStorage.setItem('type', res.type);
+        });
     }
   
 
@@ -94,6 +114,7 @@ class App extends React.Component {
                             <Dashboard
                                     user_email={this.state.email || "Username"} 
                                     logout={this.logout}>
+                                <Route exact path='/' component={Stats}></Route>
                                 <Route exact path='/projetos' component={Projects}></Route>
                                 <Route exact path='/projetos/:id' component={Project}></Route>
                                 <Route exact path='/cursos' component={Courses}></Route>
@@ -102,7 +123,7 @@ class App extends React.Component {
                                 <Route exact path='/turmas/:id' component={Grade}></Route>
                                 <Route exact path='/alunos' component={Students}></Route>
                                 <Route exact path='/alunos/:id' component={Student}></Route>
-                                <Route exact path='/usuarios' component={Users}></Route>
+                                <UserRoute admin={true} exact path='/usuarios' component={Users} />
                                 <Route exact path='/usuarios/:id' component={User}></Route>
                             </Dashboard>
                         </PrivateRoute>

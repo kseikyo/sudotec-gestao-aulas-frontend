@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuItem from './MenuItem';
+import AdminBlock from './../users/AdminBlock';
 
 class MainMenu extends React.Component {
 
@@ -24,7 +25,9 @@ class MainMenu extends React.Component {
                             <MenuItem icon="course" span="Cursos" link='/cursos' />
                             <MenuItem icon="grade" span="Turmas" link='/turmas' />
                             <MenuItem icon="students" span="Alunos" link='/alunos' />
-                            <MenuItem icon="user" span="Usuários" link='/usuarios' />
+                            <AdminBlock>
+                                <MenuItem icon="user" span="Usuários" link='/usuarios' />
+                            </AdminBlock>
                         </menu>
                     </ul>
                 </div>

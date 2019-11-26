@@ -9,10 +9,12 @@ import Loader from '../../components/misc/Loader';
 function StudentListCard({student}) {
   return (
     <Link to={`/alunos/${student.id}`}>
-      <div>
-
-      {student.name}
+    <div className='user-card'>
+      <div className='user-name'>
+        {student.name}
       </div>
+      <span></span>
+    </div>
     </Link>
   );
 }
@@ -50,9 +52,11 @@ class Students extends React.Component {
             <AddStudent onRegister={this.getAllStudents.bind(this)} />
           </div>
         </div>
-        {this.state.students.map(student => 
-              (<StudentListCard key={student.id} student={student} />)
-            )}
+        <div className='row'>
+          {this.state.students.map(student => 
+                (<div key={student.id} className='col-md-4 mt-2'><StudentListCard key={student.id} student={student} /></div>)
+              )}
+        </div>
       </Content>
     );
   }

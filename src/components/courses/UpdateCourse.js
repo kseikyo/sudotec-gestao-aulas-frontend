@@ -10,6 +10,7 @@ import { Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import Select from '../forms/Select';
 import StatusCheckbox from '../misc/StatusCheckbox';
+import AdminBlock from './../users/AdminBlock';
 
 class UpdateCourse extends React.Component {
     constructor(props) {
@@ -100,10 +101,12 @@ class UpdateCourse extends React.Component {
                         </div>
                     </form>
                 </div>
-                <div className="col-12 pt-3 text-right">
-                    <Button variant='secondary' onClick={this.cancel.bind(this)} className='mr-3'>Cancelar</Button>
-                    <Button variant='primary' onClick={this.update.bind(this)}>Atualizar</Button>
-                </div>
+                <AdminBlock>
+                    <div className="col-12 pt-3 text-right">
+                        <Button variant='secondary' onClick={this.cancel.bind(this)} className='mr-3'>Cancelar</Button>
+                        <Button variant='primary' onClick={this.update.bind(this)}>Atualizar</Button>
+                    </div>
+                </AdminBlock>
             </>
         );
     }

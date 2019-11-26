@@ -13,6 +13,7 @@ import CourseCard from './CourseCard';
 import { searchFilter } from '../misc/searchFilter';
 import { statusFilter } from '../misc/statusFilter';
 import { projectsFilter } from '../misc/projectsFilter';
+import AdminBlock from './../users/AdminBlock';
 
 const styles = {
     flexFlow: 'row wrap',
@@ -130,12 +131,14 @@ class ProjectsContent extends React.Component {
         const students_len = this.state.students.length;
         return (
             <Content>
-                <RegisterCourseModal onRegister={this.addCourse.bind(this)} show={this.state.showRegisterModal} close={this.closeRegister.bind(this)} />
                 <div className="d-flex mb-5" style={styles}>
                     <SectionTitle icon="course" title='Cursos'></SectionTitle>
-                    <div className="ml-auto">
-                        <GlyphButton className="ml-auto" click={this.openRegister.bind(this)}>Novo Curso</GlyphButton>
-                    </div>
+                    <AdminBlock>
+                        <div className="ml-auto">
+                            <GlyphButton className="ml-auto" click={this.openRegister.bind(this)}>Novo Curso</GlyphButton>
+                        </div>
+                        <RegisterCourseModal onRegister={this.addCourse.bind(this)} show={this.state.showRegisterModal} close={this.closeRegister.bind(this)} />
+                    </AdminBlock>
                     <div className="d-flex" style={{ ...styles, justifyContent: '', ...SectionInfoStyles }}>
                         <SectionInfo hasBorder={true} title="Cursos cadastrados" subtitle={courses_len} />
                         <SectionInfo hasBorder={true} title="Cursos ativos" subtitle={active} />

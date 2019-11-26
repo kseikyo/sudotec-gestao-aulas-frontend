@@ -5,6 +5,7 @@ import Content from '../../components/misc/Content';
 import SectionTitle from '../../components/misc/SectionTitle';
 import {Link} from 'react-router-dom';
 import Loader from '../../components/misc/Loader';
+import AdminBlock from './../../components/users/AdminBlock';
 
 function StudentListCard({student}) {
   return (
@@ -48,9 +49,11 @@ class Students extends React.Component {
       <Content> 
         <div className="d-flex mb-3">
           <SectionTitle icon="students" title='Alunos' />
-          <div className="ml-auto">
-            <AddStudent onRegister={this.getAllStudents.bind(this)} />
-          </div>
+          <AdminBlock>
+            <div className="ml-auto">
+              <AddStudent onRegister={this.getAllStudents.bind(this)} />
+            </div>
+          </AdminBlock>
         </div>
         <div className='row'>
           {this.state.students.map(student => 

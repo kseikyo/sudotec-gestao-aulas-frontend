@@ -9,6 +9,7 @@ import SectionStatus from '../misc/SectionStatus';
 import { Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import StatusCheckbox from '../misc/StatusCheckbox';
+import AdminBlock from './../users/AdminBlock';
 
 class UpdateProject extends React.Component {
     constructor(props) {
@@ -99,10 +100,12 @@ class UpdateProject extends React.Component {
                         </div>
                     </form>
                 </div>
-                <div className="col-12 pt-3 text-right">
-                    <Button variant='secondary' onClick={this.cancel.bind(this)} className='mr-3'>Cancelar</Button>
-                    <Button variant='primary' onClick={this.update.bind(this)}>Atualizar</Button>
-                </div>
+                <AdminBlock>
+                    <div className="col-12 pt-3 text-right">
+                        <Button variant='secondary' onClick={this.cancel.bind(this)} className='mr-3'>Cancelar</Button>
+                        <Button variant='primary' onClick={this.update.bind(this)}>Atualizar</Button>
+                    </div>
+                </AdminBlock>
             </>
         );
     }

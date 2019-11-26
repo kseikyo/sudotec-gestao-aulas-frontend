@@ -6,6 +6,7 @@ import GradeCard from './GradeCard';
 import grades from '../../services/api/grades';
 import RegisterGradeModal from '../grades/RegisterGradeModal';
 import Loader from '../../components/misc/Loader';
+import AdminBlock from './../users/AdminBlock';
 
 class GradesContent extends React.Component {
   constructor(props) {
@@ -50,12 +51,14 @@ class GradesContent extends React.Component {
       
     return (
       <Content>
-        <RegisterGradeModal onRegister={this.addGrade.bind(this)} show={this.state.showRegisterModal} close={this.closeRegister.bind(this)} />
         <div className="d-flex mb-5">
           <SectionTitle icon="grade" title='Turmas'></SectionTitle>
-          <div className="ml-auto">
-            <GlyphButton click={this.openRegister.bind(this)} className="ml-auto">Nova turma</GlyphButton>
-          </div>
+          <AdminBlock>
+            <div className="ml-auto">
+              <GlyphButton click={this.openRegister.bind(this)} className="ml-auto">Nova turma</GlyphButton>
+            </div>
+            <RegisterGradeModal onRegister={this.addGrade.bind(this)} show={this.state.showRegisterModal} close={this.closeRegister.bind(this)} />
+          </AdminBlock>
         </div>
         <div className="grade-cards">
           {this.state.grades.map(this.renderGrade)}

@@ -5,39 +5,58 @@ import Content from '../../components/misc/Content';
 import SectionTitle from '../../components/misc/SectionTitle';
 import UpdateCourse from '../../components/courses/UpdateCourse';
 import Loader from '../../components/misc/Loader';
+import GradesContent from '../../components/grades/GradesContent';
+import gradesAPI from '../../services/api/grades';
 
 export default class Project extends Component {
     state = {
         course: { projects: [] },
+        grades: [],
         loaded: false,
     }
 
     componentDidMount() {
-        this.updateCourse();
+        this.updateCourse(() => {
+            if (this.state.course.grades[0]) {
+                gradesAPI.getById(this.state.course.grades[0].course_id).then(res => {
+                    this.setState({
+                        grades: [res],
+                        loaded: true
+                    });
+                }
+                )
+            }else {
+                this.setState({
+                    loaded: true
+                })
+            }
+        });
+
     }
 
     componentWillUnmount() {
         this.setState({
             course: { projects: [] },
+            grades: [],
             loaded: false,
         })
     }
 
-    updateCourse() {
+    updateCourse(callback) {
         let routeId = this.props.match.params.id;
         courseAPI.getById(routeId).then(res => {
             this.setState({
                 course: res.data,
-                loaded: true
+            }, () => {
+                if (callback) callback();
             });
         });
     }
 
     render() {
-        let { course, loaded } = this.state;
-
+        let { course, loaded, grades } = this.state;
         if (!loaded) {
-            return <Loader/>
+            return <Loader />
         }
         return (
             <>
@@ -48,6 +67,7 @@ export default class Project extends Component {
                     <SectionTitle title='Dados' icon='info-circle' />
                     <UpdateCourse update={this.updateCourse.bind(this)} className="pt-3" course={course} />
                 </Content>
+                <GradesContent grades={grades}/>
             </>
         )
     }

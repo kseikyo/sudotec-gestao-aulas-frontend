@@ -5,6 +5,7 @@ import Content from '../../components/misc/Content';
 import SectionTitle from '../../components/misc/SectionTitle';
 import UpdateProject from '../../components/projects/UpdateProject';
 import Loader from '../../components/misc/Loader';
+import CoursesContent from '../../components/courses/CoursesContent';
 
 export default class Project extends Component {
     state = {
@@ -35,7 +36,6 @@ export default class Project extends Component {
 
     render() {
         let { project, loaded } = this.state;
-
         if (!loaded) {
             return <Loader />
         }
@@ -48,6 +48,7 @@ export default class Project extends Component {
                     <SectionTitle title='Dados' icon='info-circle' />
                     <UpdateProject update={this.updateProject.bind(this)} className="pt-3" project={project} />
                 </Content>
+                <CoursesContent courses={project.courses} />
             </>
         )
     }

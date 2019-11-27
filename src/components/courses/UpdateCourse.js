@@ -5,11 +5,11 @@ import projects from '../../services/api/projects';
 import courses from '../../services/api/courses';
 import TextInput from '../forms/Input';
 import ImageUploader from '../misc/ImageUploader';
-import SectionStatus from '../misc/SectionStatus';
 import { Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import Select from '../forms/Select';
 import StatusCheckbox from '../misc/StatusCheckbox';
+import DeleteModal from '../misc/DeleteModal';
 
 class UpdateCourse extends React.Component {
     constructor(props) {
@@ -18,20 +18,31 @@ class UpdateCourse extends React.Component {
         let { course } = props;
 
         this.state = {
-            formControls: { 
+            formControls: {
                 ...course,
             },
             projects: [],
+            openDeleteModal: false,
         };
 
         this.formRef = React.createRef();
         this.changeHandler = changeHandler.bind(this);
     }
 
+    deleteCourse() {
+        courses.delete(this.props.course.id).then(() => {
+            this.props.history.push('/cursos');
+        })
+    }
+
+    toggleDeleteModal() {
+        this.setState({ openDeleteModal: !this.state.openDeleteModal });
+    }
+
     update() {
         let form = new FormData(this.formRef.current);
-        
-        if(!!form.get('status'))
+
+        if (!!form.get('status'))
             form.set('status', 'active')
         else
             form.set('status', 'inactive')
@@ -50,8 +61,8 @@ class UpdateCourse extends React.Component {
     }
 
     cancel() {
-        this.setState({ 
-            formControls: { ...this.props.project } 
+        this.setState({
+            formControls: { ...this.props.project }
         }, this.redirect());
     }
 
@@ -92,17 +103,21 @@ class UpdateCourse extends React.Component {
                         </div>
                         <div className="col-md-4">
                             <ImageUploader name='image' handler={this.imageHandler.bind(this)} imagePreview={formControls.image} />
-                            
+
                         </div>
                         <div className="col-md-2">
-                            {/* <SectionStatus icon="plus" status="Ativo" /> */}
-                            <StatusCheckbox status={formControls.status} handler={this.changeHandler}/>
+                            <StatusCheckbox status={formControls.status} handler={this.changeHandler} />
                         </div>
                     </form>
-                </div>
-                <div className="col-12 pt-3 text-right">
-                    <Button variant='secondary' onClick={this.cancel.bind(this)} className='mr-3'>Cancelar</Button>
-                    <Button variant='primary' onClick={this.update.bind(this)}>Atualizar</Button>
+
+                    <div className="col-12 pt-3 text-right">
+                        <div onClick={this.toggleDeleteModal.bind(this)} className='mr-4 text-danger d-inline-block hover-pointer'>Excluir curso</div>
+                        <Button variant='secondary' onClick={this.cancel.bind(this)} className='mr-3'>Cancelar</Button>
+                        <Button variant='primary' onClick={this.update.bind(this)}>Atualizar</Button>
+                    </div>
+                    <DeleteModal show={this.state.openDeleteModal} onDelete={this.deleteCourse.bind(this)} onHide={this.toggleDeleteModal.bind(this)}>
+                        Tem certeza que deseja excluir o curso <b>{this.props.course.name}</b>?
+                    </DeleteModal>
                 </div>
             </>
         );

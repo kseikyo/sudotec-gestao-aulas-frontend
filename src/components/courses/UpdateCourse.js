@@ -10,6 +10,7 @@ import { withRouter } from 'react-router-dom';
 import Select from '../forms/Select';
 import StatusCheckbox from '../misc/StatusCheckbox';
 import DeleteModal from '../misc/DeleteModal';
+import AdminBlock from './../users/AdminBlock';
 
 class UpdateCourse extends React.Component {
     constructor(props) {
@@ -109,16 +110,18 @@ class UpdateCourse extends React.Component {
                             <StatusCheckbox status={formControls.status} handler={this.changeHandler} />
                         </div>
                     </form>
-
+                </div>
+                <AdminBlock>
                     <div className="col-12 pt-3 text-right">
                         <div onClick={this.toggleDeleteModal.bind(this)} className='mr-4 text-danger d-inline-block hover-pointer'>Excluir curso</div>
                         <Button variant='secondary' onClick={this.cancel.bind(this)} className='mr-3'>Cancelar</Button>
                         <Button variant='primary' onClick={this.update.bind(this)}>Atualizar</Button>
                     </div>
+
                     <DeleteModal show={this.state.openDeleteModal} onDelete={this.deleteCourse.bind(this)} onHide={this.toggleDeleteModal.bind(this)}>
                         Tem certeza que deseja excluir o curso <b>{this.props.course.name}</b>?
                     </DeleteModal>
-                </div>
+                </AdminBlock>
             </>
         );
     }

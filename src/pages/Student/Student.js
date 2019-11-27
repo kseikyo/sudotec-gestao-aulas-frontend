@@ -10,6 +10,7 @@ import DeleteModal from '../../components/misc/DeleteModal';
 import {Button} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
 import Loader from '../../components/misc/Loader';
+import AdminBlock from './../../components/users/AdminBlock';
 
 class Student extends React.Component {
   constructor(props) {
@@ -97,11 +98,13 @@ class Student extends React.Component {
             <TextInput name='address' onChange={this.changeHandler} label='Endereço' value={formControls.address} type='phone' />
           </div>
           
-          <div className="col-12 pt-3 text-right">
-            <div onClick={this.toggleDeleteModal.bind(this)} className='mr-4 text-danger d-inline-block hover-pointer'>Excluir aluno</div>
-            <Button variant='secondary' onClick={this.cancel.bind(this)} className='mr-3'>Cancelar</Button>
-            <Button variant='primary' onClick={this.update.bind(this)}>Atualizar</Button>
-          </div>
+          <AdminBlock>
+            <div className="col-12 pt-3 text-right">
+              <div onClick={this.toggleDeleteModal.bind(this)} className='mr-4 text-danger d-inline-block hover-pointer'>Excluir aluno</div>
+              <Button variant='secondary' onClick={this.cancel.bind(this)} className='mr-3'>Cancelar</Button>
+              <Button variant='primary' onClick={this.update.bind(this)}>Atualizar</Button>
+            </div>
+          </AdminBlock>
         </div>
 
         <DeleteModal show={this.state.openDeleteModal} onDelete={this.deleteStudent.bind(this)} onHide={this.toggleDeleteModal.bind(this)}>

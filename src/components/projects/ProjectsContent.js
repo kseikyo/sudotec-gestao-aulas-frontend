@@ -11,6 +11,7 @@ import ProjectsFilterForm from '../forms/ProjectsFilterForm';
 import Loader from '../misc/Loader';
 import { searchFilter } from '../misc/searchFilter';
 import { statusFilter } from '../misc/statusFilter';
+import AdminBlock from './../users/AdminBlock';
 
 const styles = {
     flexFlow: 'row wrap',
@@ -109,12 +110,14 @@ class ProjectsContent extends React.Component {
 
         return (
             <Content>
-                <RegisterProjectModal onRegister={this.addProject.bind(this)} show={this.state.showRegisterModal} close={this.closeRegister.bind(this)} />
                 <div className="d-flex mb-5" style={styles}>
                     <SectionTitle icon="project" title='Projetos'></SectionTitle>
-                    <div className="ml-auto">
-                        <GlyphButton className="ml-auto" click={this.openRegister.bind(this)}>Novo projeto</GlyphButton>
-                    </div>
+                    <AdminBlock>
+                        <div className="ml-auto">
+                            <GlyphButton className="ml-auto" click={this.openRegister.bind(this)}>Novo projeto</GlyphButton>
+                        </div>
+                        <RegisterProjectModal onRegister={this.addProject.bind(this)} show={this.state.showRegisterModal} close={this.closeRegister.bind(this)} />
+                    </AdminBlock>
                     <div className="d-flex" style={{ ...styles, justifyContent: '', ...SectionInfoStyles }}>
                         <SectionInfo hasBorder={true} title="Projetos cadastrados" subtitle={project_len} />
                         <SectionInfo hasBorder={true} title="Projetos ativos" subtitle={active} />

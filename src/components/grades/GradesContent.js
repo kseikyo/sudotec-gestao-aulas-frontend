@@ -20,9 +20,13 @@ class GradesContent extends React.Component {
   }
 
   componentDidMount() {
-    grades.getAll().then(res => {
-      this.setState({ grades: res.data, loaded: true });
-    })
+    if (this.props.grades) {
+      this.setState({ grades: this.props.grades, loaded: true });
+    } else {
+      grades.getAll().then(res => {
+        this.setState({ grades: res.data, loaded: true });
+      });
+    }
   }
 
   renderGrade(grade) {
@@ -47,8 +51,9 @@ class GradesContent extends React.Component {
   render() {
     if (!this.state.loaded) {
       return <Loader />
-    } 
-      
+    }
+    console.log(this.state.grades);
+
     return (
       <Content>
         <div className="d-flex mb-5">

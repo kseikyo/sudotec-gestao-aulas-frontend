@@ -46,25 +46,44 @@ class ProjectsContent extends React.Component {
 
         this.updateStatusValue = this.updateStatusValue.bind(this);
         this.updateSearchValue = this.updateSearchValue.bind(this);
-        this.updateProjectId   = this.updateProjectId.bind(this);
+        this.updateProjectId = this.updateProjectId.bind(this);
 
-        this.projectsFilter = projectsFilter.bind(this); 
-        this.searchFilter   = searchFilter.bind(this);
-        this.statusFilter   = statusFilter.bind(this);
+        this.projectsFilter = projectsFilter.bind(this);
+        this.searchFilter = searchFilter.bind(this);
+        this.statusFilter = statusFilter.bind(this);
     }
 
     componentDidMount() {
-        projects.getAll().then(res => {
-            this.setState({ projects: res.data });
-        });
+        if (this.props.projects) {
+            let res = this.props.projects;
+            this.setState({ projects: res });
+        } else {
+            projects.getAll().then(res => {
+                this.setState({ projects: res.data });
+            });
+        }
 
-        students.getAll().then(res => {
-            this.setState({ students: res.data });
-        });
+        if (this.props.students) {
+            let res = this.props.students;
+            this.setState({ students: res });
+        } else {
+            students.getAll().then(res => {
+                this.setState({ students: res.data });
+            });
+        }
 
-        courses.getAll().then(res => {
-            this.setState({ courses: res.data, rendered: res.data, loaded: true })
-        })
+        if (this.props.courses) {
+            let res = this.props.courses;
+            this.setState({
+                courses: res,
+                rendered: res,
+                loaded: true
+            });
+        } else {
+            courses.getAll().then(res => {
+                this.setState({ courses: res.data, rendered: res.data, loaded: true })
+            });
+        }
     }
 
     updateProjectId(event) {
@@ -74,7 +93,7 @@ class ProjectsContent extends React.Component {
         },
             () => {
                 this.projectsFilter(this.state.projects, id);
-        });
+            });
     }
 
     updateSearchValue(event) {
@@ -146,9 +165,9 @@ class ProjectsContent extends React.Component {
                     </div>
                     <div style={{ width: '100vw' }}>
                         <CoursesFilterForm
-                            onProjectChange={ this.updateProjectId }
-                            onStatusChange={ this.updateStatusValue }
-                            onChange={ this.updateSearchValue }
+                            onProjectChange={this.updateProjectId}
+                            onStatusChange={this.updateStatusValue}
+                            onChange={this.updateSearchValue}
                         />
                     </div>
                     <div className="project-cards d-flex" style={styles}>

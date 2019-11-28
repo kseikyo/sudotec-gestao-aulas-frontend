@@ -3,7 +3,7 @@ import DeleteModal from './../misc/DeleteModal';
 import gradesApi from './../../services/api/grades';
 
 function frequencyColor(frequency) {
-  if (parseInt(frequency) === 100) {
+  if (parseInt(frequency) >= 90) {
     return 'success';
   } else if (frequency >= 75) {
     return 'primary';

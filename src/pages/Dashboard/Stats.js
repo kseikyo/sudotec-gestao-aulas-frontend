@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import statsAPI from '../../services/api/stats';
 import PageTitle from '../../components/misc/PageTitle';
 import Loader from '../../components/misc/Loader';
-import RegisterModal from '../../components/misc/RegisterModal';
 import DonutGraph from '../../components/graphs/DonutGraph';
 import BarGraph from '../../components/graphs/BarGraph';
 import {Button, Table} from 'react-bootstrap';
@@ -91,7 +90,7 @@ export default class Stats extends Component {
                 <div className='d-flex'>
                     <PageTitle title='Dashboard' />
                     <div className="ml-auto">
-                        <Button variant='primary' onClick={this.toggleModal.bind(this)} className='text-shadow'>Relatório</Button>
+                        <Button variant='main' onClick={this.toggleModal.bind(this)} className='text-shadow'>Relatório</Button>
                         <ReportModal title='Relatório geral dos alunos' show={this.state.showReportModal} close={this.toggleModal.bind(this)}>
                             <div>
                                 <h5>Gênero</h5>

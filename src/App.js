@@ -19,7 +19,6 @@ import User from './pages/User/User';
 import Users from './pages/User/Users';
 import Stats from './pages/Dashboard/Stats';
 import usersApi from './services/api/users';
-import Loader from './components/misc/Loader';
 
 const PrivateRoute = ({path, children, ...rest}) => (
     <Route {...rest} render={(props) => 

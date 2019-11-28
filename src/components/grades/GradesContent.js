@@ -7,6 +7,8 @@ import grades from '../../services/api/grades';
 import RegisterGradeModal from '../grades/RegisterGradeModal';
 import Loader from '../../components/misc/Loader';
 import AdminBlock from './../users/AdminBlock';
+import SearchInput from '../forms/SearchInput';
+import {changeHandler} from '../forms/handler';
 
 class GradesContent extends React.Component {
   constructor(props) {
@@ -16,7 +18,12 @@ class GradesContent extends React.Component {
       grades: [],
       showRegisterModal: false,
       loaded: false,
+      formControls: {
+        search: '',
+      }
     }
+
+    this.changeHandler = changeHandler.bind(this);
   }
 
   componentDidMount() {
@@ -48,15 +55,18 @@ class GradesContent extends React.Component {
     });
   }
 
+  filteredGrades() {
+    return this.state.grades.filter(({name}) =>name.toLowerCase().includes(this.state.formControls.search.toLowerCase()));
+  }
+
   render() {
     if (!this.state.loaded) {
       return <Loader />
     }
-    console.log(this.state.grades);
 
     return (
       <Content>
-        <div className="d-flex mb-5">
+        <div className="d-flex mb-3">
           <SectionTitle icon="grade" title='Turmas'></SectionTitle>
           <AdminBlock>
             <div className="ml-auto">
@@ -65,8 +75,13 @@ class GradesContent extends React.Component {
             <RegisterGradeModal onRegister={this.addGrade.bind(this)} show={this.state.showRegisterModal} close={this.closeRegister.bind(this)} />
           </AdminBlock>
         </div>
+        <div className='row'>
+          <div className='col-md-4'>
+            <SearchInput name='search' onChange={this.changeHandler.bind(this)} />
+          </div>
+        </div>
         <div className="grade-cards">
-          {this.state.grades.map(this.renderGrade)}
+          {this.filteredGrades().map(this.renderGrade)}
         </div>
       </Content>
     );

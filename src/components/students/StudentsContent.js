@@ -4,6 +4,10 @@ import Content from '../misc/Content';
 import StudentCard from './StudentCard';
 import gradesAPI from './../../services/api/grades';
 import {Button} from 'react-bootstrap';
+import Loader from '../misc/Loader';
+import SearchInput from '../forms/SearchInput';
+import {changeHandler} from '../forms/handler';
+
 
 class StudentsContent extends React.Component {
   constructor(props) {
@@ -11,21 +15,33 @@ class StudentsContent extends React.Component {
 
     this.state = {
       studentsOptions: [],
+      loading: false,
+      formControls: {
+        search: '',
+      },
     }
 
     this.addStudentInput = React.createRef();
+    this.changeHandler = changeHandler.bind(this);
   }
 
   handleSearchInput(e) {
     this.searchStudents(e.target.value);
   }
 
+  load(status) {
+    this.setState({loading: status});
+  }
+
   addStudent() {
+    this.load(true);
     let studentName = this.addStudentInput.current.value;
     let student = this.state.studentsOptions.find(el => el.name === studentName);
 
     gradesAPI.addStudent(this.props.grade.id, student.id).then(() => {
       this.props.update();
+      this.load(false);
+      this.addStudentInput.current.value = '';
     });
   }
 
@@ -38,17 +54,24 @@ class StudentsContent extends React.Component {
       });
   };
 
-  render() {
-    let {students} = this.props;
+  filteredStudents() {
+    return this.props.students.filter(({name}) => name.toLowerCase().includes(this.state.formControls.search.toLowerCase()));
+  }
 
+  render() {
     return (
       <Content className='students-content'>
         <SectionTitle title='Alunos' icon='students' />
 
+        <div className='row mt-2'>
+          <div className='col-md-4'>
+            <SearchInput autoComplete="off" name='search' onChange={this.changeHandler.bind(this)} />
+          </div>
+        </div>
         <div className="row mt-3">
           <div className="col-md-8">
             <div className='students-content-list row pr-3'>
-              {students.map(student => 
+              {this.filteredStudents().map(student => 
                   <StudentCard student={student} key={student.id} grade={this.props.grade} onDelete={this.props.update} />
                 )}
             </div>
@@ -64,6 +87,10 @@ class StudentsContent extends React.Component {
               </datalist>
             </div>
             <Button size='sm' onClick={this.addStudent.bind(this)} variant='outline-dark'>Adicionar</Button>
+            {this.state.loading ? 
+              <Loader message='Salvando' size='50px' /> :
+              <></>
+            }
           </div>
         </div>
         

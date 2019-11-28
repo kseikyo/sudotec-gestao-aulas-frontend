@@ -101,3 +101,8 @@ transition: all 0.3s ease-in-out;
     font-size: 14px;
   }
 }
+
+.lessons-content-list, .students-content-list {
+  max-height: 320px;
+  overflow-y: auto;
+}

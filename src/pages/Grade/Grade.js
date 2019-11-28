@@ -62,7 +62,7 @@ class Grade extends React.Component {
       <>
       <div className='d-flex'>
         <PageTitle title={grade.name} subtitle={grade.course.name}/>
-        <RegisterLessonModal key={grade.students.length} onRegister={this.updateLessons.bind(this)} grade={grade} />
+        <RegisterLessonModal key={`${grade.students.length}-${grade.lessons.length}`} onRegister={this.updateLessons.bind(this)} grade={grade} />
       </div>
       <Content>
         <SectionTitle title='Dados' icon='info-circle' />

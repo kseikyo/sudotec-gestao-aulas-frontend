@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import statsAPI from '../../services/api/stats';
 import PageTitle from '../../components/misc/PageTitle';
 import Loader from '../../components/misc/Loader';
+import RegisterModal from '../../components/misc/RegisterModal';
 import DonutGraph from '../../components/graphs/DonutGraph';
 import BarGraph from '../../components/graphs/BarGraph';
-import {Button} from 'react-bootstrap';
-import ReactToPdf from 'react-to-pdf';
+import {Button, Table} from 'react-bootstrap';
+import ReportModal from '../../components/misc/ReportModal';
 
 export default class Stats extends Component {
     constructor(props) {
@@ -15,6 +16,8 @@ export default class Stats extends Component {
             gender: {},
             ages: {},
             loaded: false,
+            genderRes: {},
+            agesRes: {},
         }
 
         this.print = React.createRef()
@@ -30,9 +33,12 @@ export default class Stats extends Component {
             let ages = this.formatAges(res.data.ages);
             
             this.setState({
+                genderRes: res.data.gender,
+                agesRes: res.data.ages,
                 gender,
                 ages,
-                loaded: true
+                loaded: true,
+                showReportModal: false,
             });
         });
     }
@@ -70,8 +76,12 @@ export default class Stats extends Component {
         return result;
     }
 
+    toggleModal() {
+        this.setState({showReportModal: !this.state.showReportModal});
+    }
+
     render() {
-        let { gender, ages, loaded } = this.state;
+        let { gender, ages, loaded, genderRes, agesRes } = this.state;
 
         if (!loaded) {
             return <Loader/>
@@ -81,11 +91,34 @@ export default class Stats extends Component {
                 <div className='d-flex'>
                     <PageTitle title='Dashboard' />
                     <div className="ml-auto">
-                    <ReactToPdf targetRef={this.print} filename="div-blue.pdf">
-                        {({toPdf}) => (
-                        <Button variant='primary' onClick={toPdf} className='text-shadow'>Imprimir</Button>
-                        )}
-                    </ReactToPdf>
+                        <Button variant='primary' onClick={this.toggleModal.bind(this)} className='text-shadow'>Relatório</Button>
+                        <ReportModal title='Relatório geral dos alunos' show={this.state.showReportModal} close={this.toggleModal.bind(this)}>
+                            <div>
+                                <h5>Gênero</h5>
+                                <div>Feminino: {genderRes.F}</div> 
+                                <div>Masculino: {genderRes.M}</div> 
+                            </div>
+                            <div className='mt-4'>
+                                <h5>Idades</h5>
+                                <Table>
+                                    <thead>
+                                        <tr>
+                                            <th>Faixa de idade</th>
+                                            <th>Quantidade</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {Object.keys(agesRes).map(key => 
+                                            <tr key={key}>
+                                                <td>{key}</td>
+                                                <td>{agesRes[key]}</td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </Table>
+                            </div>
+
+                        </ReportModal>
                     </div>
                 </div>
 

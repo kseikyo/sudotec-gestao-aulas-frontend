@@ -1,0 +1,9 @@
+.dashboard-grid {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: 1fr 2fr;
+  align-items: start;
+  .block-content {
+    border-radius: 20px;
+  }
+}

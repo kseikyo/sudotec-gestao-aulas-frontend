@@ -8,6 +8,7 @@
 @import 'styles/components';
 
 // Pages
+@import 'styles/pages/dashboard';
 @import 'styles/pages/grade';
 @import 'styles/pages/lesson';
 @import 'styles/pages/student';
@@ -15,7 +16,7 @@
 @import 'styles/pages/users';
 
 body {
-  background-color: #eeeeee;
+  background-color: #ebe4e4;
 }
 
 #app {
@@ -23,7 +24,7 @@ body {
   padding: 0;
   height: 100vh;
   display: flex;
-  background-color: #eeeeee;
+  background-color: #ebe4e4;
 }
 
 #root, #dashboard {

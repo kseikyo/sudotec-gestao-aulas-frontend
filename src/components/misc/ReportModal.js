@@ -4,7 +4,7 @@ import SectionTitle from './SectionTitle';
 import {Button} from 'react-bootstrap';
 import ReactToPdf from 'react-to-pdf';
 
-function ReportModal({icon = 'lesson', size = 'md', filename = 'report.pdf', ...props}) {
+function ReportModal({icon = 'lesson', browserPrint = false, size = 'md', filename = 'report.pdf', ...props}) {
   const printRef = React.createRef();
 
   let options = {}; 
@@ -32,11 +32,18 @@ function ReportModal({icon = 'lesson', size = 'md', filename = 'report.pdf', ...
             </div>
           </div>
 
-          <div className="text-right mt-3 px-4 pb-3">
+          <div className="text-right mt-3 px-4 pb-3 d-print-none">
             <Button onClick={props.close} className='mr-2' variant='secondary'>Cancelar</Button>
             <ReactToPdf targetRef={printRef} filename={filename} options={options}>
                 {({toPdf}) => (
-                <Button variant='primary' onClick={() => {toPdf(); props.close();} } className='text-shadow'>Salvar</Button>
+                <Button variant='primary' onClick={() => {
+                  if (browserPrint) {
+                    window.print();
+                  } else {
+                    toPdf();
+                  }
+                  props.close();} 
+                } className='text-shadow'>Salvar</Button>
                 )}
             </ReactToPdf>
           </div>

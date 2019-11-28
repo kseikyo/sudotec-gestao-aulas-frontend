@@ -66,3 +66,12 @@
 .frequency-report {
   overflow: auto;
 }
+
+@media print {
+  .frequency-report {
+    height: auto !important;
+    table {
+      width: 500px;
+    }
+  }
+}

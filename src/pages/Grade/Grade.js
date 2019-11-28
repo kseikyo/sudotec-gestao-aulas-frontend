@@ -102,6 +102,8 @@ class Grade extends React.Component {
   getStudentFrequency(id) {
     let student = this.state.grade.students.find(student => student.id === id);
 
+    if (!student) return;
+    
     return student.frequency;
   }
 
@@ -127,7 +129,7 @@ class Grade extends React.Component {
         </Content>
         <LessonsContent updateLessons={this.updateLessons.bind(this)} grade={grade} lessons={grade.lessons} />
         <StudentsContent update={this.updateLessons.bind(this)} grade={grade} students={this.state.grade.students} />
-        <ReportModal title='Relatório de frequências' subtitle={this.state.grade.name} show={this.state.showReportModal} close={this.toggleReportModal.bind(this)} size='lg' filename={`Frequencia-${this.state.grade.name}`}>
+        <ReportModal browserPrint={true} title='Relatório de frequências' subtitle={this.state.grade.name} show={this.state.showReportModal} close={this.toggleReportModal.bind(this)} size='lg' filename={`Frequencia-${this.state.grade.name}`}>
           Curso: <span className='font-weight-bold'>{grade.course.name}</span> <br />
           Turma: <span className='font-weight-bold'>{grade.name}</span>
           <div className='frequency-report mt-3 overflow-auto' style={{height: '500px'}}>
@@ -137,21 +139,25 @@ class Grade extends React.Component {
                   <th className='sticky-top bg-white' style={{minWidth: '200px'}}>Alunos</th>
                   {grade.lessons.map(lesson => 
                     (
-                      <th className='sticky-top bg-white text-muted' key={lesson.id}>{formatDate(lesson.grade_date)}</th>
+                      <th className='sticky-top bg-white text-muted d-print-none' key={lesson.id}>{formatDate(lesson.grade_date)}</th>
                     ))}
                   <th className='sticky-top bg-white'>Total</th>
                 </tr>
               </thead>
               <tbody>
-                {this.state.students.map(student => (
-                  <tr key={`report-student-${student.id}`}>
-                    <td style={{position: 'sticky', left: '0'}} className='bg-white'><small>{student.name}</small></td>
-                    {student.attendances.map(att => (
-                      <td key={att.id}><Frequency frequency={att.presence} /></td>
-                    ))}
-                    <td className={frequencyColor(this.getStudentFrequency(student.id))}>{this.getStudentFrequency(student.id)}%</td>
-                  </tr> 
-                ))}
+                {this.state.students.map(student => {
+                  let stdFrequency = this.getStudentFrequency(student.id);
+
+                  return (
+                    <tr key={`report-student-${student.id}`} className={stdFrequency < 75 ? 'bg-danger-light' : ''}>
+                      <td style={{position: 'sticky', left: '0'}} className={stdFrequency < 75 ? 'bg-danger-lighter' : 'bg-white'}><small>{student.name}</small></td>
+                      {student.attendances.map(att => (
+                        <td className='d-print-none' key={att.id}><Frequency frequency={att.presence} /></td>
+                      ))}
+                      <td className={frequencyColor(stdFrequency)}>{stdFrequency}%</td>
+                    </tr> 
+                  );
+                })}
               </tbody>
             </Table>
           </div>

@@ -75,6 +75,14 @@ h3 {
   cursor: pointer;
 }
 
+.bg-danger-lighter {
+  background-color: #fad9db !important;
+}
+
+.bg-danger-light {
+  background-color: #fac7ca !important;
+}
+
 @media print {
   .print-padding {
     padding: 50px;

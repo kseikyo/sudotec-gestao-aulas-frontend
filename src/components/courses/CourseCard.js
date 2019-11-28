@@ -9,7 +9,7 @@ function CourseCard({ course }) {
   };
 
   return (
-    <Link className="text-decoration-none" to={`/cursos/${course.id}`}>
+    <Link className="text-decoration-none mb-2 mr-2" to={`/cursos/${course.id}`}>
       <div className="project-card">
         <Image style={image_style} src={course.image} rounded />
         <div>

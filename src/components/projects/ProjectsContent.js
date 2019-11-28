@@ -129,7 +129,7 @@ class ProjectsContent extends React.Component {
                             onChange={this.updateSearchValue} 
                         />
                     </div>
-                    <div className="project-cards d-flex" style={styles}>
+                    <div className="project-cards d-flex justify-content-start" style={styles}>
                         {this.state.rendered.map(this.renderProject)}
                     </div>
                 </div>

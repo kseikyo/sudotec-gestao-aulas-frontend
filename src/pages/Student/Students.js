@@ -6,6 +6,8 @@ import SectionTitle from '../../components/misc/SectionTitle';
 import {Link} from 'react-router-dom';
 import Loader from '../../components/misc/Loader';
 import AdminBlock from './../../components/users/AdminBlock';
+import SearchInput from '../../components/forms/SearchInput';
+import {changeHandler} from '../../components/forms/handler';
 
 function StudentListCard({student}) {
   return (
@@ -27,7 +29,12 @@ class Students extends React.Component {
     this.state = {
       students: [],
       loaded: false,
+      formControls: {
+        search: '',
+      }
     }
+
+    this.changeHandler = changeHandler.bind(this);
   }
 
   componentDidMount() {
@@ -38,6 +45,10 @@ class Students extends React.Component {
     studentsAPI.getAll().then(res => {
       this.setState({students: res.data, loaded: true});
     })
+  }
+
+  filteredStudents() {
+    return this.state.students.filter(({name}) =>name.toLowerCase().includes(this.state.formControls.search.toLowerCase()));
   }
 
   render() {
@@ -56,7 +67,12 @@ class Students extends React.Component {
           </AdminBlock>
         </div>
         <div className='row'>
-          {this.state.students.map(student => 
+          <div className='col-md-4'>
+            <SearchInput name='search' onChange={this.changeHandler.bind(this)} />
+          </div>
+        </div>
+        <div className='row'>
+          {this.filteredStudents().map(student => 
                 (<div key={student.id} className='col-md-4 mt-2'><StudentListCard key={student.id} student={student} /></div>)
               )}
         </div>

@@ -7,6 +7,7 @@ import {Button} from 'react-bootstrap';
 import Loader from '../misc/Loader';
 import SearchInput from '../forms/SearchInput';
 import {changeHandler} from '../forms/handler';
+import SectionInfo from '../misc/SectionInfo';
 
 
 class StudentsContent extends React.Component {
@@ -64,6 +65,9 @@ class StudentsContent extends React.Component {
         <SectionTitle title='Alunos' icon='students' />
 
         <div className='row mt-2'>
+          <div className='col-12'>
+            <SectionInfo title="Alunos atuais" subtitle={`${this.props.students.length}`} />
+          </div>
           <div className='col-md-4'>
             <SearchInput autoComplete="off" name='search' onChange={this.changeHandler.bind(this)} />
           </div>

@@ -5,6 +5,8 @@ import Content from '../../components/misc/Content';
 import SectionTitle from '../../components/misc/SectionTitle';
 import {Link} from 'react-router-dom';
 import Loader from '../../components/misc/Loader';
+import SearchInput from '../../components/forms/SearchInput';
+import {changeHandler} from '../../components/forms/handler';
 
 function UserListCard({user}) {
   return (
@@ -28,11 +30,20 @@ class Users extends React.Component {
     this.state = {
       users: [],
       laoded: false,
+      formControls: {
+        search: '',
+      }
     }
+
+    this.changeHandler = changeHandler.bind(this);
   }
 
   componentDidMount() {
     this.getAllUsers();
+  }
+
+  filteredUsers() {
+    return this.state.users.filter(({name}) =>name.toLowerCase().includes(this.state.formControls.search.toLowerCase()));
   }
 
   getAllUsers() {
@@ -55,8 +66,12 @@ class Users extends React.Component {
           </div>
         </div>
         <div className='row'>
-
-          {this.state.users.map(user => 
+          <div className='col-md-4'>
+            <SearchInput name='search' onChange={this.changeHandler.bind(this)} />
+          </div>
+        </div>
+        <div className='row'>
+          {this.filteredUsers().map(user => 
               (
                 <div key={user.id} className='col-md-4 mt-2'>
                   <UserListCard user={user} />

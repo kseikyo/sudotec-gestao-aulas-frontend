@@ -92,7 +92,8 @@ export default class Stats extends Component {
                     <div className="ml-auto">
                         <Button variant='main' onClick={this.toggleModal.bind(this)} className='text-shadow'>Relatório</Button>
                         <ReportModal title='Relatório geral dos alunos' show={this.state.showReportModal} close={this.toggleModal.bind(this)}>
-                            <div>
+                            <div><b>Total de alunos:</b> {genderRes.F + genderRes.M}</div> 
+                            <div className='mt-3'>
                                 <h5>Gênero</h5>
                                 <div>Feminino: {genderRes.F}</div> 
                                 <div>Masculino: {genderRes.M}</div> 

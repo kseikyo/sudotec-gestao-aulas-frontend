@@ -2,6 +2,7 @@ import React from 'react';
 import SectionTitle from '../../components/misc/SectionTitle';
 import Content from './../misc/Content';
 import LessonCard from './LessonCard';
+import Loader from '../misc/Loader';
 
 class LessonsContent extends React.Component {
   constructor(props) {
@@ -14,6 +15,15 @@ class LessonsContent extends React.Component {
 
   render() {
     let {lessons} = this.props;
+
+    if (!this.props.loaded) {
+      return (
+        <Content className='lessons-content'>
+          <SectionTitle title='Aulas' icon='lesson' subtitle='Clique em uma aula para ver detalhes' />
+          <Loader />
+        </Content>  
+      );
+    }
 
     return (
       <Content className='lessons-content'>

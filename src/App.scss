@@ -87,4 +87,14 @@ h3 {
   .print-padding {
     padding: 50px;
   }
+  #sidebar {
+    display: none;
+  }
+  #app-content {
+    width: 100%;
+    margin: 0;
+  }
+  .students-content-list {
+    max-height: fit-content;
+  }
 }

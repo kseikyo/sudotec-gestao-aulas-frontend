@@ -53,19 +53,17 @@ class Grade extends React.Component {
     super(props);
 
     this.state = {  
-      grade: {students: []},
+      grade: null,
       loaded: false,
       showReportModal: false,
-      students: []
+      students: [],
+      studentsLoaded: false,
+      lessonsLoaded: false,
     }
   }
 
   componentDidMount() {
     this.updateGrade();
-
-    gradesAPI.studentsWithAttendances(this.props.match.params.id).then(({data}) => {
-      this.setState({students: data});
-    })
   }
 
   toggleReportModal() {
@@ -76,10 +74,13 @@ class Grade extends React.Component {
     let routeId = this.props.match.params.id;
     
     gradesAPI.getById(routeId).then(res => {
+
       this.setState({
-        grade: res, 
+        grade: Object.assign(res, {lessons: [], students: []}), 
         loaded: true
       });
+
+      this.updateLessons();
     });
   }
 
@@ -87,14 +88,16 @@ class Grade extends React.Component {
     let {grade} = this.state;
 
     const lessons = lessonsAPI.getAllByGrade(grade.id);
-    const students = gradesAPI.students(grade.id);
+    const students = gradesAPI.studentsWithAttendances(grade.id);
 
     Promise.all([lessons, students]).then((values) => {
       grade.lessons = values[0].data;      
       grade.students = values[1].data;
 
       this.setState({
-        grade
+        grade,
+        lessonsLoaded: true,
+        studentsLoaded: true,
       });
     });
   }
@@ -110,7 +113,7 @@ class Grade extends React.Component {
   render() {
     let {grade, loaded} = this.state;
 
-    if (!loaded) {
+    if (!loaded || !grade) {
       return <Loader />
     } 
     
@@ -127,8 +130,8 @@ class Grade extends React.Component {
           <SectionTitle title='Dados' icon='info-circle' />
           <UpdateGrade update={this.updateGrade.bind(this)} className="pt-3" grade={grade} />
         </Content>
-        <LessonsContent updateLessons={this.updateLessons.bind(this)} grade={grade} lessons={grade.lessons} />
-        <StudentsContent update={this.updateLessons.bind(this)} grade={grade} students={this.state.grade.students} />
+        <LessonsContent loaded={this.state.lessonsLoaded} updateLessons={this.updateLessons.bind(this)} grade={grade} lessons={grade.lessons} />
+        <StudentsContent loaded={this.state.studentsLoaded} update={this.updateLessons.bind(this)} grade={grade} students={this.state.grade.students} />
         <ReportModal browserPrint={true} title='Relatório de frequências' subtitle={this.state.grade.name} show={this.state.showReportModal} close={this.toggleReportModal.bind(this)} size='lg' filename={`Frequencia-${this.state.grade.name}`}>
           Curso: <span className='font-weight-bold'>{grade.course.name}</span> <br />
           Turma: <span className='font-weight-bold'>{grade.name}</span>
@@ -145,7 +148,7 @@ class Grade extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.students.map(student => {
+                {this.state.grade.students.map(student => {
                   let stdFrequency = this.getStudentFrequency(student.id);
 
                   return (

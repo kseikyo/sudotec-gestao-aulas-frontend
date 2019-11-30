@@ -4,11 +4,13 @@ import SectionTitle from '../misc/SectionTitle';
 import GlyphButton from '../misc/GlyphButton';
 import GradeCard from './GradeCard';
 import grades from '../../services/api/grades';
+import coursesAPI from '../../services/api/courses';
 import RegisterGradeModal from '../grades/RegisterGradeModal';
 import Loader from '../../components/misc/Loader';
 import AdminBlock from './../users/AdminBlock';
 import SearchInput from '../forms/SearchInput';
 import {changeHandler} from '../forms/handler';
+import Select from '../forms/Select';
 
 class GradesContent extends React.Component {
   constructor(props) {
@@ -20,7 +22,9 @@ class GradesContent extends React.Component {
       loaded: false,
       formControls: {
         search: '',
-      }
+        course_id: 0,
+      },
+      courses: [{id: 0, name: 'Todos'}],
     }
 
     this.changeHandler = changeHandler.bind(this);
@@ -28,12 +32,18 @@ class GradesContent extends React.Component {
 
   componentDidMount() {
     if (this.props.grades) {
-      this.setState({ grades: this.props.grades, loaded: true });
+      this.setState({loaded: true});
     } else {
       grades.getAll().then(res => {
         this.setState({ grades: res.data, loaded: true });
       });
     }
+    coursesAPI.getAll().then(({data}) => {
+      let courses = this.state.courses;
+      courses.push(...data);
+
+      this.setState({courses})
+    })
   }
 
   renderGrade(grade) {
@@ -56,10 +66,20 @@ class GradesContent extends React.Component {
   }
 
   filteredGrades() {
-    return this.state.grades.filter(({name}) =>name.toLowerCase().includes(this.state.formControls.search.toLowerCase()));
+    let grades = this.state.grades;
+    let {search, course_id} = this.state.formControls;
+    
+    course_id = parseInt(course_id);
+    
+    if (course_id !== 0) {
+      grades = grades.filter((el) => el.course_id === course_id);
+    }
+    
+    return grades.filter(({name}) => name.toLowerCase().includes(search.toLowerCase()));
   }
 
   render() {
+    let {formControls} = this.state;
     if (!this.state.loaded) {
       return <Loader />
     }
@@ -75,10 +95,9 @@ class GradesContent extends React.Component {
             <RegisterGradeModal onRegister={this.addGrade.bind(this)} show={this.state.showRegisterModal} close={this.closeRegister.bind(this)} />
           </AdminBlock>
         </div>
-        <div className='row'>
-          <div className='col-md-4'>
-            <SearchInput name='search' onChange={this.changeHandler.bind(this)} />
-          </div>
+        <div className='d-flex'>
+            <SearchInput name='search' value={formControls.search} onChange={this.changeHandler.bind(this)} />
+            <Select showDefault={false} label='Cursos' name='course_id' value={formControls.course_id} onChange={this.changeHandler.bind(this)} options={this.state.courses} />
         </div>
         <div className="grade-cards">
           {this.filteredGrades().map(this.renderGrade)}

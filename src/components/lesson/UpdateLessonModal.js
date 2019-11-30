@@ -6,6 +6,7 @@ import TextArea from '../forms/TextArea';
 import lessons from '../../services/api/lessons';
 import StudentFrequency from './frequency/StudentFrequency';
 import attendanceDefs from '../../config/attendance';
+import DeleteModal from '../misc/DeleteModal';
 
 class UpdateLessonModal extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class UpdateLessonModal extends React.Component {
     this.state = {
       showModal: false,
       formControls: this.props.lesson,
+      showDeleteModal: false,
     }
 
     this.changeHandler = changeHandler.bind(this);
@@ -68,10 +70,14 @@ class UpdateLessonModal extends React.Component {
     })
   }
 
+  toggleDeleteModal() {
+    this.setState({showDeleteModal: !this.state.showDeleteModal, showModal: !this.state.showModal});
+  }
+
   render() {
     return (
       <>
-        <RegisterModal enableDelete onDelete={this.deleteLesson.bind(this)} icon='lesson' save={this.update.bind(this)} show={this.props.showModal} close={this.props.closeModal} cancel={this.props.closeModal} title='Relatório de aula' subtitle={`Turma ${this.props.grade.name}`}>
+        <RegisterModal enableDelete onDelete={this.toggleDeleteModal.bind(this)} icon='lesson' save={this.update.bind(this)} show={this.props.showModal} close={this.props.closeModal} cancel={this.props.closeModal} title='Relatório de aula' subtitle={`Turma ${this.props.grade.name}`}>
           <div className='pb-3'>
             <h6 className="text-muted">Dados da aula</h6>
             <TextInput type='date' name='grade_date' value={this.state.formControls.grade_date} onChange={this.changeHandler} label='Data'/>
@@ -82,6 +88,9 @@ class UpdateLessonModal extends React.Component {
             <small className='text-black-50'>Clique nos ícones ou dê dois cliques para alterar a presença.</small>
             {this.state.formControls.attendances.map(attendance => (<StudentFrequency key={attendance.student.id} onchange={this.setPresence.bind(this)} attendance={attendance} />))}
           </div>
+          <DeleteModal show={this.state.showDeleteModal} onDelete={this.deleteLesson.bind(this)} onHide={this.toggleDeleteModal.bind(this)}>
+            Tem certeza que deseja remover a aula do dia {this.state.formControls.grade_date}?
+          </DeleteModal>
         </RegisterModal>
       </>
     )

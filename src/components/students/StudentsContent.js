@@ -60,6 +60,15 @@ class StudentsContent extends React.Component {
   }
 
   render() {
+    if (!this.props.loaded) {
+      return (
+        <Content className='students-content'>
+          <SectionTitle title='Alunos' icon='students' />
+          <Loader />
+        </Content>
+      );
+    }
+
     return (
       <Content className='students-content'>
         <SectionTitle title='Alunos' icon='students' />

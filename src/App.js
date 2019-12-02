@@ -63,7 +63,9 @@ class App extends React.Component {
         if(token && email) {
             this.setState({token: token, email: email});
         }
+    }
 
+    componentDidUpdate() {
         usersApi.getLogged().then((res) => {
             this.setState({user: res, loaded: true});
             localStorage.setItem('type', res.type);
@@ -78,6 +80,7 @@ class App extends React.Component {
     logout = () => {
         this.setState({ token: null, email: null});
         localStorage.removeItem('token');
+        localStorage.removeItem('type');
     }
 
 

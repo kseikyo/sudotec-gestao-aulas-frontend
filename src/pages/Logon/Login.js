@@ -51,8 +51,7 @@ class Login extends React.Component {
         })
             .then(response => {
                 if (response.status !== 200 && response.status !== 201) {
-                    throw new Error('Authentication failed');
-                    //Don't know how we are gonna handle it on frontend yet
+                    alert('Dados incorretos.');
                 }
                 return response.json();
             })
